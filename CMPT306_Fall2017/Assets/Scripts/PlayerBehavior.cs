@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class PlayerBehavior : MonoBehaviour {
 
-    [SerializeField]
-    private float Acceleration;
     /* Movement to apply this frame */
-    private Vector3 Movement;
+    private Vector3 frameMovement;
+    
+    [SerializeField]
+    private float acceleration;
+    [SerializeField]
+    private float brakeFraction;
 
+    [SerializeField]
+    private float maxSpeed;
 
     public GameObject player;
     private Rigidbody2D playerBody;
@@ -17,32 +22,44 @@ public class PlayerBehavior : MonoBehaviour {
 
     public void MoveLeft()
     {
-        Movement.x -= Acceleration;
+        frameMovement.x -= acceleration;
     }
 
     public void MoveRight()
     {
-        Movement.x += Acceleration;
+        frameMovement.x += acceleration;
     }
 
     public void MoveUp()
     {
-        Movement.y += Acceleration;
+        frameMovement.y += acceleration;
     }
 
     public void MoveDown()
     {
-        Movement.y -= Acceleration;
+        frameMovement.y -= acceleration;
+    }
+
+    public void Brake()
+    {
+        playerBody.velocity *= brakeFraction;
     }
 
 
     // Use this for initialization
     void Start () {
-		
+        playerBody = this.GetComponent<Rigidbody2D>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        playerBody.AddForce(Vector3.ClampMagnitude(Movement, Acceleration));
+        playerBody.AddForce(Vector3.ClampMagnitude(frameMovement, acceleration));
+
+        if(playerBody.velocity.magnitude > maxSpeed)
+        {
+            playerBody.velocity = (playerBody.velocity.normalized * maxSpeed);
+        }
+
+        frameMovement = Vector3.zero;
 	}
 }

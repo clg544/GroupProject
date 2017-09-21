@@ -6,7 +6,10 @@ public class PlayerTetherScript : MonoBehaviour {
     
     /* How far the players can go before the tether pulls them in */
     [SerializeField]
-    private float MaxDistance;
+    private float engageDistance;
+    /* The Absolute Max */ 
+    [SerializeField]
+    private float maxDistance;
 
     /* Hooke's law labels this k, how much force the tether applies */
     [SerializeField]
@@ -32,16 +35,11 @@ public class PlayerTetherScript : MonoBehaviour {
 
     public void DrawTether()
     {
-        if(curDistance > MaxDistance)
-        {
-            tetherVisual.SetColors(Color.red, Color.blue);
-        }
         tetherVisual.SetPosition(0, playerOne.transform.position);
         tetherVisual.SetPosition(1, playerTwo.transform.position);
     }
 
-
-
+    
     // Use this for initialization
     void Start () {
         playerOneBody = playerOne.GetComponent<Rigidbody2D>();
@@ -59,10 +57,10 @@ public class PlayerTetherScript : MonoBehaviour {
         Vector3 difference = posOne - posTwo;
         // Magnitide of difference
         curDistance = Vector3.Distance(posOne, posTwo);
-
-        if (curDistance > MaxDistance)
+        
+        if (curDistance > engageDistance)
         {
-            float tension = (elasticity * curDistance) / 2;
+            float tension = (elasticity * (curDistance - engageDistance)) / 2;
 
             difference = Vector3.ClampMagnitude(difference, tension);
 
