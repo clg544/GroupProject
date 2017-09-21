@@ -7,19 +7,27 @@ public class PlayerBehavior : MonoBehaviour {
     /* Movement to apply this frame */
     private Vector3 frameMovement;
     
+    /* How much force is applied by player movement */
     [SerializeField]
     private float acceleration;
+    
+    /* How much the velocity is scaled down on brake */
     [SerializeField]
     private float brakeFraction;
 
+    /* The maximum speed a player is allowed to go */
     [SerializeField]
     private float maxSpeed;
 
+    /* Holds our plaayer and player body */
     public GameObject player;
     private Rigidbody2D playerBody;
 
 
-
+    /**
+     *  Collection of basic movement functions that add to a movement vector, which is 
+     *      reset every frame.
+     */
     public void MoveLeft()
     {
         frameMovement.x -= acceleration;
@@ -40,6 +48,9 @@ public class PlayerBehavior : MonoBehaviour {
         frameMovement.y -= acceleration;
     }
 
+    /**
+     * Scale the player's velocity down, if brakeFraction is < zero 
+     */
     public void Brake()
     {
         playerBody.velocity *= brakeFraction;
@@ -53,13 +64,17 @@ public class PlayerBehavior : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        playerBody.AddForce(Vector3.ClampMagnitude(frameMovement, acceleration));
+        /* Accelerate the player with a movement vector based on this frames input */
+        playerBody.AddForce(frameMovement.normalized * acceleration));
 
-        if(playerBody.velocity.magnitude > maxSpeed)
-        {
+        /* Cap player speed with a velocity check */
+        if (playerBody.velocity.magnitude > maxSpeed)
             playerBody.velocity = (playerBody.velocity.normalized * maxSpeed);
-        }
+        
+        /* Apply some simple friction */
+        playerBody.velocity *= .99f;
 
+        /* Reset any persistant variables */
         frameMovement = Vector3.zero;
 	}
 }

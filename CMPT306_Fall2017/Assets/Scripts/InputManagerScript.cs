@@ -20,6 +20,10 @@ public class InputManagerScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+        /**
+         * Player One Movement Controls 
+         */
         if (Input.GetKey(KeyCode.W))
         {
             playerOneBehavior.MoveUp();
@@ -43,6 +47,9 @@ public class InputManagerScript : MonoBehaviour {
         }
 
 
+        /**
+         * Player Two Movement Controls 
+         */
         if (Input.GetKey(KeyCode.UpArrow))
         {
             playerTwoBehavior.MoveUp();

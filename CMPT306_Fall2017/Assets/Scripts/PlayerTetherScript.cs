@@ -7,9 +7,6 @@ public class PlayerTetherScript : MonoBehaviour {
     /* How far the players can go before the tether pulls them in */
     [SerializeField]
     private float engageDistance;
-    /* The Absolute Max */ 
-    [SerializeField]
-    private float maxDistance;
 
     /* Hooke's law labels this k, how much force the tether applies */
     [SerializeField]
@@ -30,10 +27,11 @@ public class PlayerTetherScript : MonoBehaviour {
     private Rigidbody2D playerTwoBody;
 
 
-    /* My Components */
+    /* Resource to represent the tether as a line */
     LineRenderer tetherVisual;
 
-    public void DrawTether()
+    /* Draw the tether as a line between the two players */
+    public void DrawTetherAsLine()
     {
         tetherVisual.SetPosition(0, playerOne.transform.position);
         tetherVisual.SetPosition(1, playerTwo.transform.position);
@@ -50,25 +48,32 @@ public class PlayerTetherScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
         // Get current distance
         Vector3 posOne = playerOne.transform.position;
         Vector3 posTwo = playerTwo.transform.position;
-        // Distance vector of p1 to p2
+
+        // Calculate vector of p1 to p2
         Vector3 difference = posOne - posTwo;
-        // Magnitide of difference
+        // curdistance = Magnitide of difference
         curDistance = Vector3.Distance(posOne, posTwo);
         
+        /* if The players are far enough apart... */
         if (curDistance > engageDistance)
         {
+            /* Apply force of Distance, Scaled by elasticity, and divide among both players */
             float tension = (elasticity * (curDistance - engageDistance)) / 2;
 
+            /* Vector difference gets magnitide = tension */
             difference = Vector3.ClampMagnitude(difference, tension);
 
+            /* Apply said Vector to both players */
             playerOneBody.AddForce(-difference);
             playerTwoBody.AddForce(difference);
         }
 
-        DrawTether();
+        /* Draw the tether */
+        DrawTetherAsLine();
 	}
 
 }
