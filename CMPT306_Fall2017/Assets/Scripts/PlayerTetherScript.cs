@@ -61,8 +61,12 @@ public class PlayerTetherScript : MonoBehaviour {
         /* if The players are far enough apart... */
         if (curDistance > engageDistance)
         {
-            /* Apply force of Distance, Scaled by elasticity, and divide among both players */
-            float tension = (elasticity * (curDistance - engageDistance)) / 2;
+            float distance = curDistance - engageDistance;
+            /* Apply force of Distance squared, Scaled by elasticity, and divide among both players 
+             *
+             * I used distance squared to make the tether more responsive, though less realistic. - Clint
+             */
+            float tension = (elasticity * (distance * distance)) / 2;
 
             /* Vector difference gets magnitide = tension */
             difference = Vector3.ClampMagnitude(difference, tension);

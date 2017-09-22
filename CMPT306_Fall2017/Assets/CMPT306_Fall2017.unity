@@ -656,6 +656,16 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114537395268845308, guid: f5beac725b81ce84e9335ad6d595f36f,
+        type: 2}
+      propertyPath: acceleration
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 114537395268845308, guid: f5beac725b81ce84e9335ad6d595f36f,
+        type: 2}
+      propertyPath: maxSpeed
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f5beac725b81ce84e9335ad6d595f36f, type: 2}
   m_IsPrefabParent: 0
@@ -693,7 +703,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   acceleration: 8
   brakeFraction: 0.92
-  maxSpeed: 11
+  maxSpeed: 10
   player: {fileID: 1530915660}
 --- !u!50 &1530915662
 Rigidbody2D:
@@ -1005,7 +1015,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   engageDistance: 10
-  maxDistance: 20
   elasticity: 1
   curDistance: 0
   playerOne: {fileID: 970431135}

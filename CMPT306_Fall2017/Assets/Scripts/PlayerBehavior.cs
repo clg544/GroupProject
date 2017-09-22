@@ -65,7 +65,7 @@ public class PlayerBehavior : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         /* Accelerate the player with a movement vector based on this frames input */
-        playerBody.AddForce(frameMovement.normalized * acceleration));
+        playerBody.AddForce(frameMovement.normalized * acceleration);
 
         /* Cap player speed with a velocity check */
         if (playerBody.velocity.magnitude > maxSpeed)
