@@ -3,12 +3,13 @@ using System.Collections;
 
 public class PlayerCameraTargetScript : MonoBehaviour
 {
-
+    /* Player target movement variables */
     [SerializeField]
     float ACCEL;
     float MAX_SPEED;
     Vector3 accel_scale;
 
+    /* Maximum target movement speeds, independant for screen ratios */
     [SerializeField]
     float MAX_X;
     [SerializeField]

@@ -36,10 +36,13 @@ public class PlayerCameraScript : MonoBehaviour
     }
 
 
+    /**
+     * Does a smooth movement towards the set target, based on speed variables.
+     */
     private void CameraTracking()
     {
         /* Adjust the Camera value to the right Z-plane */
-        Vector3 target = myTarget.transform.position;
+    Vector3 target = myTarget.transform.position;
         target.z = myCamera.transform.position.z;
 
         /* Camera speeds up as player leaves centre */

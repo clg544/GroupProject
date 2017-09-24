@@ -21,6 +21,7 @@ public class PlayerParentScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        /* Move to Players centre */
         this.transform.position = (playerOneTransform.position + playerTwoTransform.position) / 2;
 	}
 }
