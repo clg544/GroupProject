@@ -6,14 +6,16 @@ public class PlayerBehavior : MonoBehaviour {
 
     /* Movement to apply this frame */
     private Vector3 frameMovement;
-    
+
     /* How much force is applied by player movement */
     [SerializeField]
     private float acceleration;
-    
+
     /* How much the velocity is scaled down on brake */
     [SerializeField]
     private float brakeFraction;
+    [SerializeField]
+    private float constantFraction;
 
     /* The maximum speed a player is allowed to go */
     [SerializeField]
@@ -23,6 +25,12 @@ public class PlayerBehavior : MonoBehaviour {
     public GameObject player;
     private Rigidbody2D playerBody;
 
+
+    /* Getters and Setters */
+    public float getMaxSpeed()
+    {
+        return maxSpeed;
+    }
 
     /**
      *  Collection of basic movement functions that add to a movement vector, which is 
@@ -72,7 +80,7 @@ public class PlayerBehavior : MonoBehaviour {
             playerBody.velocity = (playerBody.velocity.normalized * maxSpeed);
         
         /* Apply some simple friction */
-        playerBody.velocity *= .99f;
+        playerBody.velocity *= constantFraction;
 
         /* Reset any persistant variables */
         frameMovement = Vector3.zero;

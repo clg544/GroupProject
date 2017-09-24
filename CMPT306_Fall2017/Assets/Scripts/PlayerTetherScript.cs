@@ -37,6 +37,11 @@ public class PlayerTetherScript : MonoBehaviour {
         tetherVisual.SetPosition(1, playerTwo.transform.position);
     }
 
+    public Vector3 getCentre()
+    {
+        return (playerOne.transform.position + playerTwo.transform.position) / 2;
+    }
+
     
     // Use this for initialization
     void Start () {
