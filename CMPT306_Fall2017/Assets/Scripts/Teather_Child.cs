@@ -7,7 +7,7 @@ public class Teather_Child : MonoBehaviour {
     public GameObject left;
     public GameObject right;
 
-	// Use this for initialization
+	// Use this for initialization 
 	void Start () {
 		
 	}

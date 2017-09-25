@@ -11,7 +11,7 @@ public class basicMovement : MonoBehaviour
 
     }
 
-    // Update is called once per frame
+    // Update is called once per frame 
     void Update()
     {
         var x = Input.GetAxis("Horizontal") * Time.deltaTime * 15.0f;

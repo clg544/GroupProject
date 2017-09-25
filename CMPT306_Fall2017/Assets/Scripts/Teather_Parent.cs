@@ -7,7 +7,7 @@ public class Teather_Parent : MonoBehaviour {
     public int health { get; private set; }
     public int startingHealth;
 
-	// Use this for initialization
+	// Use this for initialization 
 	void Start () {
         health = startingHealth;
 	}
