@@ -20,7 +20,7 @@ public class PlayerCameraScript : MonoBehaviour
     private float PLAYER_Y_ADJ;
     /* Camera moves at 1 / CAMERA_SPEED */
     [SerializeField]
-    private float CAMERA_LAG;
+    private float cameraLag;
 
     public GameObject MyTarget
     {
@@ -46,7 +46,7 @@ public class PlayerCameraScript : MonoBehaviour
         target.z = myCamera.transform.position.z;
 
         /* Camera speeds up as player leaves centre */
-        float speed = Vector3.Distance(myCamera.transform.position, target) / CAMERA_LAG;
+        float speed = Vector3.Distance(myCamera.transform.position, target) / cameraLag;
 
         /* Set the new camera position */
         myCamera.transform.position = Vector3.MoveTowards(myCamera.transform.position, target, speed);
