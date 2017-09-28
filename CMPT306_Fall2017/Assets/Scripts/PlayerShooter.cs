@@ -33,13 +33,13 @@ public class PlayerShooter : MonoBehaviour {
 
     public void PlayerAim(Vector2 joyPos)
     {
-        Destroy(curCrosshair);
+        Debug.Log(joyPos.ToString());
 
         joyPos.Normalize();
         joyPos *= crosshairDist;
 
         curCrosshair = Instantiate(Crosshair);
-
+        curCrosshair.transform.parent = this.transform;
         curCrosshair.transform.localPosition = joyPos;
     }
 
@@ -54,6 +54,7 @@ public class PlayerShooter : MonoBehaviour {
         if (LightShotCooldown > 0)
             LightShotCooldown--;
 
-        
+        if(curCrosshair != null)
+            Destroy(curCrosshair);
 	}
 }
