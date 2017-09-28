@@ -17,10 +17,10 @@ public class InputManagerScript : MonoBehaviour {
         playerOneBehavior = playerOne.GetComponent<PlayerBehavior>();
         playerTwoBehavior = playerTwo.GetComponent<PlayerBehavior>();
     }
-	
-	// Update is called once per frame
-	void Update () {
 
+
+    private void KeyboardInput()
+    {
         /**
          * Player One Movement Controls 
          */
@@ -70,5 +70,22 @@ public class InputManagerScript : MonoBehaviour {
         {
             playerTwoBehavior.Brake();
         }
+    }
+
+    public void JoypadOneInput()
+    {
+        playerOneBehavior.MoveHorizontal(Input.GetAxis("Left Horizontal"));
+        playerOneBehavior.MoveVertical(Input.GetAxis("Left Vertical"));
+
+        if (Input.GetButton("Xbox B"))
+            playerOneBehavior.Brake();
+
+    }
+
+    // Update is called once per frame
+    void Update () {
+        KeyboardInput();
+
+        JoypadOneInput();
     }
 }

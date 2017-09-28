@@ -40,21 +40,30 @@ public class PlayerBehavior : MonoBehaviour {
     {
         frameMovement.x -= acceleration;
     }
-
     public void MoveRight()
     {
         frameMovement.x += acceleration;
     }
-
     public void MoveUp()
     {
         frameMovement.y += acceleration;
     }
-
     public void MoveDown()
     {
         frameMovement.y -= acceleration;
     }
+
+    public void MoveHorizontal(float f)
+    {
+        if(Mathf.Abs(f) <= 1)
+            frameMovement.x += f;
+    }
+    public void MoveVertical(float f)
+    {
+        if (Mathf.Abs(f) <= 1)
+            frameMovement.y += f;
+    }
+
 
     /**
      * Scale the player's velocity down, if brakeFraction is < zero 
