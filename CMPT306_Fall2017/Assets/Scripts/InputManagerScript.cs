@@ -12,10 +12,16 @@ public class InputManagerScript : MonoBehaviour {
     private PlayerBehavior playerOneBehavior;
     private PlayerBehavior playerTwoBehavior;
 
+    private PlayerShooter myShooter;
+
+    private bool isAiming;
+
 	// Use this for initialization
 	void Start () {
         playerOneBehavior = playerOne.GetComponent<PlayerBehavior>();
         playerTwoBehavior = playerTwo.GetComponent<PlayerBehavior>();
+
+        myShooter = playerOne.GetComponent<PlayerShooter>();
     }
 
 
@@ -74,18 +80,63 @@ public class InputManagerScript : MonoBehaviour {
 
     public void JoypadOneInput()
     {
-        playerOneBehavior.MoveHorizontal(Input.GetAxis("Left Horizontal"));
-        playerOneBehavior.MoveVertical(Input.GetAxis("Left Vertical"));
+        /* Movement based on left stick */
+        float leftHorizontal = Input.GetAxis("Left Horizontal");
+        float leftVertical = Input.GetAxis("Left Vertical");
+        playerOneBehavior.MoveHorizontal(leftHorizontal);
+        playerOneBehavior.MoveVertical(leftVertical);
 
+        /* Aim based on the right stick */
+        Vector2 rightStickOrientation = new Vector2(Input.GetAxis("Right Horizontal"), Input.GetAxis("Right Vertical"));
+
+        if (rightStickOrientation.magnitude > 0)
+        {
+            if (!isAiming)
+            {
+                isAiming = true;
+                myShooter.PlayerAimStart(rightStickOrientation);
+            }
+            else
+            {
+                myShooter.PlayerAimContinue(rightStickOrientation);
+            }
+        }
+        else if((rightStickOrientation.magnitude <= 0) && (isAiming))
+        {
+            isAiming = false;
+            myShooter.PlayerAimEnd();
+        }
+
+
+        if (!isAiming)
+        {
+            if (rightStickOrientation.magnitude > 0)
+            {
+                isAiming = true;
+                myShooter.PlayerAimStart(rightStickOrientation);
+            }
+        }
+        else
+        {
+
+        }
+
+
+        /* Brake based on the B Button */
         if (Input.GetButton("Xbox B"))
             playerOneBehavior.Brake();
+        
+        /* Shoot based on Right Trigger */
+        if (Input.GetAxis("Right Trigger") < -.3)
+        {
+            myShooter.Shoot();
+        }
 
     }
 
     // Update is called once per frame
     void Update () {
         KeyboardInput();
-
         JoypadOneInput();
     }
 }
