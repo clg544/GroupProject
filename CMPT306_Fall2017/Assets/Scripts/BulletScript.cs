@@ -5,9 +5,14 @@ using UnityEngine;
 public class BulletScript : MonoBehaviour {
 
 
-    void OncollisionEnter2D(Collider2D coll)
+    void OnTriggerEnter2D(Collider2D coll)
     {
-        coll.SendMessage("BulletHit");
+        if(coll.tag != "Untagged")
+        {
+            Destroy(gameObject);
+        }
+        Debug.Log(coll.tag);
+
     }
 
 	// Use this for initialization

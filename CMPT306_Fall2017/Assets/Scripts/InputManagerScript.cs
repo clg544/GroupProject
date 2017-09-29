@@ -14,6 +14,8 @@ public class InputManagerScript : MonoBehaviour {
 
     private PlayerShooter myShooter;
 
+    private bool isAiming;
+
 	// Use this for initialization
 	void Start () {
         playerOneBehavior = playerOne.GetComponent<PlayerBehavior>();
@@ -84,25 +86,57 @@ public class InputManagerScript : MonoBehaviour {
         playerOneBehavior.MoveHorizontal(leftHorizontal);
         playerOneBehavior.MoveVertical(leftVertical);
 
-        /* Aiming based on right stick 
-        float rightHorizontal = Input.GetAxis("Right Horizontal");
-        float rightVertical = Input.GetAxis("Right Vertical");*/
-
+        /* Aim based on the right stick */
         Vector2 rightStickOrientation = new Vector2(Input.GetAxis("Right Horizontal"), Input.GetAxis("Right Vertical"));
 
         if (rightStickOrientation.magnitude > 0)
-            myShooter.PlayerAim(rightStickOrientation);
+        {
+            if (!isAiming)
+            {
+                isAiming = true;
+                myShooter.PlayerAimStart(rightStickOrientation);
+            }
+            else
+            {
+                myShooter.PlayerAimContinue(rightStickOrientation);
+            }
+        }
+        else if((rightStickOrientation.magnitude <= 0) && (isAiming))
+        {
+            isAiming = false;
+            myShooter.PlayerAimEnd();
+        }
 
 
+        if (!isAiming)
+        {
+            if (rightStickOrientation.magnitude > 0)
+            {
+                isAiming = true;
+                myShooter.PlayerAimStart(rightStickOrientation);
+            }
+        }
+        else
+        {
+
+        }
+
+
+        /* Brake based on the B Button */
         if (Input.GetButton("Xbox B"))
             playerOneBehavior.Brake();
+        
+        /* Shoot based on Right Trigger */
+        if (Input.GetAxis("Right Trigger") < -.3)
+        {
+            myShooter.Shoot();
+        }
 
     }
 
     // Update is called once per frame
     void Update () {
         KeyboardInput();
-
         JoypadOneInput();
     }
 }
