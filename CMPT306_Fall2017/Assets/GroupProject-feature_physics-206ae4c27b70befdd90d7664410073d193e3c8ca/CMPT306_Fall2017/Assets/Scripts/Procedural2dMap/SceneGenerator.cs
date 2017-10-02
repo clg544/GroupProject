@@ -21,12 +21,10 @@ namespace NG
 		public List<AreaData> generatedAreas { get; set; }
 
 		public Material material;
+		public GameObject levelMesh;
 
 		public int dungeonHeight;
 		public int dungeonWidth;
-
-		public MeshFilter walls;
-		public MeshFilter dungeon;
 
 		public GameObject startPoint;
 
@@ -176,7 +174,7 @@ namespace NG
 		}
 
 
-		void Start()
+		void Awake()
 		{
 			Generate();
 
@@ -193,10 +191,10 @@ namespace NG
 			for (int i = 0; i < generatedAreas.Count; i++)
 			{
 				GameObject section = new GameObject();
+				GameObject newMesh = Instantiate (levelMesh);
 				// Attach an Area component so we can easily inspect the AreaData in the editor.
 				section.AddComponent<LevelGenerator>();
 				section.AddComponent <MeshCreator>();
-				section.AddComponent <MeshFilter>();
 				section.AddComponent<MeshRenderer>();
 
 				section.GetComponent<MeshRenderer> ().material = material;
@@ -204,6 +202,9 @@ namespace NG
 				section.GetComponent<LevelGenerator> ().width = dungeonWidth;
 				section.GetComponent<LevelGenerator> ().height = dungeonHeight;
 				section.GetComponent<LevelGenerator> ().useRandomSeed = true;
+				section.GetComponent<MeshCreator> ().cave = newMesh.GetComponent<MeshFilter>();
+				newMesh.transform.Rotate (-90, 0, 0);
+				newMesh.transform.SetParent (section.transform, true);
 
 				//section.GetComponent<LevelGenerator> ().startPoint = startPoint;
 
@@ -214,8 +215,6 @@ namespace NG
 				section.transform.position = generatedAreas[i].coordinates.ToVector2();
 				section.transform.localScale = 0.75f * Vector3.one;
 				section.name = generatedAreas[i].name;
-				area.transform.Rotate (-90, 0, 0);
-
 
 				foreach (var item in generatedAreas[i].transitions)
 				{
@@ -228,24 +227,28 @@ namespace NG
 
 					switch (item.Key)
 					{
-						case Direction.N:
-							transitionPostion.x += 10f;
-							scale.y = 10f;
-							break;
-						case Direction.E:
-							transitionPostion.y += 10f;
-							scale.x = 10f;
-							break;
-						case Direction.S:
-							scale.y = 10f;
-							transitionPostion.x -= 10f;
-							break;
-						case Direction.W:
-							transitionPostion.y -= 10f;
-							scale.x = 10f;
-							break;
-						default:
-							break;
+					case Direction.N:
+						transitionPostion.x += 10f;
+						scale.y = 2f;
+						section.GetComponent<LevelGenerator> ().doorPicker ("N");
+						break;
+					case Direction.E:
+						transitionPostion.y += 0f;
+						scale.x = 2f;
+						section.GetComponent<LevelGenerator> ().doorPicker ("E");
+						break;
+					case Direction.S:
+						scale.y = 2f;
+						transitionPostion.x -= 10f;
+						section.GetComponent<LevelGenerator> ().doorPicker ("S");
+						break;
+					case Direction.W:
+						transitionPostion.y -= 0f;
+						scale.x = 2f;
+						section.GetComponent<LevelGenerator> ().doorPicker ("W");
+						break;
+					default:
+						break;
 					}
 
 					transition.transform.position = transitionPostion;
