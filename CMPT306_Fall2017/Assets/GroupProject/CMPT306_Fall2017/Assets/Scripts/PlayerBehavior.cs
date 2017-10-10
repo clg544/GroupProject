@@ -21,6 +21,7 @@ public class PlayerBehavior : MonoBehaviour {
 
     /* Holds our plaayer and player body */
     public GameObject player;
+
     private Rigidbody2D playerBody;
 
 
@@ -60,6 +61,7 @@ public class PlayerBehavior : MonoBehaviour {
     // Use this for initialization
     void Start () {
         playerBody = this.GetComponent<Rigidbody2D>();
+
 	}
 	
 	// Update is called once per frame

@@ -14,6 +14,8 @@ public class LevelGenerator : MonoBehaviour {
 	[Range(0,100)]
 	public int randomFillPercent;
 
+	public GameObject door;
+
 	int[,] map;
 	int doorWidth1;
 	int doorHeight1;
@@ -57,7 +59,7 @@ public class LevelGenerator : MonoBehaviour {
 
 		for (int x = 0; x < width; x ++) {
 			for (int y = 0; y < height; y ++) {
-				if (x < doorWidth2  && x > doorWidth1 && y < doorHeight2  && y > doorHeight1) {
+				if (x < doorWidth2 && x > doorWidth1 && y < doorHeight1  && y > doorHeight2) {
 					map [x, y] = 0;
 				}
 				else if (x == 0 || x == width - 1 || y == 0 || y == height - 1) {
@@ -72,25 +74,23 @@ public class LevelGenerator : MonoBehaviour {
 
 	public void doorPicker(String direction){
 		if (direction == "N") {
-
 			doorWidth1 = (width/2) - 10;
 			doorWidth2 = (width/2) + 10;
-			doorHeight1 = height - 10;
+			doorHeight1 = height -1;
 			doorHeight2 = height - 5;
 
 			n += 1;
-			GameObject nDoor = new GameObject ();
+			GameObject nDoor = Instantiate(door);
 			nDoor.transform.SetParent (this.transform);
 			nDoor.transform.position = this.transform.position + new Vector3(0, height/3, 0);
-			nDoor.AddComponent<BoxCollider2D> ();
-			nDoor.tag = "Door";
+			nDoor.GetComponent<BoxCollider2D> ().isTrigger = true;
+			nDoor.tag = "DoorN";
 			nDoor.name = "north door" + n;
 		}
 		if (direction == "E") {
-
-			doorWidth1 = width - 10;
-			doorWidth2 = width - 5;
-			doorHeight1 = (height / 2) - 10;
+			doorWidth1 = width - 5;
+			doorWidth2 = width - 1;
+			doorHeight1 = (height / 2) + 10;
 			doorHeight2 = (height / 2) - 10;
 
 			e += 1;
@@ -98,29 +98,29 @@ public class LevelGenerator : MonoBehaviour {
 			eDoor.transform.SetParent (this.transform);
 			eDoor.transform.position = this.transform.position + new Vector3(width/3, 0, 0);
 			eDoor.AddComponent<BoxCollider2D> ();
-			eDoor.tag = "Door";
+			eDoor.GetComponent<BoxCollider2D> ().isTrigger = true;
+			eDoor.tag = "DoorE";
 			eDoor.name = "east door" + e;
 		}
 		if (direction == "S") {
-
 			doorWidth1 = (width/2) - 10;
 			doorWidth2 = (width/2) + 10;
-			doorHeight1 = height - 10;
-			doorHeight2 = height - 5;
+			doorHeight1 = 5;
+			doorHeight2 = 0;
 
 			s += 1;
 			GameObject sDoor = new GameObject ();
 			sDoor.transform.SetParent (this.transform);
 			sDoor.transform.position = this.transform.position - new Vector3 (0, height / 3, 0);
 			sDoor.AddComponent<BoxCollider2D> ();
-			sDoor.tag = "Door";
-			sDoor.name = "south door" + s;;
+			sDoor.GetComponent<BoxCollider2D> ().isTrigger = true;
+			sDoor.tag = "DoorS";
+			sDoor.name = "south door" + s;
 		}
 		if (direction == "W") {
-
-			doorWidth1 = width - 10;
-			doorWidth2 = width - 5;
-			doorHeight1 = (height/2) - 10;
+			doorWidth1 = 0;
+			doorWidth2 = 5;
+			doorHeight1 = (height/2) + 10;
 			doorHeight2 = (height / 2) - 10;
 
 			w += 1;
@@ -128,7 +128,8 @@ public class LevelGenerator : MonoBehaviour {
 			wDoor.transform.SetParent (this.transform);
 			wDoor.transform.position = this.transform.position - new Vector3(width/3, 0, 0);
 			wDoor.AddComponent<BoxCollider2D> ();
-			wDoor.tag = "Door";
+			wDoor.GetComponent<BoxCollider2D> ().isTrigger = true;
+			wDoor.tag = "DoorW";
 			wDoor.name = "west door" + w;
 		}
 	}

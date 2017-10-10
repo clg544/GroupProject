@@ -27,6 +27,7 @@ namespace NG
 		public int dungeonWidth;
 
 		public GameObject startPoint;
+		public GameObject doorPrefab;
 
 		void Generate()
 		{
@@ -197,6 +198,7 @@ namespace NG
 				section.AddComponent <MeshCreator>();
 				section.AddComponent<MeshRenderer>();
 
+				section.GetComponent<LevelGenerator> ().door = doorPrefab;
 				section.GetComponent<MeshRenderer> ().material = material;
 				section.GetComponent<LevelGenerator> ().randomFillPercent = Random.Range (40, 45);
 				section.GetComponent<LevelGenerator> ().width = dungeonWidth;

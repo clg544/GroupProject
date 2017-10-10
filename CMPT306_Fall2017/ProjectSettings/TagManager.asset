@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Walls
   - Door
+  - DoorN
+  - DoorE
+  - DoorW
+  - DoorS
   layers:
   - Default
   - TransparentFX
