@@ -17,6 +17,7 @@ public class BasicMeleeEnemyBehaviour : MonoBehaviour {
     private int curentHealth;
     private Rigidbody2D rb;
     private int inCombat = 0;
+    private MeleeDamage md;
 
 	// Use this for initialization
 	void Start () {
@@ -26,7 +27,7 @@ public class BasicMeleeEnemyBehaviour : MonoBehaviour {
         }
         rb = GetComponent<Rigidbody2D>();
         currentNavPoint = navQueue.Dequeue();
-       
+        md = GetComponentInChildren<MeleeDamage>();
     }
 	void FixedUpdate () {
 		if (inCombat < 0){ // this should never happen
@@ -44,20 +45,35 @@ public class BasicMeleeEnemyBehaviour : MonoBehaviour {
                 currentNavPoint = navQueue.Dequeue();
             }
         }
+
         if (inCombat > 0){ // in combat
-
+            GameObject tartget;
+            if (Vector2.Distance(transform.position, fighty.transform.position) < Vector2.Distance(transform.position, shooty.transform.position)){
+                tartget = fighty;
+            }
+            else {
+                tartget = shooty;
+            }
+            Vector3 dir = tartget.transform.position - transform.position;
+            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90;
+            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         }
-        rb.AddRelativeForce(new Vector2(0, speed));
-        rb.velocity = Vector2.ClampMagnitude(rb.velocity, speed);
 
+        if (!md.winding) {
+            rb.AddRelativeForce(new Vector2(0, speed));
+            rb.velocity = Vector2.ClampMagnitude(rb.velocity, speed);
+        }
+        else {
+            rb.velocity = new Vector2(0,0);
+        }
     }
     void OnTriggerEnter2D(Collider2D col) {
-        if (col.tag == "Player") {
+        if (col.tag == "Player" && inCombat < 2) {
             inCombat++;
         }
     }
     void OnTriggerExit2D(Collider2D col) {
-        if (col.tag == "Player"){
+        if (col.tag == "Player" && inCombat > 0){
             inCombat--;
         }
     }

@@ -71,7 +71,7 @@ public class PlayerCameraScript : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        Debug.Log("Moving Camera...");
+       // Debug.Log("Moving Camera...");
 
         CameraTracking();
         //myCamera.transform.position += ZAdjustVect;
