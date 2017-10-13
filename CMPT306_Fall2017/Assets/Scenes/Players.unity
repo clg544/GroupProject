@@ -1749,6 +1749,7 @@ MonoBehaviour:
   curDistance: 0
   playerOne: {fileID: 208738658}
   playerTwo: {fileID: 344455158}
+  linkSpeed: 0.01
 --- !u!120 &1170235301
 LineRenderer:
   m_ObjectHideFlags: 0
