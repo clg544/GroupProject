@@ -32,6 +32,8 @@ public class PlayerTetherScript : MonoBehaviour {
     /* Resource to represent the tether as a line */
     private GameObject[] tetherLinks;
     private LineRenderer tetherVisual;
+    [SerializeField]
+    private float linkSpeed;
 
     /* Draw the tether as a line between the two players */
     public void DrawTetherAsLine()
@@ -45,7 +47,19 @@ public class PlayerTetherScript : MonoBehaviour {
         return (playerOne.transform.position + playerTwo.transform.position) / 2;
     }
 
-    
+    public void distributeNodes()
+    {
+        Vector3 diff = (playerTwo.transform.position - playerOne.transform.position) / (tetherLinks.Length + 1);
+
+        int i = 1;
+        foreach (GameObject link in tetherLinks)
+        {
+            link.transform.position = playerOne.transform.position + (diff * i);
+            //link.GetComponent<Rigidbody2D>().velocity = Vector3.MoveTowards(link.transform.position, playerOne.transform.position + (diff * i), linkSpeed);
+            i++;
+        }
+    }
+
     // Use this for initialization
     void Start () {
         playerOneBody = playerOne.GetComponent<Rigidbody2D>();
@@ -54,15 +68,28 @@ public class PlayerTetherScript : MonoBehaviour {
         tetherLinks = GameObject.FindGameObjectsWithTag("TetherLink");
         GameObject[] temp = new GameObject[tetherLinks.Length];
 
+        /* Sort all of the links */
         for(int i = 0; i < tetherLinks.Length; i++)
         {
             // Sorted by GameObject Name!  Important, as we adust positions with this array.
-            Debug.Log(tetherLinks[i].name + ":" + int.Parse(tetherLinks[i].name[4].ToString() + tetherLinks[i].name[5].ToString()));
-
             int cur = int.Parse(tetherLinks[i].name[4].ToString() + tetherLinks[i].name[5].ToString());
             temp[cur] = tetherLinks[i];
         }
         tetherLinks = temp;
+
+        /* Set the links targets, with special cases for the end links */
+        tetherLinks[0].GetComponent<DistanceJoint2D>().connectedBody = playerOneBody;
+        tetherLinks[0].GetComponent<TetherLinks>().setConnection(playerOne);
+        for (int i = 1; i < tetherLinks.Length; i++)
+        {
+            tetherLinks[i].GetComponent<DistanceJoint2D>().connectedBody = tetherLinks[i - 1].GetComponent<Rigidbody2D>();
+            tetherLinks[i].GetComponent<TetherLinks>().setConnection(tetherLinks[i-1]);
+        }
+        playerTwo.GetComponent<DistanceJoint2D>().connectedBody = tetherLinks[tetherLinks.Length - 1].GetComponent<Rigidbody2D>();
+        playerTwo.GetComponent<TetherLinks>().setConnection(tetherLinks[tetherLinks.Length - 1]);
+
+
+        distributeNodes();
 
         tetherVisual = this.GetComponent<LineRenderer>();
     }
@@ -79,7 +106,7 @@ public class PlayerTetherScript : MonoBehaviour {
         Vector3 difference = posOne - posTwo;
         // curdistance = Magnitide of difference
         curDistance = Vector3.Distance(posOne, posTwo);
-        
+
         /* if The players are far enough apart... */
         if (curTaught)
         {
@@ -98,25 +125,14 @@ public class PlayerTetherScript : MonoBehaviour {
             playerTwoBody.AddForce(difference);
         }
 
-        // if we are re-entering engage distance
-        if(taught && (!curTaught))
-        {
-            Vector3 diff = (playerTwo.transform.position - playerOne.transform.position) / (tetherLinks.Length + 1);
-
-            int i = 1;
-            foreach(GameObject link in tetherLinks)
-            {
-                link.transform.position = playerOne.transform.position + (diff * i);
-                i++;
-            }
-        }
-
         /* Draw the tether */
-        if (curTaught)
+        if (curTaught && (!taught))
         {
+            
+            distributeNodes();
             DrawTetherAsLine();
         }
-        else
+        else if(taught && (!curTaught))
         {
             BroadcastMessage("ConnectNodes");
             playerTwo.SendMessage("ConnectNodes");
