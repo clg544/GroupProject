@@ -11,6 +11,7 @@ TagManager:
   - DoorS
   - DoorW
   - Walls
+  - TetherLink
   layers:
   - Default
   - TransparentFX
