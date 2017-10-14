@@ -14,15 +14,6 @@ public class TetherLinks : MonoBehaviour {
         tetherVisual.SetPosition(1, myConnection.transform.position);
     }
 
-    
-    void OnCollisionStay2D(Collider2D coll)
-    {
-        Debug.Log("Hit!");
-
-        coll.GetComponent<Rigidbody2D>().velocity = myBody.velocity;
-    }
-
-
 	// Use this for initialization
 	void Start () {
         myBody = this.GetComponent<Rigidbody2D>();
