@@ -53,7 +53,7 @@ GameObject:
   - component: {fileID: 4547775109539174}
   - component: {fileID: 23845895772655458}
   - component: {fileID: 102323351269028102}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: NumberLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,8 @@ GameObject:
   - component: {fileID: 58002207139794412}
   - component: {fileID: 50248210954898466}
   - component: {fileID: 114200218664241116}
-  m_Layer: 0
+  - component: {fileID: 114486490454902566}
+  m_Layer: 8
   m_Name: Player One
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -114,7 +115,7 @@ GameObject:
   - component: {fileID: 114502801422751638}
   - component: {fileID: 232304480091829556}
   - component: {fileID: 120107633762349446}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player Two
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -149,7 +150,7 @@ GameObject:
   - component: {fileID: 4237229847669624}
   - component: {fileID: 23556303289929588}
   - component: {fileID: 102954642106451806}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: NumberLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -527,12 +528,12 @@ MonoBehaviour:
   engageDistance: 10
   distanceMultiplier: 10
   elasticity: 1
-  curDistance: 0
   playerOne: {fileID: 1436182535237730}
   playerTwo: {fileID: 1763017534516472}
-  tetherResolution: 25
-  linkSpeed: 0.01
+  tetherResolution: 10
   linkNode: {fileID: 1843378605204904, guid: 9ec2b8db4a864174f9b5bbd7e7c69d22, type: 2}
+  numColls: 0
+  curColl: {x: 0, y: 0, z: 0}
 --- !u!114 &114083128046382276
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -584,6 +585,21 @@ MonoBehaviour:
   maxY: 30
   PlayerOne: {fileID: 1436182535237730}
   PlayerTwo: {fileID: 1763017534516472}
+--- !u!114 &114486490454902566
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1436182535237730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43ee4e162f0db5441b53b7238b1ba6cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tetherManager: {fileID: 0}
+  myConnection: {fileID: 0}
+  pullDistance: 0.85
+  tension: 80
 --- !u!114 &114502801422751638
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -595,7 +611,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43ee4e162f0db5441b53b7238b1ba6cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tetherManager: {fileID: 0}
   myConnection: {fileID: 0}
+  pullDistance: 0.85
+  tension: 80
 --- !u!114 &114860004238916526
 MonoBehaviour:
   m_ObjectHideFlags: 1

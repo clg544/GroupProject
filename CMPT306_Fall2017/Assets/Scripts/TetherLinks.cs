@@ -11,11 +11,16 @@ public class TetherLinks : MonoBehaviour {
     private Rigidbody2D connectionBody;         // Connections RigidBody
     private LineRenderer tetherVisual;          // My lineRenderer
 
-    public float freezeDistance;
+    private Vector3 collisionPos;
+    public float pullDistance;
+    public float tension;
 
     /* Set lineRenderer to draw from me to my connection */
     public void ConnectNodes()
     {
+        if (gameObject.name == "Player One")
+            return;
+
         tetherVisual.SetPosition(0, this.transform.position);
         tetherVisual.SetPosition(1, myConnection.transform.position);
     }
@@ -25,27 +30,62 @@ public class TetherLinks : MonoBehaviour {
         return Vector3.Distance(gameObject.transform.position, myConnection.transform.position);
     }
 
+    public void UnfreezeNode()
+    {
+        myBody.constraints = RigidbodyConstraints2D.FreezeRotation;
+    }
+
     void Awake()
     {
         tetherManager = transform.parent.gameObject.GetComponent<PlayerTetherScript>();
     }
+    
+    
+    public void OnCollisionEnter2D(Collision2D coll)
+    {
 
-	// Use this for initialization
-	void Start() {
+        if (coll.gameObject.tag == "Barrier" || 
+            coll.gameObject.tag == "tetherLink")
+        {
+            return;
+        }
+        
+        tetherManager.numColls++;
+
+        collisionPos = (coll.contacts)[0].point;        // If we have a circle collider, this is safe
+        tetherManager.curColl = collisionPos;
+    }
+
+    public void OnCollisionStay2D(Collision2D coll)
+    {
+        if (coll.gameObject.tag == "Barrier" || coll.gameObject.tag == "tetherLink")
+            return;
+
+        float curDistance = Vector3.Distance(gameObject.transform.position, myConnection.transform.position);
+        
+        Vector3 collDir = this.transform.position - collisionPos;
+            
+        myBody.AddForce(collDir.normalized * curDistance * Time.deltaTime);
+        connectionBody.AddForce(((-1) * collDir.normalized) * curDistance * tension * Time.deltaTime);
+    }
+
+    public void OnCollisionExit2D(Collision2D coll)
+    {
+        if (this.tag != "Player")
+            tetherManager.numColls--;
+    }  
+    
+    // Use this for initialization
+    void Start() {
         myBody = this.GetComponent<Rigidbody2D>();
         tetherVisual = this.GetComponent<LineRenderer>();
         connectionBody = myConnection.GetComponent<Rigidbody2D>();
+        tetherManager = GetComponentInParent<PlayerTetherScript>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        float curDistance = Vector3.Distance(gameObject.transform.position, myConnection.transform.position);
 
-        if(curDistance > freezeDistance)
-        {
-            if (tetherManager != null)
-                tetherManager.Freeze(gameObject);
-        }
 	}
 
     public void setConnection(GameObject gameOb)

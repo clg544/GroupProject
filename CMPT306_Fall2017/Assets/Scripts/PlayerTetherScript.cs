@@ -31,10 +31,10 @@ public class PlayerTetherScript : MonoBehaviour {
     public int tetherResolution;        // How many nodes to use
     [SerializeField]
     private GameObject linkNode;        // Link prefab to clone
-
-    public float freezeDistance;        // Child's frozen distance
-    private bool frozen;                // a pair of nodes passed a distance threshold
-    private GameObject whoFroze;        // the node who froze the tether 
+    
+    /* Collision tracking */
+    public int numColls;
+    public Vector3 curColl;
 
     /* Get the centre of the players */
     public Vector3 getCentre()
@@ -55,33 +55,11 @@ public class PlayerTetherScript : MonoBehaviour {
         }
     }
 
-    /* A node hit something pointy, so freeze offending node untin they figure it out */
-    public void Freeze(GameObject freezer)
-    {
-        if (!(frozen))
-        {
-            Rigidbody2D offenderBody = freezer.GetComponent<Rigidbody2D>();
-
-            frozen = true;
-            whoFroze = freezer;
-
-            offenderBody.constraints = RigidbodyConstraints2D.FreezePosition;
-        }
-    }
-    public void Unfreeze()
-    {
-        if (frozen)
-        {
-            whoFroze.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
-
-            frozen = false;
-            whoFroze = null;
-
-        }
-    }
-
     /* Set up via Awake to prepare for child nodes */
     void Awake () {
+        /* tracking variables */
+        numColls = 0;
+
         /* Prepare players */
         playerOneBody = playerOne.GetComponent<Rigidbody2D>();
         playerTwoBody = playerTwo.GetComponent<Rigidbody2D>();
@@ -96,16 +74,22 @@ public class PlayerTetherScript : MonoBehaviour {
         }
         distributeNodes();
 
-        /* Set the links targets to prev node, with special cases for the end links */
+        /* Set the links targets to prev node, with special cases for the players */
+        playerOne.GetComponent<TetherLinks>().setConnection(tetherLinks[0]);
+        playerOne.GetComponent<TetherLinks>().tetherManager = this;
         tetherLinks[0].GetComponent<DistanceJoint2D>().connectedBody = playerOneBody;
         tetherLinks[0].GetComponent<TetherLinks>().setConnection(playerOne);
+
         for (int i = 1; i < tetherLinks.Length; i++)
         {
             tetherLinks[i].GetComponent<DistanceJoint2D>().connectedBody = tetherLinks[i - 1].GetComponent<Rigidbody2D>();
             tetherLinks[i].GetComponent<TetherLinks>().setConnection(tetherLinks[i-1]);
         }
+
         playerTwo.GetComponent<DistanceJoint2D>().connectedBody = tetherLinks[tetherLinks.Length - 1].GetComponent<Rigidbody2D>();
         playerTwo.GetComponent<TetherLinks>().setConnection(tetherLinks[tetherLinks.Length - 1]);
+        playerTwo.GetComponent<TetherLinks>().setConnection(tetherLinks[tetherLinks.Length - 1]);
+        playerTwo.GetComponent<TetherLinks>().tetherManager = this;
     }
 	
 	// Update is called once per frame
@@ -113,10 +97,10 @@ public class PlayerTetherScript : MonoBehaviour {
         // Get current distance between players
         Vector3 posOne = playerOne.transform.position;
         Vector3 posTwo = playerTwo.transform.position;
-
         Vector3 difference;
-
-        if (!(frozen))
+        
+        /* Calculate distance based on taughtness */
+        if (numColls == 0)
         {
             // Calculate vector of p1 to p2
             difference = posOne - posTwo;
@@ -126,13 +110,11 @@ public class PlayerTetherScript : MonoBehaviour {
         }
         else
         {
-            Vector3 posFrz = whoFroze.transform.position;
-
             // Calculate vector of p1 to p2
-            difference = posOne - posTwo - posFrz;
+            difference = posOne - posTwo - curColl;
 
             // curdistance = Magnitide of difference
-            curDistance = Vector3.Distance(posOne, posFrz) + Vector3.Distance(posTwo, posFrz);
+            curDistance = Vector3.Distance(posOne, curColl) + Vector3.Distance(posTwo, curColl);
         }
 
         /* if The players are too far apart... */
@@ -147,30 +129,14 @@ public class PlayerTetherScript : MonoBehaviour {
             difference = Vector3.ClampMagnitude(difference, tension);
 
             /* Apply said Vector to both players */
-            playerOneBody.AddForce(-difference);
-            playerTwoBody.AddForce(difference);
+            playerOneBody.AddForce(-difference * Time.deltaTime);
+            playerTwoBody.AddForce(difference * Time.deltaTime);
         }
 
         /* Tell all nodes to render a line */ 
         BroadcastMessage("ConnectNodes");
         playerTwo.SendMessage("ConnectNodes");
-
-        int overDist = 0;
-        if (frozen)
-        {
-            foreach(TetherLinks tl in tetherScripts)
-            {
-                if(tl.getDistance() > tl.freezeDistance)
-                {
-                    overDist++;
-                }
-            }
-
-            if(overDist <= 2)
-            {
-                Unfreeze();
-            }
-        }
-	}
+        
+    }
 
 }
