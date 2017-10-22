@@ -40,17 +40,15 @@ public class TetherLinks : MonoBehaviour {
         tetherManager = transform.parent.gameObject.GetComponent<PlayerTetherScript>();
     }
     
-    
     public void OnCollisionEnter2D(Collision2D coll)
     {
+        tetherManager.numColls++;
 
         if (coll.gameObject.tag == "Barrier" || 
             coll.gameObject.tag == "tetherLink")
         {
             return;
         }
-        
-        tetherManager.numColls++;
 
         collisionPos = (coll.contacts)[0].point;        // If we have a circle collider, this is safe
         tetherManager.curColl = collisionPos;
@@ -71,8 +69,7 @@ public class TetherLinks : MonoBehaviour {
 
     public void OnCollisionExit2D(Collision2D coll)
     {
-        if (this.tag != "Player")
-            tetherManager.numColls--;
+        tetherManager.numColls--;
     }  
     
     // Use this for initialization
@@ -81,11 +78,6 @@ public class TetherLinks : MonoBehaviour {
         tetherVisual = this.GetComponent<LineRenderer>();
         connectionBody = myConnection.GetComponent<Rigidbody2D>();
         tetherManager = GetComponentInParent<PlayerTetherScript>();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-
 	}
 
     public void setConnection(GameObject gameOb)
