@@ -69,7 +69,7 @@ public class PlayerBehavior : MonoBehaviour {
      */
     public void Brake()
     {
-        playerBody.velocity *= brakeFraction;
+        playerBody.velocity *= (brakeFraction * Time.deltaTime);
     }
 
     /**
@@ -87,7 +87,7 @@ public class PlayerBehavior : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
         /* Accelerate the player with a movement vector based on this frames input */
         playerBody.AddForce(frameMovement.normalized * acceleration);
 
