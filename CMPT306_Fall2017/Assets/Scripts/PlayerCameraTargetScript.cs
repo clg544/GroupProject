@@ -3,8 +3,22 @@ using System.Collections;
 
 public class PlayerCameraTargetScript : MonoBehaviour
 {
+    /* Magic Numbers */
     int NUM_PLAYERS = 2;
-
+    
+    /* Serialized Game Objects */
+    [SerializeField]
+    GameObject PlayerOne;
+    [SerializeField]
+    GameObject PlayerTwo;
+    [SerializeField]
+    GameObject PlayerCamera;
+        
+    /* Used Components */
+    Rigidbody2D PlayerOneBody;
+    Rigidbody2D PlayerTwoBody;
+    Camera myCamera;
+    
     /* Player target movement variables */
     [SerializeField]
     private float AccelerationSpeed;
@@ -14,23 +28,19 @@ public class PlayerCameraTargetScript : MonoBehaviour
     private float cameraSpeed;
     [SerializeField]
     private float AccelRatio;
+
+    /* Camera Restrictions */
+    [SerializeField]
+    private float minCameraSize;
+    [SerializeField]
+    private float maxCameraSize;
     
     /* Maximum target movement speeds, independant for screen ratios */
     [SerializeField]
     float maxX;
     [SerializeField]
     float maxY;
-    Vector3 MAX_X;
-    Vector3 MAX_Y;
-
-    [SerializeField]
-    GameObject PlayerOne;
-    [SerializeField]
-    GameObject PlayerTwo;
-
-    Rigidbody2D PlayerOneBody;
-    Rigidbody2D PlayerTwoBody;
-
+    
     Vector3 tetherCenter;
     
     // Use this for initialization
@@ -39,15 +49,15 @@ public class PlayerCameraTargetScript : MonoBehaviour
         PlayerOneBody = PlayerOne.GetComponent<Rigidbody2D>();
         PlayerTwoBody = PlayerTwo.GetComponent<Rigidbody2D>();
 
-        MAX_X = new Vector3(maxX, 0, 0);
-        MAX_Y = new Vector3(0, maxY, 0);
+        myCamera = PlayerCamera.GetComponent<Camera>();
     }
     
     // Update is called once per frame
     void Update()
     {
         /* Start in the Center */
-        Vector3 targetPos = (PlayerOne.transform.localPosition + PlayerTwo.transform.localPosition) / NUM_PLAYERS;
+        Vector3 playerDist = (PlayerOne.transform.localPosition + PlayerTwo.transform.localPosition) / NUM_PLAYERS;
+        Vector3 targetPos = playerDist;
 
         /* Add player velocities */
         Vector3 playerVelocities = ((Vector3)PlayerOneBody.velocity + (Vector3)PlayerTwoBody.velocity) * AccelRatio;
@@ -68,7 +78,12 @@ public class PlayerCameraTargetScript : MonoBehaviour
             this.transform.localPosition = Vector3.MoveTowards(this.transform.localPosition, targetPos, cameraSpeed);
         }
         
-        /* Add player velocities */
+        /* Move to the calculated position */
         this.transform.localPosition = Vector3.MoveTowards(this.transform.localPosition, targetPos, cameraSpeed);
+
+
+        /* Adjust the camera size based on player distance */
+        //Todo: this
+
     }
 }
