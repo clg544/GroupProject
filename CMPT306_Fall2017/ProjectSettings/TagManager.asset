@@ -4,13 +4,6 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Barrier
-  - Door
-  - DoorN
-  - DoorE
-  - DoorS
-  - DoorW
-  - Walls
   - TetherLink
   layers:
   - Default
@@ -21,13 +14,8 @@ TagManager:
   - UI
   - 
   - 
-<<<<<<< HEAD
-  - Enemy
   - 
-=======
-  - Player
-  - Tether
->>>>>>> develop
+  - 
   - 
   - 
   - 

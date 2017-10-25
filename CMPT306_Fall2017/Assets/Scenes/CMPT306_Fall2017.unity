@@ -208,7 +208,6 @@ Transform:
   m_LocalScale: {x: 21.288282, y: -0.827292, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-<<<<<<< HEAD:CMPT306_Fall2017/Assets/CMPT306_Fall2017.unity
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &539924686
@@ -243,9 +242,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1941051258}
   m_RootOrder: 2
-=======
-  m_RootOrder: 4
->>>>>>> develop:CMPT306_Fall2017/Assets/Scenes/CMPT306_Fall2017.unity
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &568827984
 Prefab:
@@ -284,11 +280,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4504003809388494, guid: 5eed0066b4268c14887ebeafd95873f0, type: 2}
       propertyPath: m_RootOrder
-<<<<<<< HEAD:CMPT306_Fall2017/Assets/CMPT306_Fall2017.unity
       value: 2
-=======
-      value: 0
->>>>>>> develop:CMPT306_Fall2017/Assets/Scenes/CMPT306_Fall2017.unity
       objectReference: {fileID: 0}
     - target: {fileID: 114941791273446218, guid: 5eed0066b4268c14887ebeafd95873f0,
         type: 2}
@@ -398,7 +390,6 @@ Transform:
   m_LocalScale: {x: 21.288544, y: 0.58124524, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-<<<<<<< HEAD:CMPT306_Fall2017/Assets/CMPT306_Fall2017.unity
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &967917388
@@ -615,9 +606,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1941051258}
   m_RootOrder: 3
-=======
-  m_RootOrder: 1
->>>>>>> develop:CMPT306_Fall2017/Assets/Scenes/CMPT306_Fall2017.unity
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1154437410
 GameObject:
@@ -688,7 +676,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: -1}
   m_Children: []
   m_Father: {fileID: 0}
-<<<<<<< HEAD:CMPT306_Fall2017/Assets/CMPT306_Fall2017.unity
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1296616206
@@ -883,9 +870,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1374445134}
   m_RootOrder: 0
-=======
-  m_RootOrder: 5
->>>>>>> develop:CMPT306_Fall2017/Assets/Scenes/CMPT306_Fall2017.unity
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1501078556
 GameObject:
@@ -1043,11 +1027,7 @@ Transform:
   m_LocalScale: {x: 0.48638585, y: 7.7381415, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-<<<<<<< HEAD:CMPT306_Fall2017/Assets/CMPT306_Fall2017.unity
   m_RootOrder: 4
-=======
-  m_RootOrder: 2
->>>>>>> develop:CMPT306_Fall2017/Assets/Scenes/CMPT306_Fall2017.unity
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1704310603
 GameObject:
@@ -1144,7 +1124,6 @@ Transform:
   m_LocalScale: {x: -0.3519798, y: 8.004621, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-<<<<<<< HEAD:CMPT306_Fall2017/Assets/CMPT306_Fall2017.unity
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1792611675
@@ -1174,9 +1153,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1374445134}
   m_RootOrder: 1
-=======
-  m_RootOrder: 3
->>>>>>> develop:CMPT306_Fall2017/Assets/Scenes/CMPT306_Fall2017.unity
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1805919923
 Prefab:
