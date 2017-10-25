@@ -59,6 +59,8 @@ public class BasicRangedEnemyBehaviour : MonoBehaviour {
         Vector3 dir = tartget.transform.position - transform.position;
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90;
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+
+        Debug.Log(currentNavPoint);
         rb.velocity = (currentNavPoint.transform.position - transform.position).normalized * speed;
         
         //
@@ -85,8 +87,11 @@ public class BasicRangedEnemyBehaviour : MonoBehaviour {
 
                 shootHit = Physics2D.Raycast(shootPoint.transform.position, miss);
                 lr.SetPosition(1, shootHit.point);
-              //  Debug.Log(shootHit.transform.tag);
-                shootHit.transform.gameObject.SendMessage("applyDamage",damage);
+                //  Debug.Log(shootHit.transform.tag);
+                if (shootHit.transform.CompareTag("Player"))
+                {
+                    shootHit.transform.gameObject.SendMessage("ApplyDamage", damage);
+                }
                 yield return 10;
                 lr.enabled = false;
 

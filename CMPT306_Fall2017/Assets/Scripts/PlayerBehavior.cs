@@ -63,14 +63,21 @@ public class PlayerBehavior : MonoBehaviour {
         if (Mathf.Abs(f) <= 1)
             frameMovement.y += f;
     }
-
-
+    
     /**
      * Scale the player's velocity down, if brakeFraction is < zero 
      */
     public void Brake()
     {
         playerBody.velocity *= brakeFraction;
+    }
+
+    /**
+     * Damage the player
+     */
+     public void ApplyDamage(int dam)
+    {
+        Debug.Log("Playerbehavior:ApplyDamage(int dam): Not Yet Implemented");
     }
 
 
