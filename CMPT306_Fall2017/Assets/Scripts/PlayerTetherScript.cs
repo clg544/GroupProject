@@ -136,7 +136,6 @@ public class PlayerTetherScript : MonoBehaviour {
         /* Tell all nodes to render a line */ 
         BroadcastMessage("ConnectNodes");
         playerTwo.SendMessage("ConnectNodes");
-        
     }
 
 }
