@@ -27,6 +27,10 @@ public class LevelGenerator : MonoBehaviour {
 	int s = 0;
 	int w = 0;
 
+	public GameObject spawnObject;
+
+	int partOfList = 0;
+
 	void Start() {
 		GenerateMap();
 	}
@@ -51,6 +55,8 @@ public class LevelGenerator : MonoBehaviour {
 
 
 	void RandomFillMap() {
+		int randomSpawnPlacement = UnityEngine.Random.Range (0, 5);
+
 		if (useRandomSeed) {
 			seed = Time.time.ToString();
 		}
@@ -59,14 +65,18 @@ public class LevelGenerator : MonoBehaviour {
 
 		for (int x = 0; x < width; x ++) {
 			for (int y = 0; y < height; y ++) {
-				if (x < doorWidth2 && x > doorWidth1 && y < doorHeight1  && y > doorHeight2) {
+				if (x < doorWidth2 && x > doorWidth1 && y < doorHeight1 && y > doorHeight2) {
 					map [x, y] = 0;
-				}
-				else if (x == 0 || x == width - 1 || y == 0 || y == height - 1) {
+				} else if (x == 0 || x == width - 1 || y == 0 || y == height - 1) {
 					map [x, y] = 1;
-				}
-				else {
-					map[x,y] = (pseudoRandom.Next(0, 100) < randomFillPercent)? 1: 0;
+				} else {
+					map [x, y] = (pseudoRandom.Next (0, 100) < randomFillPercent) ? 1 : 0;
+					if (map [x, y] == 0 && partOfList < randomSpawnPlacement) {
+						partOfList += 1;
+						GameObject spawn = Instantiate (spawnObject);
+						spawn.transform.SetParent (this.transform);
+						spawn.transform.position = new Vector2 (x, y);
+					}
 				}
 			}
 		}
@@ -83,9 +93,8 @@ public class LevelGenerator : MonoBehaviour {
 			GameObject nDoor = Instantiate(door);
 			nDoor.transform.SetParent (this.transform);
 			nDoor.transform.position = this.transform.position + new Vector3(0, height/3, 0);
-			nDoor.GetComponent<BoxCollider2D> ().isTrigger = true;
 			nDoor.tag = "DoorN";
-			nDoor.name = "north door" + n;
+			nDoor.name = "north door";
 		}
 		if (direction == "E") {
 			doorWidth1 = width - 5;
@@ -94,13 +103,11 @@ public class LevelGenerator : MonoBehaviour {
 			doorHeight2 = (height / 2) - 10;
 
 			e += 1;
-			GameObject eDoor = new GameObject ();
+			GameObject eDoor = Instantiate(door);
 			eDoor.transform.SetParent (this.transform);
 			eDoor.transform.position = this.transform.position + new Vector3(width/3, 0, 0);
-			eDoor.AddComponent<BoxCollider2D> ();
-			eDoor.GetComponent<BoxCollider2D> ().isTrigger = true;
 			eDoor.tag = "DoorE";
-			eDoor.name = "east door" + e;
+			eDoor.name = "east door";
 		}
 		if (direction == "S") {
 			doorWidth1 = (width/2) - 10;
@@ -109,13 +116,11 @@ public class LevelGenerator : MonoBehaviour {
 			doorHeight2 = 0;
 
 			s += 1;
-			GameObject sDoor = new GameObject ();
+			GameObject sDoor = Instantiate(door);
 			sDoor.transform.SetParent (this.transform);
 			sDoor.transform.position = this.transform.position - new Vector3 (0, height / 3, 0);
-			sDoor.AddComponent<BoxCollider2D> ();
-			sDoor.GetComponent<BoxCollider2D> ().isTrigger = true;
 			sDoor.tag = "DoorS";
-			sDoor.name = "south door" + s;
+			sDoor.name = "south door";
 		}
 		if (direction == "W") {
 			doorWidth1 = 0;
@@ -124,13 +129,11 @@ public class LevelGenerator : MonoBehaviour {
 			doorHeight2 = (height / 2) - 10;
 
 			w += 1;
-			GameObject wDoor = new GameObject ();
+			GameObject wDoor = Instantiate(door);
 			wDoor.transform.SetParent (this.transform);
 			wDoor.transform.position = this.transform.position - new Vector3(width/3, 0, 0);
-			wDoor.AddComponent<BoxCollider2D> ();
-			wDoor.GetComponent<BoxCollider2D> ().isTrigger = true;
 			wDoor.tag = "DoorW";
-			wDoor.name = "west door" + w;
+			wDoor.name = "west door";
 		}
 	}
 

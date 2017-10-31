@@ -34,6 +34,7 @@ public class MeshCreator : MonoBehaviour {
 		Mesh mesh = new Mesh();
 		cave.mesh = mesh;
 
+
 		mesh.vertices = vertices.ToArray();
 		mesh.triangles = triangles.ToArray();
 		mesh.RecalculateNormals();
@@ -47,6 +48,8 @@ public class MeshCreator : MonoBehaviour {
 		}
 		mesh.uv = uvs;
 
+		this.gameObject.AddComponent<PolygonCollider2D> ();
+
 		Generate2DColliders();
 
 		this.tag = "Walls";
@@ -54,22 +57,41 @@ public class MeshCreator : MonoBehaviour {
 
 	void Generate2DColliders() {
 
-		EdgeCollider2D[] currentColliders = gameObject.GetComponents<EdgeCollider2D> ();
+		PolygonCollider2D[] currentColliders = gameObject.GetComponents<PolygonCollider2D> ();
 		for (int i = 0; i < currentColliders.Length; i++) {
 			Destroy(currentColliders[i]);
+		}
+
+		EdgeCollider2D[] currentEdges = gameObject.GetComponents<EdgeCollider2D> ();
+		for (int i = 0; i < currentEdges.Length; i++) {
+			Destroy(currentEdges[i]);
 		}
 
 		CalculateMeshOutlines ();
 
 
 		foreach (List<int> outline in outlines) {
-			EdgeCollider2D edgeCollider = gameObject.AddComponent<EdgeCollider2D>();
-			Vector2[] edgePoints = new Vector2[outline.Count];
+			if (outlines.IndexOf (outline) == 1) {
+				EdgeCollider2D edgeCollider = gameObject.AddComponent<EdgeCollider2D> ();
+				Vector2[] edgePoints = new Vector2[outline.Count];
 
-			for (int i =0; i < outline.Count; i ++) {
-				edgePoints[i] = new Vector2(vertices[outline[i]].x,vertices[outline[i]].z);
+				for (int i = 0; i < outline.Count; i++) {
+					edgePoints [i] = new Vector2 (vertices [outline [i]].x, vertices [outline [i]].z);
+				}
+
+
+				edgeCollider.points = edgePoints;
+			} else {
+				PolygonCollider2D polyCollider = gameObject.AddComponent<PolygonCollider2D> ();
+				Vector2[] edgePoints = new Vector2[outline.Count];
+
+				for (int i = 0; i < outline.Count; i++) {
+					edgePoints [i] = new Vector2 (vertices [outline [i]].x, vertices [outline [i]].z);
+				}
+
+
+				polyCollider.SetPath (0, edgePoints);
 			}
-			edgeCollider.points = edgePoints;
 		}
 
 	}

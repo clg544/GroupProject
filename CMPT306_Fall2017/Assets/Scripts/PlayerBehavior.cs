@@ -26,6 +26,7 @@ public class PlayerBehavior : MonoBehaviour {
     private Rigidbody2D playerBody;
 
 
+
     /* Getters and Setters */
     public float getMaxSpeed()
     {
@@ -63,21 +64,14 @@ public class PlayerBehavior : MonoBehaviour {
         if (Mathf.Abs(f) <= 1)
             frameMovement.y += f;
     }
-    
+
+
     /**
      * Scale the player's velocity down, if brakeFraction is < zero 
      */
     public void Brake()
     {
-        playerBody.velocity *= (brakeFraction * Time.deltaTime);
-    }
-
-    /**
-     * Damage the player
-     */
-     public void ApplyDamage(int dam)
-    {
-        Debug.Log("Playerbehavior:ApplyDamage(int dam): Not Yet Implemented");
+        playerBody.velocity *= brakeFraction;
     }
 
 
@@ -87,7 +81,7 @@ public class PlayerBehavior : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void FixedUpdate () {
+	void Update () {
         /* Accelerate the player with a movement vector based on this frames input */
         playerBody.AddForce(frameMovement.normalized * acceleration);
 

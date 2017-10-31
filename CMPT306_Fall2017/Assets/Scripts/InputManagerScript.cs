@@ -14,12 +14,22 @@ public class InputManagerScript : MonoBehaviour {
 
     private PlayerShooter myShooter;
 
+	private GameObject doorEntererN;
+	private GameObject doorEntererS;
+	private GameObject doorEntererW;
+	private GameObject doorEntererE;
+
     private bool isAiming;
 
 	// Use this for initialization
 	void Start () {
         playerOneBehavior = playerOne.GetComponent<PlayerBehavior>();
         playerTwoBehavior = playerTwo.GetComponent<PlayerBehavior>();
+
+		doorEntererN = GameObject.FindGameObjectWithTag ("DoorN");
+		doorEntererS = GameObject.FindGameObjectWithTag ("DoorS");
+		doorEntererW = GameObject.FindGameObjectWithTag ("DoorW");
+		doorEntererE = GameObject.FindGameObjectWithTag ("DoorE"); 
 
         myShooter = playerOne.GetComponent<PlayerShooter>();
     }
@@ -51,6 +61,21 @@ public class InputManagerScript : MonoBehaviour {
         {
             playerOneBehavior.Brake();
         }
+
+		if (Input.GetKeyDown (KeyCode.F)) {
+			if (doorEntererN != null) {
+				doorEntererN.GetComponent<EnterDoor> ().goThroughDoor ();
+			}
+			if (doorEntererS != null) {
+				doorEntererS.GetComponent<EnterDoor> ().goThroughDoor ();
+			}
+			if (doorEntererW != null) {
+				doorEntererW.GetComponent<EnterDoor> ().goThroughDoor ();
+			}
+			if (doorEntererE != null) {
+				doorEntererE.GetComponent<EnterDoor> ().goThroughDoor ();
+			}
+		}
 
 
         /**
