@@ -13,6 +13,7 @@ public class PlayerAttackScript : MonoBehaviour {
         if (coll.gameObject.tag == "Enemy")
         {
             coll.gameObject.SendMessage("ApplyDamage", attackDamage);
+            Debug.Log("I Dealt Damage" + attackDamage);
         }
     }
 

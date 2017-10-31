@@ -27,7 +27,7 @@ public class PlayerCombat : MonoBehaviour {
     public Vector3 SwingVect;
     public float swingDuration;
     public float swingCooldown;
-    public float swingAttack;
+    public float swingDamage;
 
     /* Shooty Variables */
     public float bulletSpawnDist;  // How far to spawn the bullet
@@ -147,10 +147,10 @@ public class PlayerCombat : MonoBehaviour {
             return;
         
         GameObject curAttack = Instantiate(FightySwing, gameObject.transform);
+        curAttack.GetComponent<PlayerAttackScript>().attackDamage = swingDamage;
 
         curAttack.transform.localPosition = SwingVect;
         curAttack.transform.Rotate(0, 0, 90 + (-90 * (int)curDirection), Space.Self);
-        curAttack.GetComponent<PlayerAttackScript>().attackDamage = swingAttack;
 
         AttackCooldown += swingCooldown;
     }

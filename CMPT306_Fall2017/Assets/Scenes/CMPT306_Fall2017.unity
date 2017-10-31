@@ -265,7 +265,7 @@ Prefab:
 GameObject:
   m_PrefabParentObject: {fileID: 1642003740233448, guid: 43a50026743875842b5906d0e5d8116f,
     type: 2}
-  m_PrefabInternal: {fileID: 1625842892}
+  m_PrefabInternal: {fileID: 1666296754}
 --- !u!1 &826563813
 GameObject:
   m_ObjectHideFlags: 0
@@ -365,9 +365,9 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &855935673 stripped
 GameObject:
-  m_PrefabParentObject: {fileID: 1435480096455922, guid: 43a50026743875842b5906d0e5d8116f,
+  m_PrefabParentObject: {fileID: 1441463896677894, guid: 43a50026743875842b5906d0e5d8116f,
     type: 2}
-  m_PrefabInternal: {fileID: 1625842892}
+  m_PrefabInternal: {fileID: 1666296754}
 --- !u!1 &1154437410
 GameObject:
   m_ObjectHideFlags: 0
@@ -627,7 +627,7 @@ Transform:
   m_Father: {fileID: 1374445134}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1625842892
+--- !u!1001 &1666296754
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -666,67 +666,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 232968804247740292, guid: 43a50026743875842b5906d0e5d8116f,
+    - target: {fileID: 114849192383879338, guid: 43a50026743875842b5906d0e5d8116f,
         type: 2}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 120875268748500028, guid: 43a50026743875842b5906d0e5d8116f,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114634243783423288, guid: 43a50026743875842b5906d0e5d8116f,
-        type: 2}
-      propertyPath: HeavyBulletVel
-      value: 75
-      objectReference: {fileID: 0}
-    - target: {fileID: 114634243783423288, guid: 43a50026743875842b5906d0e5d8116f,
-        type: 2}
-      propertyPath: HeavyBulletCooldown
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 114634243783423288, guid: 43a50026743875842b5906d0e5d8116f,
-        type: 2}
-      propertyPath: HeavyBulletMassRatio
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 114634243783423288, guid: 43a50026743875842b5906d0e5d8116f,
-        type: 2}
-      propertyPath: recoil
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1248456438693984, guid: 43a50026743875842b5906d0e5d8116f, type: 2}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1849681674316268, guid: 43a50026743875842b5906d0e5d8116f, type: 2}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1331113859876140, guid: 43a50026743875842b5906d0e5d8116f, type: 2}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1642003740233448, guid: 43a50026743875842b5906d0e5d8116f, type: 2}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1912825161100112, guid: 43a50026743875842b5906d0e5d8116f, type: 2}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1189084515324114, guid: 43a50026743875842b5906d0e5d8116f, type: 2}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1435480096455922, guid: 43a50026743875842b5906d0e5d8116f, type: 2}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1364349108589580, guid: 43a50026743875842b5906d0e5d8116f, type: 2}
-      propertyPath: m_Layer
-      value: 8
+      propertyPath: swingDamage
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 43a50026743875842b5906d0e5d8116f, type: 2}

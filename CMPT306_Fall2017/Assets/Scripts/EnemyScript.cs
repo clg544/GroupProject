@@ -14,7 +14,7 @@ public class EnemyScript : MonoBehaviour {
     {
         currentHealth -= dam;
 
-        if (currentHealth < 0)
+        if (currentHealth <= 0)
             Kill();
     }
 
