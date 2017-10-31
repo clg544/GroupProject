@@ -6,7 +6,6 @@ public class BasicRangedEnemyBehaviour : MonoBehaviour {
     public GameObject fighty;
     public GameObject shooty;
 
-    public int maxHealth;
     public float speed;
     public float spread;
     public int burst;
@@ -14,8 +13,6 @@ public class BasicRangedEnemyBehaviour : MonoBehaviour {
     public float rof;
     public int damage;
 
-    
-    private int currentHealth;
     private Rigidbody2D rb;
     private LineRenderer lr;
     public GameObject shootPoint;
@@ -26,25 +23,8 @@ public class BasicRangedEnemyBehaviour : MonoBehaviour {
     private GameObject currentNavPoint;
 
     private RaycastHit2D shootHit;
-    private GameObject tartget;
+    private GameObject target;
 
-    /**
-     * Damage this enemy
-     */
-    public void ApplyDamage(int dam)
-    {
-        if (currentHealth < 0)
-            Kill();
-    }
-
-    /** 
-     * Kill this enemy
-     */
-    public void Kill()
-    {
-        Destroy(gameObject);
-    }
-    
     // Use this for initialization
     void Start() {
         navQueue = new Queue<GameObject>();
@@ -57,7 +37,6 @@ public class BasicRangedEnemyBehaviour : MonoBehaviour {
         rb = GetComponent<Rigidbody2D>();
         lr = GetComponentInChildren<LineRenderer>();
 
-        currentHealth = maxHealth;
         StartCoroutine(shoot());
     }
 
@@ -65,18 +44,17 @@ public class BasicRangedEnemyBehaviour : MonoBehaviour {
     void FixedUpdate() {
         //look at closer of fighty or shooty
         if (Vector2.Distance(transform.position, fighty.transform.position) < Vector2.Distance(transform.position, shooty.transform.position)) {
-            tartget = fighty;
+            target = fighty;
         }
         else {
-            tartget = shooty;
+            target = shooty;
         }
         //look at closest player
 
-        Vector3 dir = tartget.transform.position - transform.position;
+        Vector3 dir = target.transform.position - transform.position;
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90;
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-
-        Debug.Log(currentNavPoint);
+        
         rb.velocity = (currentNavPoint.transform.position - transform.position).normalized * speed;
         
         //

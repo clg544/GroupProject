@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 232795414665801086}
   - component: {fileID: 120366032863917642}
   - component: {fileID: 114281913493297394}
-  m_Layer: 9
+  m_Layer: 12
   m_Name: Link
   m_TagString: TetherLink
   m_Icon: {fileID: 0}

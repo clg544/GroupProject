@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4459500311563058}
-  m_Layer: 8
+  m_Layer: 14
   m_Name: Waypoint (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34,7 +34,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4721743220192342}
-  m_Layer: 8
+  m_Layer: 14
   m_Name: Waypoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49,7 +49,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4140383514999288}
-  m_Layer: 8
+  m_Layer: 14
   m_Name: Waypoint (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -68,7 +68,8 @@ GameObject:
   - component: {fileID: 50741798470851334}
   - component: {fileID: 60059447213727202}
   - component: {fileID: 114196105704846844}
-  m_Layer: 8
+  - component: {fileID: 114680986305846780}
+  m_Layer: 14
   m_Name: Ranged Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -84,7 +85,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4328412112759320}
   - component: {fileID: 120026016331682604}
-  m_Layer: 8
+  m_Layer: 14
   m_Name: shootPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,7 +100,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4537712358047610}
-  m_Layer: 8
+  m_Layer: 14
   m_Name: Waypoint (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -127,7 +128,7 @@ Transform:
   m_GameObject: {fileID: 1496164178887884}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -8.01, y: -4.94, z: 0}
-  m_LocalScale: {x: 81.09643, y: 117.53087, z: 1}
+  m_LocalScale: {x: 4.8706565, y: 5.2586517, z: 1}
   m_Children:
   - {fileID: 4328412112759320}
   - {fileID: 4721743220192342}
@@ -249,8 +250,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fighty: {fileID: 0}
   shooty: {fileID: 0}
-  maxHealth: 100
-  speed: 10
+  speed: 0
   spread: 15
   burst: 5
   reloadTime: 5
@@ -263,6 +263,19 @@ MonoBehaviour:
   - {fileID: 1020717404057448}
   - {fileID: 1200202102100790}
   navTriggerDistance: 3
+--- !u!114 &114680986305846780
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1496164178887884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e917e6bab03d2894888798562fb67977, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHealth: 0
+  maxHealth: 100
 --- !u!120 &120026016331682604
 LineRenderer:
   m_ObjectHideFlags: 1

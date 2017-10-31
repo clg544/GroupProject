@@ -34,9 +34,14 @@ public class PlayerCombat : MonoBehaviour {
     public float crosshairDist;    // How away the crasshair is from the player
     public float LightBulletVel;     // How fast light bullets travel
     public float LightBulletCooldown;    // How many frames before we can shoot again
+    public float LightBulletDamage;     // How fast light bullets travel
+    public float LightBulletSpread;     // Spread applied to light bullets
+
     public float HeavyBulletVel;     // How fast light bullets travel
     public float HeavyBulletCooldown;    // How many frames before we can shoot again
     public float HeavyBulletMassRatio;   // Mass Multiplier of heavy bullet over light bullet
+    public float HeavyBulletDamage;     // How much damage this causes
+    public float HeavyBulletSpread;     // Spread applied to Heavy bullets
     public float recoil;            // Universal recoil multiplier
     
     /* Weapon variables */
@@ -78,6 +83,7 @@ public class PlayerCombat : MonoBehaviour {
 
             /* Create our new bullet */
             newBullet = Instantiate(Bullet, gameObject.transform);
+            newBullet.GetComponent<BulletScript>().damage = LightBulletDamage;
 
             /* Bullet Position = bulletSpawnDist from centre of player, towards the crasshair*/
             newBullet.transform.localPosition = curCrosshair.transform.localPosition.normalized * bulletSpawnDist;
@@ -90,11 +96,11 @@ public class PlayerCombat : MonoBehaviour {
             /* Push player with bulletVel */
             myBody.AddForce(-bulletVel.velocity * bulletVel.mass * recoil);
 
-            /* Spread, does nothing */
-            Vector3 perpendicular = Quaternion.AngleAxis(90, curCrosshair.transform.localPosition.normalized) 
-                * curCrosshair.transform.localPosition.normalized;
+            /* Add Bullet Spread */
+            Vector3 perpendicular = Vector3.Cross(bulletVel.velocity, new Vector3(0, 0, 1)).normalized;
+
             /* Apply Bullet Spread */
-            bulletVel.AddForce(perpendicular);
+            bulletVel.AddForce(perpendicular * Random.Range(-1.0F, 1.0F) * LightBulletSpread);
         }
     }
     /**
@@ -111,6 +117,7 @@ public class PlayerCombat : MonoBehaviour {
 
             /* Create our new bullet */
             newBullet = Instantiate(Bullet, gameObject.transform);
+            newBullet.GetComponent<BulletScript>().damage = HeavyBulletDamage;
 
             /* Bullet Position = bulletSpawnDist from centre of player, towards the crasshair*/
             newBullet.transform.localPosition = curCrosshair.transform.localPosition.normalized * bulletSpawnDist;
@@ -123,11 +130,11 @@ public class PlayerCombat : MonoBehaviour {
             /* Push player with bulletVel */
             myBody.AddForce(-bulletVel.velocity * bulletVel.mass * HeavyBulletMassRatio * recoil);
 
-            /* Spread, does nothing */
-            Vector3 perpendicular = Quaternion.AngleAxis(90, curCrosshair.transform.localPosition.normalized)
-                * curCrosshair.transform.localPosition.normalized;
+            /* Add Bullet Spread */
+            Vector3 perpendicular = Vector3.Cross(bulletVel.velocity, new Vector3(0, 0, 1)).normalized;
+
             /* Apply Bullet Spread */
-            bulletVel.AddForce(perpendicular);
+            bulletVel.AddForce(perpendicular * Random.Range(-1.0F, 1.0F) * HeavyBulletSpread);
         }
     }
 
@@ -174,14 +181,25 @@ public class PlayerCombat : MonoBehaviour {
 
     public void SwitchWeapon()
     {
+        if (myClass != PlayerClass.SHOOTY)
+            return;
+
+        if (AttackCooldown > 0)
+            return;
+
         /* Invert weapon choice, as long as there are only 2 weapons */
-        if(myClass == PlayerClass.SHOOTY)
+        if (curWeapon == Weapon.LIGHT_GUN)
         {
-            if (curWeapon == Weapon.LIGHT_GUN)
-                curWeapon = Weapon.HEAVY_GUN;
-            else
-                curWeapon = Weapon.LIGHT_GUN;
+            curWeapon = Weapon.HEAVY_GUN;
         }
+        else
+        {
+            curWeapon = Weapon.LIGHT_GUN;
+        }
+
+        AttackCooldown += 1;
+
+        Debug.Log(curWeapon);
     }
     
 	// Use this for initialization

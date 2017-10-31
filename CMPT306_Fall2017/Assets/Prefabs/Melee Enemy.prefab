@@ -24,7 +24,8 @@ GameObject:
   - component: {fileID: 60834748101857568}
   - component: {fileID: 58144406283700462}
   - component: {fileID: 114891106873606092}
-  m_Layer: 8
+  - component: {fileID: 114784285469784666}
+  m_Layer: 14
   m_Name: Melee Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -41,7 +42,7 @@ GameObject:
   - component: {fileID: 4915279017076574}
   - component: {fileID: 60398492660973248}
   - component: {fileID: 114285170059132214}
-  m_Layer: 8
+  m_Layer: 14
   m_Name: attackPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,8 +56,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1524523062439450}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.25, y: 1.27, z: 0}
-  m_LocalScale: {x: 0.25, y: 0.25, z: 1}
+  m_LocalPosition: {x: 4.4, y: 1, z: 0}
+  m_LocalScale: {x: 3.25, y: 3.25, z: 1}
   m_Children:
   - {fileID: 4915279017076574}
   m_Father: {fileID: 0}
@@ -69,7 +70,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1968380061691700}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.1, y: 6.96, z: 0}
+  m_LocalPosition: {x: 0.1, y: 1.08, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4764978510050738}
@@ -101,15 +102,15 @@ CircleCollider2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1524523062439450}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -1.0117931, y: 0}
+  m_Offset: {x: -9, y: 0}
   serializedVersion: 2
-  m_Radius: 19.70786
+  m_Radius: 20
 --- !u!60 &60398492660973248
 PolygonCollider2D:
   m_ObjectHideFlags: 1
@@ -134,11 +135,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 1.0611824, y: 11.901242}
-      - {x: -13.492312, y: 11.789092}
-      - {x: -4.350159, y: -3.027855}
-      - {x: 3.6748605, y: -2.931385}
-      - {x: 14.842909, y: 11.885562}
+    - - {x: 1.3088236, y: 0.4088235}
+      - {x: -1.4816177, y: 0.40882373}
+      - {x: -0.50000006, y: -0.76801467}
+      - {x: 0.28894654, y: -0.76801467}
 --- !u!60 &60834748101857568
 PolygonCollider2D:
   m_ObjectHideFlags: 1
@@ -155,7 +155,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 16, y: 16}
+    oldSize: {x: 1, y: 1}
     newSize: {x: 16, y: 16}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -163,11 +163,11 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -7.594845, y: 1.7698284}
-      - {x: -4.598156, y: -7.0957923}
-      - {x: 4.777466, y: -7.0579658}
-      - {x: 7.70195, y: 1.725484}
-      - {x: 0.1932106, y: 7.273726}
+    - - {x: -0.47286278, y: 0.1578652}
+      - {x: -0.26950455, y: -0.40373415}
+      - {x: 0.3012477, y: -0.39952204}
+      - {x: 0.48904347, y: 0.15436162}
+      - {x: 0.029172312, y: 0.48418787}
 --- !u!114 &114285170059132214
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -183,6 +183,19 @@ MonoBehaviour:
   windUpTime: 1
   damage: 5
   winding: 0
+--- !u!114 &114784285469784666
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1524523062439450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e917e6bab03d2894888798562fb67977, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHealth: 0
+  maxHealth: 100
 --- !u!114 &114891106873606092
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -236,7 +249,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 6ccac24f9086b82438e9881363e44ddc, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ece01e5c4b5aa5e4095a001e9b0cf8fd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

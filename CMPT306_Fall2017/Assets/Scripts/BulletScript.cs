@@ -4,14 +4,20 @@ using UnityEngine;
 
 public class BulletScript : MonoBehaviour {
 
+    public float damage;
 
     void OnTriggerEnter2D(Collider2D coll)
     {
-        if(coll.tag != "Untagged")
+        if(coll.gameObject.tag == "Enemy")
+        {
+            coll.gameObject.SendMessage("ApplyDamage", damage);
+        }
+
+        if(coll.gameObject.tag != "Untagged")
         {
             Destroy(gameObject);
         }
-        Debug.Log(coll.tag);
+
 
     }
 

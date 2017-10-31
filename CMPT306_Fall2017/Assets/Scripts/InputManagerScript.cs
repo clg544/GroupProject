@@ -109,7 +109,7 @@ public class InputManagerScript : MonoBehaviour {
         {
             playerTwoBehavior.Brake();
         }
-        if (Input.GetKey(KeyCode.Keypad9))
+        if (Input.GetKeyDown(KeyCode.Keypad9))
         {
             playerTwoCombat.SwitchWeapon();
         }
