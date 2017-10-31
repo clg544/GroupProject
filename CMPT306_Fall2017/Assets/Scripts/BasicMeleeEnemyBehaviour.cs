@@ -19,8 +19,15 @@ public class BasicMeleeEnemyBehaviour : MonoBehaviour {
     private int inCombat = 0;
     private MeleeDamage md;
 
-	// Use this for initialization
-	void Start () {
+    /**
+     * Damage this Enemy
+     */
+    public void ApplyDamage(int dam)
+    {
+        Debug.Log("BasicMeleeEnemyBehavior:ApplyDamage(int dam): Not Yet Implemented");
+    }
+    // Use this for initialization
+    void Start () {
         navQueue = new Queue<GameObject>();
         foreach (GameObject g in navPoints) {
             navQueue.Enqueue(g);

@@ -28,6 +28,14 @@ public class BasicRangedEnemyBehaviour : MonoBehaviour {
     private RaycastHit2D shootHit;
     private GameObject tartget;
 
+    /**
+     * Damage this enemy
+     */
+    public void ApplyDamage(int dam)
+    {
+        Debug.Log("BasicRangedEnemyBehavior:ApplyDamage(int dam): Not Yet Implemented");
+    }
+
 
     // Use this for initialization
     void Start() {

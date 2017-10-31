@@ -376,12 +376,6 @@ GameObject:
   m_PrefabParentObject: {fileID: 1642003740233448, guid: 43a50026743875842b5906d0e5d8116f,
     type: 2}
   m_PrefabInternal: {fileID: 1625842892}
---- !u!114 &728964252 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114883154659287566, guid: 43a50026743875842b5906d0e5d8116f,
-    type: 2}
-  m_PrefabInternal: {fileID: 1625842892}
-  m_Script: {fileID: 11500000, guid: 79c94baaf6a689347b6e47b5c7edd41c, type: 3}
 --- !u!50 &728964254 stripped
 Rigidbody2D:
   m_PrefabParentObject: {fileID: 50481284814123684, guid: 43a50026743875842b5906d0e5d8116f,
@@ -500,7 +494,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 725479f7b5881874d92cb73b6c876748, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myPlayer: {fileID: 728964252}
+  myPlayer: {fileID: 855935677}
   myBody: {fileID: 855935679}
   isFighty: 0
   Crosshair: {fileID: 1536397821931000, guid: 12d625172ca83dc438e54d9e8158bf5f, type: 2}
@@ -517,6 +511,12 @@ MonoBehaviour:
   LightBulletCooldown: 6
   HeavyBulletVel: 0
   HeavyBulletCooldown: 0
+--- !u!114 &855935677 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114403581883098712, guid: 43a50026743875842b5906d0e5d8116f,
+    type: 2}
+  m_PrefabInternal: {fileID: 1625842892}
+  m_Script: {fileID: 11500000, guid: 79c94baaf6a689347b6e47b5c7edd41c, type: 3}
 --- !u!50 &855935679 stripped
 Rigidbody2D:
   m_PrefabParentObject: {fileID: 50921258721999704, guid: 43a50026743875842b5906d0e5d8116f,
