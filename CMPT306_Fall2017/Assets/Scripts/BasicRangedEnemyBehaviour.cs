@@ -15,7 +15,7 @@ public class BasicRangedEnemyBehaviour : MonoBehaviour {
     public int damage;
 
     
-    private int curentHealth;
+    private int currentHealth;
     private Rigidbody2D rb;
     private LineRenderer lr;
     public GameObject shootPoint;
@@ -33,10 +33,18 @@ public class BasicRangedEnemyBehaviour : MonoBehaviour {
      */
     public void ApplyDamage(int dam)
     {
-        Debug.Log("BasicRangedEnemyBehavior:ApplyDamage(int dam): Not Yet Implemented");
+        if (currentHealth < 0)
+            Kill();
     }
 
-
+    /** 
+     * Kill this enemy
+     */
+    public void Kill()
+    {
+        Destroy(gameObject);
+    }
+    
     // Use this for initialization
     void Start() {
         navQueue = new Queue<GameObject>();
@@ -49,7 +57,7 @@ public class BasicRangedEnemyBehaviour : MonoBehaviour {
         rb = GetComponent<Rigidbody2D>();
         lr = GetComponentInChildren<LineRenderer>();
 
-        curentHealth = maxHealth;
+        currentHealth = maxHealth;
         StartCoroutine(shoot());
     }
 
@@ -83,10 +91,11 @@ public class BasicRangedEnemyBehaviour : MonoBehaviour {
         yield return new WaitForSeconds(Random.Range(0, reloadTime));
        // Debug.Log("beginning shooting");
         while (true) {
-          //  Debug.Log("shooting");
-            for (int i = 0; i < burst; i++) {
+            //  Debug.Log("shooting");
+            for (int i = 0; i < burst; i++)
+            {
 
-              //  Debug.Log("shot");
+                //  Debug.Log("shot");
 
                 lr.enabled = true;
                 lr.SetPosition(0, shootPoint.transform.position);

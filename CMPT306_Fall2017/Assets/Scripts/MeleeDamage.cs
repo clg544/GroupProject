@@ -38,7 +38,7 @@ public class MeleeDamage : MonoBehaviour {
                 yield return new WaitForSeconds(windUpTime);
                 foreach (GameObject g in inCombatWith) {
                     Debug.Log("applying "+ damage +" damage");
-                    g.SendMessage("applyDamage", damage);
+                    g.SendMessage("ApplyDamage", damage);
                 }
                 winding = false;
                 yield return new WaitForSeconds(coolDownTime);

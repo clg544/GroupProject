@@ -14,7 +14,7 @@ public class BasicMeleeEnemyBehaviour : MonoBehaviour {
     public float navTriggerDistance;
 
     private GameObject currentNavPoint;
-    private int curentHealth;
+    private int currentHealth;
     private Rigidbody2D rb;
     private int inCombat = 0;
     private MeleeDamage md;
@@ -24,14 +24,25 @@ public class BasicMeleeEnemyBehaviour : MonoBehaviour {
      */
     public void ApplyDamage(int dam)
     {
-        Debug.Log("BasicMeleeEnemyBehavior:ApplyDamage(int dam): Not Yet Implemented");
+        if (currentHealth < 0)
+            Kill();
     }
+
+    /** 
+     * Kill this enemy
+     */
+     public void Kill()
+    {
+        Destroy(gameObject);
+    }
+
     // Use this for initialization
     void Start () {
         navQueue = new Queue<GameObject>();
         foreach (GameObject g in navPoints) {
             navQueue.Enqueue(g);
         }
+        currentHealth = maxHealth;
         rb = GetComponent<Rigidbody2D>();
         currentNavPoint = navQueue.Dequeue();
         md = GetComponentInChildren<MeleeDamage>();

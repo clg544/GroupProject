@@ -10,8 +10,8 @@ public class InputManagerScript : MonoBehaviour {
     private PlayerBehavior playerOneBehavior;
     private PlayerBehavior playerTwoBehavior;
 
-    private PlayerCombat playerOneScript;
-    private PlayerCombat playerTwoScript;
+    private PlayerCombat playerOneCombat;
+    private PlayerCombat playerTwoCombat;
 
     private bool P1isAiming;
     private bool P2isAiming;
@@ -21,8 +21,8 @@ public class InputManagerScript : MonoBehaviour {
         playerOneBehavior = playerOne.GetComponent<PlayerBehavior>();
         playerTwoBehavior = playerTwo.GetComponent<PlayerBehavior>();
 
-        playerOneScript = playerOne.GetComponent<PlayerCombat>();
-        playerTwoScript = playerTwo.GetComponent<PlayerCombat>();
+        playerOneCombat = playerOne.GetComponent<PlayerCombat>();
+        playerTwoCombat = playerTwo.GetComponent<PlayerCombat>();
     }
     
     private void KeyboardInput()
@@ -69,21 +69,21 @@ public class InputManagerScript : MonoBehaviour {
             if (!P1isAiming)
             {
                 P1isAiming = true;
-                playerOneScript.PlayerAimStart(P1AimAxis);
+                playerOneCombat.PlayerAimStart(P1AimAxis);
             }
             else
             {
-                playerOneScript.PlayerAimContinue(P1AimAxis);
+                playerOneCombat.PlayerAimContinue(P1AimAxis);
             }
         }
         else if ((P1AimAxis.magnitude <= 0) && (P1isAiming))
         {
             P1isAiming = false;
-            playerOneScript.PlayerAimEnd();
+            playerOneCombat.PlayerAimEnd();
         }
         if (Input.GetKey(KeyCode.Space))
         {
-            playerOneScript.FighterAttack();
+            playerOneCombat.FighterAttack();
         }
 
         /**
@@ -109,6 +109,10 @@ public class InputManagerScript : MonoBehaviour {
         {
             playerTwoBehavior.Brake();
         }
+        if (Input.GetKey(KeyCode.Keypad9))
+        {
+            playerTwoCombat.SwitchWeapon();
+        }
 
         /* Aim based on the 8456 */
         tempHor = (Input.GetKey(KeyCode.Keypad6) ? 1 : 0) - (Input.GetKey(KeyCode.Keypad4) ? 1 : 0);
@@ -119,22 +123,22 @@ public class InputManagerScript : MonoBehaviour {
             if (!P2isAiming)
             {
                 P2isAiming = true;
-                playerTwoScript.PlayerAimStart(P2AimAxis);
+                playerTwoCombat.PlayerAimStart(P2AimAxis);
             }
             else
             {
-                playerTwoScript.PlayerAimContinue(P2AimAxis);
+                playerTwoCombat.PlayerAimContinue(P2AimAxis);
             }
         }
         else if ((P2AimAxis.magnitude <= 0) && (P2isAiming))
         {
             P2isAiming = false;
-            playerTwoScript.PlayerAimEnd();
+            playerTwoCombat.PlayerAimEnd();
         }
 
         if (Input.GetKey(KeyCode.Keypad0))
         {
-            playerTwoScript.Shoot();
+            playerTwoCombat.Shoot();
         }
     }
 
@@ -154,17 +158,17 @@ public class InputManagerScript : MonoBehaviour {
             if (!P1isAiming)
             {
                 P1isAiming = true;
-                playerTwoScript.PlayerAimStart(rightStickOrientation);
+                playerTwoCombat.PlayerAimStart(rightStickOrientation);
             }
             else
             {
-                playerTwoScript.PlayerAimContinue(rightStickOrientation);
+                playerTwoCombat.PlayerAimContinue(rightStickOrientation);
             }
         }
         else if((rightStickOrientation.magnitude <= 0) && (P1isAiming))
         {
             P1isAiming = false;
-            playerTwoScript.PlayerAimEnd();
+            playerTwoCombat.PlayerAimEnd();
         }
 
 
@@ -173,7 +177,7 @@ public class InputManagerScript : MonoBehaviour {
             if (rightStickOrientation.magnitude > 0)
             {
                 P1isAiming = true;
-                playerTwoScript.PlayerAimStart(rightStickOrientation);
+                playerTwoCombat.PlayerAimStart(rightStickOrientation);
             }
         }
         else
@@ -189,7 +193,7 @@ public class InputManagerScript : MonoBehaviour {
         /* Shoot based on Right Trigger */
         if (Input.GetAxis("Right Trigger") < -.3)
         {
-            playerOneScript.Shoot();
+            playerOneCombat.Shoot();
         }
 
     }

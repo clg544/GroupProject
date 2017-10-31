@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class PlayerCombat : MonoBehaviour {
     
+    public enum PlayerClass { FIGHTY, SHOOTY};
+
     private float AttackCooldown;     // Current cooldown value
     
     public PlayerBehavior myPlayer;
     public Rigidbody2D myBody;
-    public bool isFighty;                  // True=Fighty, False=Shooty
+    public PlayerClass myClass;                  // True=Fighty, False=Shooty
     
     /* Prefabs for attack objects */
     public GameObject Crosshair;
@@ -25,6 +27,7 @@ public class PlayerCombat : MonoBehaviour {
     public Vector3 SwingVect;
     public float swingDuration;
     public float swingCooldown;
+    public float swingAttack;
 
     /* Shooty Variables */
     public float bulletSpawnDist;  // How far to spawn the bullet
@@ -33,10 +36,12 @@ public class PlayerCombat : MonoBehaviour {
     public float LightBulletCooldown;    // How many frames before we can shoot again
     public float HeavyBulletVel;     // How fast light bullets travel
     public float HeavyBulletCooldown;    // How many frames before we can shoot again
+    public float HeavyBulletMassRatio;   // Mass Multiplier of heavy bullet over light bullet
+    public float recoil;            // Universal recoil multiplier
     
     /* Weapon variables */
     public enum Weapon { LIGHT_GUN, HEAVY_GUN };
-    private Weapon curWeapon;
+    public Weapon curWeapon;
 
     /**
      * Shoot - Shoot the current weapon 
@@ -53,6 +58,9 @@ public class PlayerCombat : MonoBehaviour {
         {
             case Weapon.LIGHT_GUN:
                 LightShot();
+                break;
+            case Weapon.HEAVY_GUN:
+                HeavyShot();
                 break;
         }
     }
@@ -78,7 +86,9 @@ public class PlayerCombat : MonoBehaviour {
             Rigidbody2D bulletVel = newBullet.GetComponent<Rigidbody2D>();
             bulletVel.velocity = (curCrosshair.transform.localPosition.normalized * LightBulletVel);
             /* Add Player Velocity */
-            bulletVel.velocity += myBody.velocity;      
+            bulletVel.velocity += myBody.velocity;
+            /* Push player with bulletVel */
+            myBody.AddForce(-bulletVel.velocity * bulletVel.mass * recoil);
 
             /* Spread, does nothing */
             Vector3 perpendicular = Quaternion.AngleAxis(90, curCrosshair.transform.localPosition.normalized) 
@@ -87,7 +97,40 @@ public class PlayerCombat : MonoBehaviour {
             bulletVel.AddForce(perpendicular);
         }
     }
-    
+    /**
+     * HeavyShot - Instantiate a bullet at the player with trajectory decided by curCrosshair 
+     */
+    private void HeavyShot()
+    {
+        GameObject newBullet;
+
+        if (AttackCooldown <= 0)
+        {
+            /* Add to Shot cooldown */
+            AttackCooldown += HeavyBulletCooldown;
+
+            /* Create our new bullet */
+            newBullet = Instantiate(Bullet, gameObject.transform);
+
+            /* Bullet Position = bulletSpawnDist from centre of player, towards the crasshair*/
+            newBullet.transform.localPosition = curCrosshair.transform.localPosition.normalized * bulletSpawnDist;
+
+            /* Bullet Velocity = LightBulletVel, towards the crasshair*/
+            Rigidbody2D bulletVel = newBullet.GetComponent<Rigidbody2D>();
+            bulletVel.velocity = (curCrosshair.transform.localPosition.normalized * HeavyBulletVel);
+            /* Add Player Velocity */
+            bulletVel.velocity += myBody.velocity;
+            /* Push player with bulletVel */
+            myBody.AddForce(-bulletVel.velocity * bulletVel.mass * HeavyBulletMassRatio * recoil);
+
+            /* Spread, does nothing */
+            Vector3 perpendicular = Quaternion.AngleAxis(90, curCrosshair.transform.localPosition.normalized)
+                * curCrosshair.transform.localPosition.normalized;
+            /* Apply Bullet Spread */
+            bulletVel.AddForce(perpendicular);
+        }
+    }
+
     public void FighterAttack()
     {
         if (curCrosshair == null)
@@ -95,14 +138,12 @@ public class PlayerCombat : MonoBehaviour {
 
         if (AttackCooldown > 0)
             return;
-
-
-
-
+        
         GameObject curAttack = Instantiate(FightySwing, gameObject.transform);
 
         curAttack.transform.localPosition = SwingVect;
         curAttack.transform.Rotate(0, 0, 90 + (-90 * (int)curDirection), Space.Self);
+        curAttack.GetComponent<PlayerAttackScript>().attackDamage = swingAttack;
 
         AttackCooldown += swingCooldown;
     }
@@ -130,6 +171,18 @@ public class PlayerCombat : MonoBehaviour {
         if (curCrosshair != null)  // Updates happen too fast!
             Destroy(curCrosshair);
     }
+
+    public void SwitchWeapon()
+    {
+        /* Invert weapon choice, as long as there are only 2 weapons */
+        if(myClass == PlayerClass.SHOOTY)
+        {
+            if (curWeapon == Weapon.LIGHT_GUN)
+                curWeapon = Weapon.HEAVY_GUN;
+            else
+                curWeapon = Weapon.LIGHT_GUN;
+        }
+    }
     
 	// Use this for initialization
 	void Start () {
@@ -137,8 +190,8 @@ public class PlayerCombat : MonoBehaviour {
 
         AttackCooldown = 0;
 
-        // Are we fighty? 
-        isFighty = (gameObject.name == "Fighty");
+        // Are we Fighty? Yes:No; 
+        myClass = (gameObject.name == "Fighty") ? PlayerClass.FIGHTY:PlayerClass.SHOOTY;
 
         SwingVect = new Vector3(SwingDist, 0, 0);
     }

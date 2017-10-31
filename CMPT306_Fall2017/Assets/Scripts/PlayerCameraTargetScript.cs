@@ -5,41 +5,30 @@ public class PlayerCameraTargetScript : MonoBehaviour
 {
     /* Magic Numbers */
     int NUM_PLAYERS = 2;
-    
+
     /* Serialized Game Objects */
-    [SerializeField]
-    GameObject PlayerOne;
-    [SerializeField]
-    GameObject PlayerTwo;
-    [SerializeField]
-    GameObject PlayerCamera;
+    public GameObject PlayerOne;
+    public GameObject PlayerTwo;
+    public GameObject PlayerCamera;
         
     /* Used Components */
     Rigidbody2D PlayerOneBody;
     Rigidbody2D PlayerTwoBody;
     Camera myCamera;
-    
+
     /* Player target movement variables */
-    [SerializeField]
-    private float AccelerationSpeed;
-    [SerializeField]
-    private float MaxSpeed;
-    [SerializeField]
-    private float cameraSpeed;
-    [SerializeField]
-    private float AccelRatio;
+    public float AccelerationSpeed;
+    public float MaxSpeed;
+    public float cameraSpeed;
+    public float AccelRatio;
 
     /* Camera Restrictions */
-    [SerializeField]
-    private float minCameraSize;
-    [SerializeField]
-    private float maxCameraSize;
-    
+    public float minCameraSize;
+    public float maxCameraSize;
+
     /* Maximum target movement speeds, independant for screen ratios */
-    [SerializeField]
-    float maxX;
-    [SerializeField]
-    float maxY;
+    public float maxX;
+    public float maxY;
     
     Vector3 tetherCenter;
     

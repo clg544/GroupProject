@@ -3,25 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerTetherScript : MonoBehaviour {
-    
+
     /* How far the players can go before the tether pulls them in */
-    [SerializeField]
-    private float engageDistance;       // Distance where players get pulled in
-    [SerializeField]
-    private float distanceMultiplier;   // Scaler to pull players in by
+    public float engageDistance;       // Distance where players get pulled in
+    public float distanceMultiplier;   // Scaler to pull players in by
 
     /* Hooke's law labels this k, how much force the tether applies */
-    [SerializeField]
-    private float elasticity;           // Constant tether force, scaled
+    public float elasticity;           // Constant tether force, scaled
 
     /* The current distance between the two players */
     private float curDistance;
-    
+
     /* Our Players */
-    [SerializeField]
-    private GameObject playerOne;       
-    [SerializeField]
-    private GameObject playerTwo;
+    public GameObject playerOne;
+    public GameObject playerTwo;
     private Rigidbody2D playerOneBody;
     private Rigidbody2D playerTwoBody;
 
@@ -29,8 +24,7 @@ public class PlayerTetherScript : MonoBehaviour {
     private GameObject[] tetherLinks;   // All the tether's child links
     private TetherLinks[] tetherScripts;// Scripts for the tethers
     public int tetherResolution;        // How many nodes to use
-    [SerializeField]
-    private GameObject linkNode;        // Link prefab to clone
+    public GameObject linkNode;        // Link prefab to clone
     
     /* Collision tracking */
     public int numColls;

@@ -8,18 +8,14 @@ public class PlayerBehavior : MonoBehaviour {
     private Vector3 frameMovement;
 
     /* How much force is applied by player movement */
-    [SerializeField]
-    private float acceleration;
+    public float acceleration;
 
     /* How much the velocity is scaled down on brake */
-    [SerializeField]
-    private float brakeFraction;
-    [SerializeField]
-    private float constantFraction;
+    public float brakeFraction;
+    public float constantFraction;
 
     /* The maximum speed a player is allowed to go */
-    [SerializeField]
-    private float maxSpeed;
+    public float maxSpeed;
 
     /* Holds our plaayer and player body */
     public GameObject player;
