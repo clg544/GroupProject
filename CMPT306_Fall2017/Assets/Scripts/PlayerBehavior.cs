@@ -16,12 +16,11 @@ public class PlayerBehavior : MonoBehaviour {
 
     /* The maximum speed a player is allowed to go */
     public float maxSpeed;
-
+    
     /* Holds our plaayer and player body */
     public GameObject player;
     private Rigidbody2D playerBody;
-
-
+    
     /* Getters and Setters */
     public float getMaxSpeed()
     {
@@ -66,14 +65,6 @@ public class PlayerBehavior : MonoBehaviour {
     public void Brake()
     {
         playerBody.velocity *= (brakeFraction * Time.deltaTime);
-    }
-
-    /**
-     * Damage the player
-     */
-     public void ApplyDamage(int dam)
-    {
-        Debug.Log("Playerbehavior:ApplyDamage(int dam): Not Yet Implemented");
     }
 
 

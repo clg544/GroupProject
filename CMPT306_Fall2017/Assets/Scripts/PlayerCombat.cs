@@ -12,6 +12,13 @@ public class PlayerCombat : MonoBehaviour {
     public Rigidbody2D myBody;
     public PlayerClass myClass;                  // True=Fighty, False=Shooty
     
+    /* Player Health */
+    private float curHealth;
+    public float maxHealth;
+
+    /* Stamina representation */
+    public float lastCountdownTime;
+
     /* Prefabs for attack objects */
     public GameObject Crosshair;
     GameObject curCrosshair;
@@ -80,9 +87,10 @@ public class PlayerCombat : MonoBehaviour {
         {
             /* Add to Shot cooldown */
             AttackCooldown += LightBulletCooldown;
+            lastCountdownTime = LightBulletCooldown;
 
-            /* Create our new bullet */
-            newBullet = Instantiate(Bullet, gameObject.transform);
+             /* Create our new bullet */
+             newBullet = Instantiate(Bullet, gameObject.transform);
             newBullet.GetComponent<BulletScript>().damage = LightBulletDamage;
 
             /* Bullet Position = bulletSpawnDist from centre of player, towards the crasshair*/
@@ -114,6 +122,7 @@ public class PlayerCombat : MonoBehaviour {
         {
             /* Add to Shot cooldown */
             AttackCooldown += HeavyBulletCooldown;
+            lastCountdownTime = HeavyBulletCooldown;
 
             /* Create our new bullet */
             newBullet = Instantiate(Bullet, gameObject.transform);
@@ -137,7 +146,7 @@ public class PlayerCombat : MonoBehaviour {
             bulletVel.AddForce(perpendicular * Random.Range(-1.0F, 1.0F) * HeavyBulletSpread);
         }
     }
-
+    
     public void FighterAttack()
     {
         if (curCrosshair == null)
@@ -153,6 +162,7 @@ public class PlayerCombat : MonoBehaviour {
         curAttack.transform.Rotate(0, 0, 90 + (-90 * (int)curDirection), Space.Self);
 
         AttackCooldown += swingCooldown;
+        lastCountdownTime = swingCooldown;
     }
 
     public void PlayerAimStart(Vector2 joyPos)
@@ -202,10 +212,43 @@ public class PlayerCombat : MonoBehaviour {
         Debug.Log(curWeapon);
     }
     
-	// Use this for initialization
-	void Start () {
+    /**
+     * Damage the player
+     */
+    public void ApplyDamage(int dam)
+    {
+        Debug.Log("Playerbehavior:ApplyDamage(int dam): Not Yet Implemented");
+    }
+
+    /* Pass values to the GUI */ 
+    public float getDamageRatio()
+    {
+        return curHealth / maxHealth;
+    }
+    public float getCooldownRatio()
+    {
+        return (1 - AttackCooldown) / lastCountdownTime;
+    }
+    public string getWeaponName()
+    {
+        switch (curWeapon)
+        {
+            case Weapon.LIGHT_GUN:
+                return "Machine Gun";
+
+            case Weapon.HEAVY_GUN:
+                return "Heavy Rifle";
+
+            default:
+                return "<Empty>";
+        }
+    }
+
+    // Use this for initialization
+    void Start () {
         myBody = gameObject.GetComponent<Rigidbody2D>();
 
+        curHealth = maxHealth;
         AttackCooldown = 0;
 
         // Are we Fighty? Yes:No; 
