@@ -29,9 +29,10 @@ public class LevelGenerator : MonoBehaviour {
 
 	public GameObject spawnObject;
 
-	int partOfList = 0;
+	List<GameObject> enemySpawns;
 
 	void Start() {
+		enemySpawns = new List<GameObject> ();
 		GenerateMap();
 	}
 
@@ -42,6 +43,12 @@ public class LevelGenerator : MonoBehaviour {
 	}
 
 	void GenerateMap() {
+		if (enemySpawns != null) {
+			foreach (GameObject spawn in enemySpawns) {
+				Destroy (spawn);
+			}
+		}
+
 		map = new int[width,height];
 		RandomFillMap();
 
@@ -49,13 +56,14 @@ public class LevelGenerator : MonoBehaviour {
 			SmoothMap();
 		}
 
+		placeSpawns ();
+
 		MeshCreator meshGen = GetComponent<MeshCreator>();
 		meshGen.GenerateMesh(map, 1);
 	}
 
 
 	void RandomFillMap() {
-		int randomSpawnPlacement = UnityEngine.Random.Range (0, 5);
 
 		if (useRandomSeed) {
 			seed = Time.time.ToString();
@@ -71,15 +79,9 @@ public class LevelGenerator : MonoBehaviour {
 					map [x, y] = 1;
 				} else {
 					map [x, y] = (pseudoRandom.Next (0, 100) < randomFillPercent) ? 1 : 0;
-					if (map [x, y] == 0 && partOfList < randomSpawnPlacement) {
-						partOfList += 1;
-						GameObject spawn = Instantiate (spawnObject);
-						spawn.transform.SetParent (this.transform);
-						spawn.transform.position = new Vector2 (x, y);
-					}
 				}
 			}
-		}
+		}	
 	}
 
 	public void doorPicker(String direction){
@@ -147,6 +149,28 @@ public class LevelGenerator : MonoBehaviour {
 				else if (neighbourWallTiles < 4)
 					map[x,y] = 0;
 
+			}
+		}
+	}
+
+	void placeSpawns(){
+		int placedSpawns = 0;
+		int numOfSpawns = UnityEngine.Random.Range (0, 5);
+		int currentLocX = UnityEngine.Random.Range (0, width);
+		int currentLocY = UnityEngine.Random.Range (0, height);
+
+		while (placedSpawns < numOfSpawns) {
+			if (map [currentLocX, currentLocY] == 0) {
+				placedSpawns += 1;
+				GameObject spawn = Instantiate (spawnObject);
+				enemySpawns.Add (spawn);
+				spawn.transform.SetParent (this.transform);
+				spawn.transform.localPosition = new Vector2 (currentLocX - width / 2, currentLocY - height / 2);
+				currentLocX = UnityEngine.Random.Range (0, width);
+				currentLocY = UnityEngine.Random.Range (0, height);
+			} else {
+				currentLocX = UnityEngine.Random.Range (0, width);
+				currentLocY = UnityEngine.Random.Range (0, height);
 			}
 		}
 	}

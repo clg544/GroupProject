@@ -15,6 +15,7 @@ TagManager:
   - Barrier
   - PlayerAttack
   - Enemy
+  - SpawnPoint
   layers:
   - Default
   - TransparentFX
