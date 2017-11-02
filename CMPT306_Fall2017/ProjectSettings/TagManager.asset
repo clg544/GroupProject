@@ -12,6 +12,7 @@ TagManager:
   - DoorW
   - Walls
   - TetherLink
+  - SpawnPoint
   layers:
   - Default
   - TransparentFX
