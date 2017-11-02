@@ -20,14 +20,11 @@ namespace NG
 		/// </summary>
 		public List<AreaData> generatedAreas { get; set; }
 
+		public GameObject section1;
+
+
 		public Material material;
 		public GameObject levelMesh;
-
-		public int dungeonHeight;
-		public int dungeonWidth;
-
-		public GameObject startPoint;
-		public GameObject doorPrefab;
 
 		void Generate()
 		{
@@ -191,26 +188,20 @@ namespace NG
 		{
 			for (int i = 0; i < generatedAreas.Count; i++)
 			{
-				GameObject section = new GameObject();
+				GameObject section = Instantiate (section1);
 				GameObject newMesh = Instantiate (levelMesh);
-				// Attach an Area component so we can easily inspect the AreaData in the editor.
-				section.AddComponent<LevelGenerator>();
-				section.AddComponent <MeshCreator>();
-				section.AddComponent<MeshRenderer>();
 
-				section.GetComponent<LevelGenerator> ().door = doorPrefab;
 				section.GetComponent<MeshRenderer> ().material = material;
 				section.GetComponent<LevelGenerator> ().randomFillPercent = Random.Range (40, 45);
-				section.GetComponent<LevelGenerator> ().width = dungeonWidth;
-				section.GetComponent<LevelGenerator> ().height = dungeonHeight;
 				section.GetComponent<LevelGenerator> ().useRandomSeed = true;
 				section.GetComponent<MeshCreator> ().cave = newMesh.GetComponent<MeshFilter>();
+
 				newMesh.transform.Rotate (-90, 0, 0);
 				newMesh.transform.SetParent (section.transform, true);
 
 				//section.GetComponent<LevelGenerator> ().startPoint = startPoint;
 
-				Area area = section.AddComponent<Area>();
+				Area area = section.GetComponent<Area>();
 
 				generatedAreas[i].name = i + " - " + generatedAreas[i].name;
 				area.areaData = generatedAreas[i];
