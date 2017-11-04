@@ -5982,6 +5982,9 @@ MonoBehaviour:
   door: {fileID: 1627067515847650, guid: 865f80a3a8702467e839fa3c56f2c486, type: 2}
   spawnObject: {fileID: 1677736986368566, guid: ad08df3cc9598413194496249191937d,
     type: 2}
+  enemyPlayers:
+  - {fileID: 1496164178887884, guid: e0ff800cf2a90c1468aa3a8f64bd2b47, type: 2}
+  - {fileID: 1524523062439450, guid: a1c01bec8fb2dc541bdd3ef97cc81b7a, type: 2}
 --- !u!114 &114281602413568262
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -12,7 +12,6 @@ public class InputManagerScript : MonoBehaviour {
     private PlayerBehavior playerOneBehavior;
     private PlayerBehavior playerTwoBehavior;
 
-    private PlayerShooter myShooter;
 
 	private GameObject doorEntererN;
 	private GameObject doorEntererS;
@@ -30,8 +29,6 @@ public class InputManagerScript : MonoBehaviour {
 		doorEntererS = GameObject.FindGameObjectWithTag ("DoorS");
 		doorEntererW = GameObject.FindGameObjectWithTag ("DoorW");
 		doorEntererE = GameObject.FindGameObjectWithTag ("DoorE"); 
-
-        myShooter = playerOne.GetComponent<PlayerShooter>();
     }
 
 
@@ -106,10 +103,10 @@ public class InputManagerScript : MonoBehaviour {
     public void JoypadOneInput()
     {
         /* Movement based on left stick */
-        float leftHorizontal = Input.GetAxis("Left Horizontal");
-        float leftVertical = Input.GetAxis("Left Vertical");
-        playerOneBehavior.MoveHorizontal(leftHorizontal);
-        playerOneBehavior.MoveVertical(leftVertical);
+        //float leftHorizontal = Input.GetAxis("Left Horizontal");
+       // float leftVertical = Input.GetAxis("Left Vertical");
+       // playerOneBehavior.MoveHorizontal(leftHorizontal);
+       // playerOneBehavior.MoveVertical(leftVertical);
 
         /* Aim based on the right stick */
         Vector2 rightStickOrientation = new Vector2(Input.GetAxis("Right Horizontal"), Input.GetAxis("Right Vertical"));
@@ -119,17 +116,17 @@ public class InputManagerScript : MonoBehaviour {
             if (!isAiming)
             {
                 isAiming = true;
-                myShooter.PlayerAimStart(rightStickOrientation);
+                //myShooter.PlayerAimStart(rightStickOrientation);
             }
             else
             {
-                myShooter.PlayerAimContinue(rightStickOrientation);
+                //myShooter.PlayerAimContinue(rightStickOrientation);
             }
         }
         else if((rightStickOrientation.magnitude <= 0) && (isAiming))
         {
             isAiming = false;
-            myShooter.PlayerAimEnd();
+            //myShooter.PlayerAimEnd();
         }
 
 
@@ -138,7 +135,7 @@ public class InputManagerScript : MonoBehaviour {
             if (rightStickOrientation.magnitude > 0)
             {
                 isAiming = true;
-                myShooter.PlayerAimStart(rightStickOrientation);
+                //myShooter.PlayerAimStart(rightStickOrientation);
             }
         }
         else
@@ -154,7 +151,7 @@ public class InputManagerScript : MonoBehaviour {
         /* Shoot based on Right Trigger */
         if (Input.GetAxis("Right Trigger") < -.3)
         {
-            myShooter.Shoot();
+           // myShooter.Shoot();
         }
 
     }

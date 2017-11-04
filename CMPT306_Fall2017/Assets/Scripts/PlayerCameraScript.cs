@@ -5,8 +5,7 @@ public class PlayerCameraScript : MonoBehaviour
 {
 
     private GameObject myCamera;
-    [SerializeField]
-    private GameObject myTarget;
+    public GameObject myTarget;
 
     /* Vectors to do trivial adjustments */
     Vector3 ZAdjustVect;
@@ -14,13 +13,10 @@ public class PlayerCameraScript : MonoBehaviour
     Vector3 CameraSpeedVect;
 
     /* Subtract these to account for the Z Vector */
-    [SerializeField]
-    private float Z_ADJ;
-    [SerializeField]
-    private float PLAYER_Y_ADJ;
+    public float Z_ADJ;
+    public float PLAYER_Y_ADJ;
     /* Camera moves at 1 / CAMERA_SPEED */
-    [SerializeField]
-    private float cameraLag;
+    public float cameraLag;
 
     public GameObject MyTarget
     {

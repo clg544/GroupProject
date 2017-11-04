@@ -28,11 +28,14 @@ public class LevelGenerator : MonoBehaviour {
 	int w = 0;
 
 	public GameObject spawnObject;
+	public GameObject[] enemyPlayers;
 
 	List<GameObject> enemySpawns;
+	List<GameObject> allEnemies;
 
 	void Start() {
 		enemySpawns = new List<GameObject> ();
+		allEnemies = new List<GameObject> ();
 		GenerateMap();
 	}
 
@@ -43,9 +46,20 @@ public class LevelGenerator : MonoBehaviour {
 	}
 
 	void GenerateMap() {
+		//Destroy all previous spawns
 		if (enemySpawns != null) {
 			foreach (GameObject spawn in enemySpawns) {
 				Destroy (spawn);
+			}
+		}
+
+		//Destory all previous enemies
+		if (allEnemies != null) {
+			foreach (GameObject a in allEnemies) {
+				foreach (GameObject nav in a.GetComponent<BasicMeleeEnemyBehaviour>().navPoints) {
+					Destroy (nav);
+				}
+				Destroy (a);
 			}
 		}
 
@@ -71,8 +85,10 @@ public class LevelGenerator : MonoBehaviour {
 
 		System.Random pseudoRandom = new System.Random(seed.GetHashCode());
 
+		//Go through all the coordinates, setting the borders to be 1
 		for (int x = 0; x < width; x ++) {
 			for (int y = 0; y < height; y ++) {
+				//Set an open space for doors
 				if (x < doorWidth2 && x > doorWidth1 && y < doorHeight1 && y > doorHeight2) {
 					map [x, y] = 0;
 				} else if (x == 0 || x == width - 1 || y == 0 || y == height - 1) {
@@ -84,7 +100,10 @@ public class LevelGenerator : MonoBehaviour {
 		}	
 	}
 
+	//Picks which doors are available, north, south, east or west
 	public void doorPicker(String direction){
+
+		//If direction equals a certain letter, set up the door accordingly
 		if (direction == "N") {
 			doorWidth1 = (width/2) - 10;
 			doorWidth2 = (width/2) + 10;
@@ -139,6 +158,7 @@ public class LevelGenerator : MonoBehaviour {
 		}
 	}
 
+	//smooth out the rough edges
 	void SmoothMap() {
 		for (int x = 0; x < width; x ++) {
 			for (int y = 0; y < height; y ++) {
@@ -174,8 +194,23 @@ public class LevelGenerator : MonoBehaviour {
 				placedSpawns += 1;
 				GameObject spawn = Instantiate (spawnObject);
 				enemySpawns.Add (spawn);
+
 				spawn.transform.SetParent (this.transform);
 				spawn.transform.localPosition = new Vector2 (currentLocX - width / 2, currentLocY - height / 2);
+
+				//Instantiate the different enemies randomly
+				int enemySelection = UnityEngine.Random.Range (0, 2);
+				GameObject newEnemy = Instantiate (enemyPlayers [enemySelection]);
+				allEnemies.Add (newEnemy);
+				newEnemy.transform.position = spawn.transform.position;
+
+				//Make the melee emey path the spawn points
+				if (enemySelection == 1) {
+					foreach (GameObject s in enemySpawns) {
+						newEnemy.GetComponent<BasicMeleeEnemyBehaviour> ().navPoints.Add (s);
+					}
+				}
+
 				currentLocX = UnityEngine.Random.Range (0, width);
 				currentLocY = UnityEngine.Random.Range (0, height);
 			} else {

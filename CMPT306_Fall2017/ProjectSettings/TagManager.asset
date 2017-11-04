@@ -4,16 +4,16 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - PlayerAttack
+  - TetherLink
+  - Enemy
   - Barrier
-  - Door
-  - DoorN
-  - DoorE
+  - Players
   - DoorS
+  - DoorE
+  - DoorN
   - DoorW
   - Walls
-  - TetherLink
-  - SpawnPoint
-  - Players
   layers:
   - Default
   - TransparentFX
@@ -23,8 +23,8 @@ TagManager:
   - UI
   - 
   - 
-  - BackGround
-  - ForeGround
+  - 
+  - 
   - 
   - 
   - 
@@ -50,7 +50,4 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: New Layer
-    uniqueID: 4058114755
     locked: 0
