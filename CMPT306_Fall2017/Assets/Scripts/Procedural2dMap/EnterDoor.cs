@@ -42,29 +42,46 @@ public class EnterDoor : MonoBehaviour {
 		if (hasEnteredDoor == true) {
 			if (this.gameObject.name == "north door") {
 				
-				GameObject players = GameObject.FindGameObjectWithTag ("Player");
-				players.gameObject.transform.position = sDoor.gameObject.transform.position;
+				GameObject players = GameObject.FindGameObjectWithTag ("Players");
+
+				for (int i = 0; i < players.transform.childCount; i++) {
+					if (players.transform.GetChild (i).gameObject.tag != "MainCamera") {
+						players.transform.GetChild (i).gameObject.transform.position = new Vector2 (sDoor.transform.position.x, sDoor.transform.position.y);
+					}
+				}
 				hasEnteredDoor = false;
 			}
 
 			if (this.gameObject.name == "south door") {
 	
-				GameObject players = GameObject.FindGameObjectWithTag ("Player");
-				players.gameObject.transform.position = nDoor.gameObject.transform.position;
+				GameObject players = GameObject.FindGameObjectWithTag ("Players");
+				for (int i = 0; i < players.transform.childCount; i++) {
+					if (players.transform.GetChild (i).gameObject.tag != "MainCamera") {
+						players.transform.GetChild (i).gameObject.transform.position = new Vector2 (nDoor.transform.position.x, nDoor.transform.position.y);
+					}
+				}
 				hasEnteredDoor = false;
 			}
 
 			if (this.gameObject.name == "east door") {
 				
-				GameObject players = GameObject.FindGameObjectWithTag ("Player");
-				players.gameObject.transform.position = wDoor.gameObject.transform.position;
+				GameObject players = GameObject.FindGameObjectWithTag ("Players");
+				for (int i = 0; i < players.transform.childCount; i++) {
+					if (players.transform.GetChild (i).gameObject.tag != "MainCamera") {
+						players.transform.GetChild (i).gameObject.transform.position = new Vector2 (wDoor.transform.position.x, wDoor.transform.position.y);
+					}
+				}
 				hasEnteredDoor = false;
 			}
 
 			if (this.gameObject.name == "west door") {
 				
-				GameObject players = GameObject.FindGameObjectWithTag ("Player");
-				players.gameObject.transform.position = eDoor.gameObject.transform.position;
+				GameObject players = GameObject.FindGameObjectWithTag ("Players");
+				for (int i = 0; i < players.transform.childCount; i++) {
+					if (players.transform.GetChild (i).gameObject.tag != "MainCamera") {
+						players.transform.GetChild (i).gameObject.transform.position = new Vector2 (eDoor.transform.position.x, eDoor.transform.position.y);
+					}
+				}
 				hasEnteredDoor = false;
 			}
 		}

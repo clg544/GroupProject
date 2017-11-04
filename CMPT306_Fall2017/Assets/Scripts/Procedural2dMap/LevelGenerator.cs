@@ -153,13 +153,23 @@ public class LevelGenerator : MonoBehaviour {
 		}
 	}
 
+	//Places the spawns for enemies
 	void placeSpawns(){
+		//the number of spawns that have been placed
 		int placedSpawns = 0;
+		//the max number of possible spawns
 		int numOfSpawns = UnityEngine.Random.Range (0, 5);
+
+		//the current x and y location randomly selected
 		int currentLocX = UnityEngine.Random.Range (0, width);
 		int currentLocY = UnityEngine.Random.Range (0, height);
 
+		//while the number of spawns placed is less than the max, place new spawns
 		while (placedSpawns < numOfSpawns) {
+
+			//if the current x and y are a wall, Instantiate a spawnObject and set its location
+			//to the current x and y
+			//if not, randomly pick new x and y
 			if (map [currentLocX, currentLocY] == 0) {
 				placedSpawns += 1;
 				GameObject spawn = Instantiate (spawnObject);

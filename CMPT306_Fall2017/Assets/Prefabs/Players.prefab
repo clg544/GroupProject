@@ -573,10 +573,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   engageDistance: 10
+  distanceMultiplier: 0
   elasticity: 1
   curDistance: 0
   playerOne: {fileID: 1436182535237730}
   playerTwo: {fileID: 1763017534516472}
+  linkSpeed: 0
 --- !u!114 &114083128046382276
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -854,7 +856,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 4c964b2c398a5cb45a675b44f5143019, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1eca21286dbfc404c97105f0a6305c75, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -938,7 +940,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 4c964b2c398a5cb45a675b44f5143019, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c583890807aa247d19dc04b0b0421529, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
