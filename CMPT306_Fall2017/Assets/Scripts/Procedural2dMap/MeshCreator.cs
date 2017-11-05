@@ -48,7 +48,6 @@ public class MeshCreator : MonoBehaviour {
 		}
 		mesh.uv = uvs;
 
-		this.gameObject.AddComponent<PolygonCollider2D> ();
 
 		Generate2DColliders();
 
@@ -71,7 +70,7 @@ public class MeshCreator : MonoBehaviour {
 
 
 		foreach (List<int> outline in outlines) {
-			if (outlines.IndexOf (outline) == 1) {
+			if (outlines.IndexOf (outline) == 1 || outlines.IndexOf(outline) == 0) {
 				EdgeCollider2D edgeCollider = gameObject.AddComponent<EdgeCollider2D> ();
 				Vector2[] edgePoints = new Vector2[outline.Count];
 

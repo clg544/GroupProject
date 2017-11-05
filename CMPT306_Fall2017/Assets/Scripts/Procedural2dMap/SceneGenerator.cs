@@ -22,9 +22,9 @@ namespace NG
 
 		public GameObject section1;
 
-
 		public Material material;
 		public GameObject levelMesh;
+		public GameObject playerSpawn;
 
 		void Generate()
 		{
@@ -195,6 +195,7 @@ namespace NG
 				section.GetComponent<LevelGenerator> ().randomFillPercent = Random.Range (40, 45);
 				section.GetComponent<LevelGenerator> ().useRandomSeed = true;
 				section.GetComponent<MeshCreator> ().cave = newMesh.GetComponent<MeshFilter>();
+				section.GetComponent<LevelGenerator> ().playerSpawn = playerSpawn;
 
 				newMesh.transform.Rotate (-90, 0, 0);
 				newMesh.transform.SetParent (section.transform, true);

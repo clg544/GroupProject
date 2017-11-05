@@ -29,6 +29,7 @@ public class BasicMeleeEnemyBehaviour : MonoBehaviour {
         currentNavPoint = navQueue.Dequeue();
         md = GetComponentInChildren<MeleeDamage>();
     }
+
 	void FixedUpdate () {
 		if (inCombat < 0){ // this should never happen
             Debug.LogError("how the hell did we get here?"); 

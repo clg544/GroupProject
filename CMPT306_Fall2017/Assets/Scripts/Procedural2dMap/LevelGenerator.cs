@@ -28,14 +28,26 @@ public class LevelGenerator : MonoBehaviour {
 	int w = 0;
 
 	public GameObject spawnObject;
+	public GameObject navPoint;
 	public GameObject[] enemyPlayers;
+	public GameObject playerSpawn;
 
 	List<GameObject> enemySpawns;
-	List<GameObject> allEnemies;
+	List<GameObject> navPoints;
+	int numOfNavs = 3;
 
 	void Start() {
 		enemySpawns = new List<GameObject> ();
-		allEnemies = new List<GameObject> ();
+		navPoints = new List<GameObject> ();
+
+		int numOfNavs = 3;
+
+		for (int i = 0; i < numOfNavs; i++) {
+			GameObject nav = Instantiate (navPoint);
+			navPoints.Add (nav);
+			nav.transform.SetParent (this.transform);
+		}
+
 		GenerateMap();
 	}
 
@@ -45,21 +57,19 @@ public class LevelGenerator : MonoBehaviour {
 		}
 	}
 
+	//randomly creates the map
 	void GenerateMap() {
+
+		GameObject[] list = GameObject.FindGameObjectsWithTag ("Enemy");
+
+		for (int i = 0; i < list.Length; i++) {
+			Destroy (list [i].gameObject);
+		}
+
 		//Destroy all previous spawns
 		if (enemySpawns != null) {
 			foreach (GameObject spawn in enemySpawns) {
-				Destroy (spawn);
-			}
-		}
-
-		//Destory all previous enemies
-		if (allEnemies != null) {
-			foreach (GameObject a in allEnemies) {
-				foreach (GameObject nav in a.GetComponent<BasicMeleeEnemyBehaviour>().navPoints) {
-					Destroy (nav);
-				}
-				Destroy (a);
+				Destroy (spawn.gameObject);
 			}
 		}
 
@@ -70,6 +80,7 @@ public class LevelGenerator : MonoBehaviour {
 			SmoothMap();
 		}
 
+		placeNavs ();
 		placeSpawns ();
 
 		MeshCreator meshGen = GetComponent<MeshCreator>();
@@ -162,6 +173,9 @@ public class LevelGenerator : MonoBehaviour {
 	void SmoothMap() {
 		for (int x = 0; x < width; x ++) {
 			for (int y = 0; y < height; y ++) {
+
+				//if number of wall tiles around the point is greater than four
+				//turn that space into a wall, if else then it is not a wall
 				int neighbourWallTiles = GetSurroundingWallCount(x,y);
 
 				if (neighbourWallTiles > 4)
@@ -177,15 +191,13 @@ public class LevelGenerator : MonoBehaviour {
 	void placeSpawns(){
 		//the number of spawns that have been placed
 		int placedSpawns = 0;
-		//the max number of possible spawns
-		int numOfSpawns = UnityEngine.Random.Range (0, 5);
 
 		//the current x and y location randomly selected
 		int currentLocX = UnityEngine.Random.Range (0, width);
 		int currentLocY = UnityEngine.Random.Range (0, height);
 
 		//while the number of spawns placed is less than the max, place new spawns
-		while (placedSpawns < numOfSpawns) {
+		while (placedSpawns < numOfNavs) {
 
 			//if the current x and y are a wall, Instantiate a spawnObject and set its location
 			//to the current x and y
@@ -201,13 +213,12 @@ public class LevelGenerator : MonoBehaviour {
 				//Instantiate the different enemies randomly
 				int enemySelection = UnityEngine.Random.Range (0, 2);
 				GameObject newEnemy = Instantiate (enemyPlayers [enemySelection]);
-				allEnemies.Add (newEnemy);
+				newEnemy.gameObject.tag = "Enemy";
 				newEnemy.transform.position = spawn.transform.position;
 
-				//Make the melee emey path the spawn points
 				if (enemySelection == 1) {
-					foreach (GameObject s in enemySpawns) {
-						newEnemy.GetComponent<BasicMeleeEnemyBehaviour> ().navPoints.Add (s);
+					foreach (GameObject nav in navPoints) {
+						newEnemy.GetComponent<BasicMeleeEnemyBehaviour> ().navPoints.Add (nav);
 					}
 				}
 
@@ -218,8 +229,35 @@ public class LevelGenerator : MonoBehaviour {
 				currentLocY = UnityEngine.Random.Range (0, height);
 			}
 		}
+
+		while (map [currentLocX, currentLocY] != 0) {
+			currentLocX = UnityEngine.Random.Range (0, width);
+			currentLocY = UnityEngine.Random.Range (0, height);
+			playerSpawn.transform.localPosition = new Vector2 (currentLocX - width / 2, currentLocY - height / 2);
+		}
 	}
 
+	//Place the nav points for the AI
+	void placeNavs(){
+
+		//the current x and y location randomly selected
+		int currentLocX = UnityEngine.Random.Range (0, width);
+		int currentLocY = UnityEngine.Random.Range (0, height);
+
+		foreach(GameObject nav in navPoints){
+			if (map [currentLocX, currentLocY] == 0) {
+				nav.transform.localPosition = new Vector2 (currentLocX - width / 2, currentLocY - height / 2);
+
+				currentLocX = UnityEngine.Random.Range (0, width);
+				currentLocY = UnityEngine.Random.Range (0, height);
+			} else {
+				currentLocX = UnityEngine.Random.Range (0, width);
+				currentLocY = UnityEngine.Random.Range (0, height);	
+			}
+		}
+	}
+
+	//Gets the number of surrounding walls
 	int GetSurroundingWallCount(int gridX, int gridY) {
 		int wallCount = 0;
 		for (int neighbourX = gridX - 1; neighbourX <= gridX + 1; neighbourX ++) {

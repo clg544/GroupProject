@@ -7,6 +7,8 @@ public class PlayerBehavior : MonoBehaviour {
     /* Movement to apply this frame */
     private Vector3 frameMovement;
 
+	public GameObject spawnPoint;
+
     /* How much force is applied by player movement */
     public float acceleration;
 
@@ -71,6 +73,7 @@ public class PlayerBehavior : MonoBehaviour {
     // Use this for initialization
     void Start () {
         playerBody = this.GetComponent<Rigidbody2D>();
+		this.gameObject.transform.position = spawnPoint.transform.position;
 	}
 	
 	// Update is called once per frame

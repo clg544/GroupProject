@@ -37,8 +37,10 @@ public class EnterDoor : MonoBehaviour {
 		hasEnteredDoor = false;
 	}
 
+	//Determines what door to go through
 	public void goThroughDoor(){
 
+		//If player has entered door zone, allow passage to another
 		if (hasEnteredDoor == true) {
 			if (this.gameObject.name == "north door") {
 				
@@ -46,7 +48,7 @@ public class EnterDoor : MonoBehaviour {
 
 				for (int i = 0; i < players.transform.childCount; i++) {
 					if (players.transform.GetChild (i).gameObject.tag != "MainCamera") {
-						players.transform.GetChild (i).gameObject.transform.position = new Vector2 (sDoor.transform.position.x, sDoor.transform.position.y);
+						players.transform.GetChild (i).gameObject.transform.localPosition = new Vector2 (sDoor.transform.position.x, sDoor.transform.position.y);
 					}
 				}
 				hasEnteredDoor = false;
@@ -57,7 +59,7 @@ public class EnterDoor : MonoBehaviour {
 				GameObject players = GameObject.FindGameObjectWithTag ("Players");
 				for (int i = 0; i < players.transform.childCount; i++) {
 					if (players.transform.GetChild (i).gameObject.tag != "MainCamera") {
-						players.transform.GetChild (i).gameObject.transform.position = new Vector2 (nDoor.transform.position.x, nDoor.transform.position.y);
+						players.transform.GetChild (i).gameObject.transform.localPosition = new Vector2 (nDoor.transform.position.x, nDoor.transform.position.y);
 					}
 				}
 				hasEnteredDoor = false;
@@ -68,7 +70,7 @@ public class EnterDoor : MonoBehaviour {
 				GameObject players = GameObject.FindGameObjectWithTag ("Players");
 				for (int i = 0; i < players.transform.childCount; i++) {
 					if (players.transform.GetChild (i).gameObject.tag != "MainCamera") {
-						players.transform.GetChild (i).gameObject.transform.position = new Vector2 (wDoor.transform.position.x, wDoor.transform.position.y);
+						players.transform.GetChild (i).gameObject.transform.localPosition = new Vector2 (wDoor.transform.position.x, wDoor.transform.position.y);
 					}
 				}
 				hasEnteredDoor = false;
@@ -79,7 +81,7 @@ public class EnterDoor : MonoBehaviour {
 				GameObject players = GameObject.FindGameObjectWithTag ("Players");
 				for (int i = 0; i < players.transform.childCount; i++) {
 					if (players.transform.GetChild (i).gameObject.tag != "MainCamera") {
-						players.transform.GetChild (i).gameObject.transform.position = new Vector2 (eDoor.transform.position.x, eDoor.transform.position.y);
+						players.transform.GetChild (i).gameObject.transform.localPosition = new Vector2 (eDoor.transform.position.x, eDoor.transform.position.y);
 					}
 				}
 				hasEnteredDoor = false;
