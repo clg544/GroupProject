@@ -984,7 +984,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 10.5, y: -15}
+  m_AnchoredPosition: {x: 10.5, y: 40.5}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &811287908
@@ -2207,8 +2207,7 @@ Prefab:
         type: 2}
       propertyPath: playerTwo
       value: 
-      objectReference: {fileID: 1015685231720104, guid: f5beac725b81ce84e9335ad6d595f36f,
-        type: 2}
+      objectReference: {fileID: 1727493527}
     - target: {fileID: 114488056296134922, guid: 579cbbeb1411b874786580eb34574534,
         type: 2}
       propertyPath: myClass
@@ -2229,6 +2228,17 @@ Prefab:
       propertyPath: spawnPoint
       value: 
       objectReference: {fileID: 1514102408}
+    - target: {fileID: 114136635433208434, guid: 579cbbeb1411b874786580eb34574534,
+        type: 2}
+      propertyPath: playerOne
+      value: 
+      objectReference: {fileID: 300907566}
+    - target: {fileID: 114488056296134922, guid: 579cbbeb1411b874786580eb34574534,
+        type: 2}
+      propertyPath: FightySwing
+      value: 
+      objectReference: {fileID: 1924731845635454, guid: d90971027387ed341b06044029bb0fbb,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 579cbbeb1411b874786580eb34574534, type: 2}
   m_IsPrefabParent: 0

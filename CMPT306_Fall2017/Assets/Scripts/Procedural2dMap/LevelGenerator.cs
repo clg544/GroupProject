@@ -34,7 +34,7 @@ public class LevelGenerator : MonoBehaviour {
 
 	List<GameObject> enemySpawns;
 	List<GameObject> navPoints;
-	int numOfNavs = 3;
+	public List<GameObject> allEnemies = new List<GameObject> ();
 
 	void Start() {
 		enemySpawns = new List<GameObject> ();
@@ -60,10 +60,8 @@ public class LevelGenerator : MonoBehaviour {
 	//randomly creates the map
 	void GenerateMap() {
 
-		GameObject[] list = GameObject.FindGameObjectsWithTag ("Enemy");
-
-		for (int i = 0; i < list.Length; i++) {
-			Destroy (list [i].gameObject);
+		foreach (GameObject enemy in allEnemies) {
+			Destroy (enemy.gameObject);
 		}
 
 		//Destroy all previous spawns
@@ -189,15 +187,17 @@ public class LevelGenerator : MonoBehaviour {
 
 	//Places the spawns for enemies
 	void placeSpawns(){
+		Debug.Log ("Here");
 		//the number of spawns that have been placed
 		int placedSpawns = 0;
+		int numOfSpawns = UnityEngine.Random.Range (2, 6);
 
 		//the current x and y location randomly selected
 		int currentLocX = UnityEngine.Random.Range (0, width);
 		int currentLocY = UnityEngine.Random.Range (0, height);
 
 		//while the number of spawns placed is less than the max, place new spawns
-		while (placedSpawns < numOfNavs) {
+		while (placedSpawns < numOfSpawns) {
 
 			//if the current x and y are a wall, Instantiate a spawnObject and set its location
 			//to the current x and y
@@ -213,6 +213,7 @@ public class LevelGenerator : MonoBehaviour {
 				//Instantiate the different enemies randomly
 				int enemySelection = UnityEngine.Random.Range (0, 2);
 				GameObject newEnemy = Instantiate (enemyPlayers [enemySelection]);
+				allEnemies.Add (newEnemy);
 				newEnemy.gameObject.tag = "Enemy";
 				newEnemy.transform.position = spawn.transform.position;
 

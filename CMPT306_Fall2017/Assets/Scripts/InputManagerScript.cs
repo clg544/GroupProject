@@ -18,12 +18,14 @@ public class InputManagerScript : MonoBehaviour {
 	private GameObject doorEntererW;
 	private GameObject doorEntererE;
 
+	private PlayerCombat myShooter;
     private bool isAiming;
 
 	// Use this for initialization
 	void Start () {
         playerOneBehavior = playerOne.GetComponent<PlayerBehavior>();
         playerTwoBehavior = playerTwo.GetComponent<PlayerBehavior>();
+		myShooter = playerTwo.GetComponent<PlayerCombat> ();
 
 		doorEntererN = GameObject.FindGameObjectWithTag ("DoorN");
 		doorEntererS = GameObject.FindGameObjectWithTag ("DoorS");
@@ -74,6 +76,10 @@ public class InputManagerScript : MonoBehaviour {
 			}
 		}
 
+		if (Input.GetKeyDown (KeyCode.Q)) {
+			myShooter.Shoot();
+		}
+
 
         /**
          * Player Two Movement Controls 
@@ -116,17 +122,17 @@ public class InputManagerScript : MonoBehaviour {
             if (!isAiming)
             {
                 isAiming = true;
-                //myShooter.PlayerAimStart(rightStickOrientation);
+               myShooter.PlayerAimStart(rightStickOrientation);
             }
             else
             {
-                //myShooter.PlayerAimContinue(rightStickOrientation);
+                myShooter.PlayerAimContinue(rightStickOrientation);
             }
         }
         else if((rightStickOrientation.magnitude <= 0) && (isAiming))
         {
             isAiming = false;
-            //myShooter.PlayerAimEnd();
+            myShooter.PlayerAimEnd();
         }
 
 
@@ -135,7 +141,7 @@ public class InputManagerScript : MonoBehaviour {
             if (rightStickOrientation.magnitude > 0)
             {
                 isAiming = true;
-                //myShooter.PlayerAimStart(rightStickOrientation);
+                myShooter.PlayerAimStart(rightStickOrientation);
             }
         }
         else
@@ -151,7 +157,7 @@ public class InputManagerScript : MonoBehaviour {
         /* Shoot based on Right Trigger */
         if (Input.GetAxis("Right Trigger") < -.3)
         {
-           // myShooter.Shoot();
+           myShooter.Shoot();
         }
 
     }
