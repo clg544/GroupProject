@@ -530,15 +530,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   engageDistance: 10
-<<<<<<< HEAD
-  distanceMultiplier: 0
-  elasticity: 1
-  curDistance: 0
-  playerOne: {fileID: 1436182535237730}
-  playerTwo: {fileID: 1763017534516472}
-  linkSpeed: 0
---- !u!114 &114083128046382276
-=======
   distanceMultiplier: 10
   elasticity: 1
   playerOne: {fileID: 1441463896677894}
@@ -548,7 +539,6 @@ MonoBehaviour:
   numColls: 0
   curColl: {x: 0, y: 0, z: 0}
 --- !u!114 &114445429429291430
->>>>>>> 69a4928ffc4fa1fded9bd10580d767d0066668a5
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -584,6 +574,8 @@ MonoBehaviour:
   myPlayer: {fileID: 114883154659287566}
   myBody: {fileID: 50481284814123684}
   myClass: 0
+  maxHealth: 0
+  lastCountdownTime: 0
   Crosshair: {fileID: 1536397821931000, guid: 12d625172ca83dc438e54d9e8158bf5f, type: 2}
   Bullet: {fileID: 1253353341930176, guid: 7f6d6c9054649ed4eaa71bfc0c670086, type: 2}
   FightySwing: {fileID: 0}
@@ -591,7 +583,7 @@ MonoBehaviour:
   SwingVect: {x: 0, y: 0, z: 0}
   swingDuration: 0
   swingCooldown: 0
-  swingAttack: 0
+  swingDamage: 0
   bulletSpawnDist: 3.5
   crosshairDist: 11
   LightBulletVel: 30
@@ -616,6 +608,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79c94baaf6a689347b6e47b5c7edd41c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnPoint: {fileID: 0}
   acceleration: 16
   brakeFraction: 0.92
   constantFraction: 0.99
@@ -663,6 +656,8 @@ MonoBehaviour:
   myPlayer: {fileID: 114666160176864448}
   myBody: {fileID: 50781938944803170}
   myClass: 0
+  maxHealth: 0
+  lastCountdownTime: 0
   Crosshair: {fileID: 1536397821931000, guid: 12d625172ca83dc438e54d9e8158bf5f, type: 2}
   Bullet: {fileID: 1253353341930176, guid: 7f6d6c9054649ed4eaa71bfc0c670086, type: 2}
   FightySwing: {fileID: 1924731845635454, guid: d90971027387ed341b06044029bb0fbb,
@@ -671,7 +666,7 @@ MonoBehaviour:
   SwingVect: {x: 0, y: 0, z: 0}
   swingDuration: 0
   swingCooldown: 1
-  swingAttack: 0
+  swingDamage: 20
   bulletSpawnDist: 3.5
   crosshairDist: 11
   LightBulletVel: 30
@@ -726,6 +721,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79c94baaf6a689347b6e47b5c7edd41c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnPoint: {fileID: 0}
   acceleration: 8
   brakeFraction: 0.92
   constantFraction: 0.99

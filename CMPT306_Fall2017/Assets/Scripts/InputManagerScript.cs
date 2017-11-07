@@ -3,41 +3,51 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class InputManagerScript : MonoBehaviour {
-
-    [SerializeField]
-    private GameObject playerOne;
-    [SerializeField]
-    private GameObject playerTwo;
+    
+    public GameObject playerOne;
+    public GameObject playerTwo;
 
     private PlayerBehavior playerOneBehavior;
     private PlayerBehavior playerTwoBehavior;
 
+    private PlayerCombat playerOneCombat;
+    private PlayerCombat playerTwoCombat;
+
+    private bool P1isAiming;
+    private bool P2isAiming;
 
 	private GameObject doorEntererN;
 	private GameObject doorEntererS;
-	private GameObject doorEntererW;
 	private GameObject doorEntererE;
+	private GameObject doorEntererW;
 
-	private PlayerCombat myShooter;
-    private bool isAiming;
-
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         playerOneBehavior = playerOne.GetComponent<PlayerBehavior>();
         playerTwoBehavior = playerTwo.GetComponent<PlayerBehavior>();
-		myShooter = playerTwo.GetComponent<PlayerCombat> ();
+
+        playerOneCombat = playerOne.GetComponent<PlayerCombat>();
+        playerTwoCombat = playerTwo.GetComponent<PlayerCombat>();
 
 		doorEntererN = GameObject.FindGameObjectWithTag ("DoorN");
 		doorEntererS = GameObject.FindGameObjectWithTag ("DoorS");
+		doorEntererE = GameObject.FindGameObjectWithTag ("DoorE");
 		doorEntererW = GameObject.FindGameObjectWithTag ("DoorW");
-		doorEntererE = GameObject.FindGameObjectWithTag ("DoorE"); 
     }
-
-
+    
     private void KeyboardInput()
     {
+        float tempHor;
+        float tempVer;
+
         /**
          * Player One Movement Controls 
+         * 
+         * WASD - Move
+         * E    - Brake
+         * TFGH - Aim
+         * Space- Shoot
+         * 
          */
         if (Input.GetKey(KeyCode.W))
         {
@@ -55,13 +65,12 @@ public class InputManagerScript : MonoBehaviour {
         {
             playerOneBehavior.MoveRight();
         }
-
         if (Input.GetKey(KeyCode.E))
         {
             playerOneBehavior.Brake();
         }
 
-		if (Input.GetKeyDown (KeyCode.F)) {
+		if (Input.GetKeyDown (KeyCode.Q)) {
 			if (doorEntererN != null) {
 				doorEntererN.GetComponent<EnterDoor> ().goThroughDoor ();
 			}
@@ -76,10 +85,31 @@ public class InputManagerScript : MonoBehaviour {
 			}
 		}
 
-		if (Input.GetKeyDown (KeyCode.Q)) {
-			myShooter.Shoot();
-		}
-
+        /* Aim based on the tfgh */
+        tempHor = (Input.GetKey(KeyCode.H) ? 1 : 0) - (Input.GetKey(KeyCode.F) ? 1 : 0);
+        tempVer = (Input.GetKey(KeyCode.T) ? 1 : 0) - (Input.GetKey(KeyCode.G) ? 1 : 0);
+        Vector2 P1AimAxis = new Vector2(tempHor, tempVer);
+        if (P1AimAxis.magnitude > 0)
+        {
+            if (!P1isAiming)
+            {
+                P1isAiming = true;
+                playerOneCombat.PlayerAimStart(P1AimAxis);
+            }
+            else
+            {
+                playerOneCombat.PlayerAimContinue(P1AimAxis);
+            }
+        }
+        else if ((P1AimAxis.magnitude <= 0) && (P1isAiming))
+        {
+            P1isAiming = false;
+            playerOneCombat.PlayerAimEnd();
+        }
+        if (Input.GetKey(KeyCode.Space))
+        {
+            playerOneCombat.FighterAttack();
+        }
 
         /**
          * Player Two Movement Controls 
@@ -104,44 +134,75 @@ public class InputManagerScript : MonoBehaviour {
         {
             playerTwoBehavior.Brake();
         }
+        if (Input.GetKeyDown(KeyCode.Keypad9))
+        {
+            playerTwoCombat.SwitchWeapon();
+        }
+
+        /* Aim based on the 8456 */
+        tempHor = (Input.GetKey(KeyCode.Keypad6) ? 1 : 0) - (Input.GetKey(KeyCode.Keypad4) ? 1 : 0);
+        tempVer = (Input.GetKey(KeyCode.Keypad8) ? 1 : 0) - (Input.GetKey(KeyCode.Keypad5) ? 1 : 0);
+        Vector2 P2AimAxis = new Vector2(tempHor, tempVer);
+        if (P2AimAxis.magnitude > 0)
+        {
+            if (!P2isAiming)
+            {
+                P2isAiming = true;
+                playerTwoCombat.PlayerAimStart(P2AimAxis);
+            }
+            else
+            {
+                playerTwoCombat.PlayerAimContinue(P2AimAxis);
+            }
+        }
+        else if ((P2AimAxis.magnitude <= 0) && (P2isAiming))
+        {
+            P2isAiming = false;
+            playerTwoCombat.PlayerAimEnd();
+        }
+
+        if (Input.GetKey(KeyCode.Keypad0))
+        {
+            playerTwoCombat.Shoot();
+        }
     }
 
     public void JoypadOneInput()
     {
         /* Movement based on left stick */
-        //float leftHorizontal = Input.GetAxis("Left Horizontal");
-       // float leftVertical = Input.GetAxis("Left Vertical");
-       // playerOneBehavior.MoveHorizontal(leftHorizontal);
-       // playerOneBehavior.MoveVertical(leftVertical);
+        float leftHorizontal = Input.GetAxis("P1 Left Stick H");
+        float leftVertical = Input.GetAxis("P1 Left Stick V");
+        playerOneBehavior.MoveHorizontal(leftHorizontal);
+        playerOneBehavior.MoveVertical(leftVertical);
 
         /* Aim based on the right stick */
-        Vector2 rightStickOrientation = new Vector2(Input.GetAxis("Right Horizontal"), Input.GetAxis("Right Vertical"));
+        Vector2 rightStickOrientation = new Vector2(Input.GetAxis("P1 Right Stick H"), Input.GetAxis("P1 Right Stick V"));
 
         if (rightStickOrientation.magnitude > 0)
         {
-            if (!isAiming)
+            if (!P1isAiming)
             {
-                isAiming = true;
-               myShooter.PlayerAimStart(rightStickOrientation);
+                P1isAiming = true;
+                playerTwoCombat.PlayerAimStart(rightStickOrientation);
             }
             else
             {
-                myShooter.PlayerAimContinue(rightStickOrientation);
+                playerTwoCombat.PlayerAimContinue(rightStickOrientation);
             }
         }
-        else if((rightStickOrientation.magnitude <= 0) && (isAiming))
+        else if((rightStickOrientation.magnitude <= 0) && (P1isAiming))
         {
-            isAiming = false;
-            myShooter.PlayerAimEnd();
+            P1isAiming = false;
+            playerTwoCombat.PlayerAimEnd();
         }
 
 
-        if (!isAiming)
+        if (!P1isAiming)
         {
             if (rightStickOrientation.magnitude > 0)
             {
-                isAiming = true;
-                myShooter.PlayerAimStart(rightStickOrientation);
+                P1isAiming = true;
+                playerTwoCombat.PlayerAimStart(rightStickOrientation);
             }
         }
         else
@@ -157,7 +218,7 @@ public class InputManagerScript : MonoBehaviour {
         /* Shoot based on Right Trigger */
         if (Input.GetAxis("Right Trigger") < -.3)
         {
-           myShooter.Shoot();
+            playerOneCombat.Shoot();
         }
 
     }
@@ -165,6 +226,6 @@ public class InputManagerScript : MonoBehaviour {
     // Update is called once per frame
     void Update () {
         KeyboardInput();
-        JoypadOneInput();
+        //JoypadOneInput();
     }
 }

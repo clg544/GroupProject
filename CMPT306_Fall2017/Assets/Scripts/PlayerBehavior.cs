@@ -73,7 +73,6 @@ public class PlayerBehavior : MonoBehaviour {
     // Use this for initialization
     void Start () {
         playerBody = this.GetComponent<Rigidbody2D>();
-		this.gameObject.transform.position = spawnPoint.transform.position;
 	}
 	
 	// Update is called once per frame

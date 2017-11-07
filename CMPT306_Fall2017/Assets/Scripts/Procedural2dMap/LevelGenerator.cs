@@ -34,11 +34,13 @@ public class LevelGenerator : MonoBehaviour {
 
 	List<GameObject> enemySpawns;
 	List<GameObject> navPoints;
-	public List<GameObject> allEnemies = new List<GameObject> ();
+	List<GameObject> allEnemies;
+	int numOfNavs = 3;
 
 	void Start() {
 		enemySpawns = new List<GameObject> ();
 		navPoints = new List<GameObject> ();
+		allEnemies = new List<GameObject> ();
 
 		int numOfNavs = 3;
 
@@ -59,9 +61,10 @@ public class LevelGenerator : MonoBehaviour {
 
 	//randomly creates the map
 	void GenerateMap() {
-
-		foreach (GameObject enemy in allEnemies) {
-			Destroy (enemy.gameObject);
+		if (allEnemies != null) {
+			foreach (GameObject enemy in allEnemies) {
+				Destroy (enemy.gameObject);
+			}
 		}
 
 		//Destroy all previous spawns
@@ -187,7 +190,6 @@ public class LevelGenerator : MonoBehaviour {
 
 	//Places the spawns for enemies
 	void placeSpawns(){
-		Debug.Log ("Here");
 		//the number of spawns that have been placed
 		int placedSpawns = 0;
 		int numOfSpawns = UnityEngine.Random.Range (2, 6);

@@ -45,45 +45,33 @@ public class EnterDoor : MonoBehaviour {
 			if (this.gameObject.name == "north door") {
 				
 				GameObject players = GameObject.FindGameObjectWithTag ("Players");
-
-				for (int i = 0; i < players.transform.childCount; i++) {
-					if (players.transform.GetChild (i).gameObject.tag != "MainCamera") {
-						players.transform.GetChild (i).gameObject.transform.localPosition = new Vector2 (sDoor.transform.position.x, sDoor.transform.position.y);
-					}
-				}
+				players.transform.localPosition = new Vector2 (sDoor.transform.position.x, sDoor.transform.position.y);
+	
 				hasEnteredDoor = false;
 			}
 
 			if (this.gameObject.name == "south door") {
 	
 				GameObject players = GameObject.FindGameObjectWithTag ("Players");
-				for (int i = 0; i < players.transform.childCount; i++) {
-					if (players.transform.GetChild (i).gameObject.tag != "MainCamera") {
-						players.transform.GetChild (i).gameObject.transform.localPosition = new Vector2 (nDoor.transform.position.x, nDoor.transform.position.y);
-					}
-				}
+				players.transform.localPosition = new Vector2 (nDoor.transform.position.x, nDoor.transform.position.y);
+
 				hasEnteredDoor = false;
 			}
 
 			if (this.gameObject.name == "east door") {
 				
 				GameObject players = GameObject.FindGameObjectWithTag ("Players");
-				for (int i = 0; i < players.transform.childCount; i++) {
-					if (players.transform.GetChild (i).gameObject.tag != "MainCamera") {
-						players.transform.GetChild (i).gameObject.transform.localPosition = new Vector2 (wDoor.transform.position.x, wDoor.transform.position.y);
-					}
-				}
+				players.transform.localPosition = new Vector2 (wDoor.transform.position.x, wDoor.transform.position.y);
+				
 				hasEnteredDoor = false;
 			}
 
 			if (this.gameObject.name == "west door") {
 				
 				GameObject players = GameObject.FindGameObjectWithTag ("Players");
-				for (int i = 0; i < players.transform.childCount; i++) {
-					if (players.transform.GetChild (i).gameObject.tag != "MainCamera") {
-						players.transform.GetChild (i).gameObject.transform.localPosition = new Vector2 (eDoor.transform.position.x, eDoor.transform.position.y);
-					}
-				}
+				players.transform.localPosition = new Vector2 (eDoor.transform.position.x, eDoor.transform.position.y);
+
+			
 				hasEnteredDoor = false;
 			}
 		}
