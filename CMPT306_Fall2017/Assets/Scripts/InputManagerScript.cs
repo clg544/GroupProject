@@ -208,7 +208,7 @@ public class InputManagerScript : MonoBehaviour {
 
     public void JoypadInput(InputNames myInput, PlayerBehavior myBehavior, PlayerCombat myCombat)
     {
-        int joyNum;
+        PrintInputNames(myInput);
         
         /* Movement based on left stick */
         float leftHorizontal = Input.GetAxis(myInput.LeftHorizontal);
@@ -218,14 +218,10 @@ public class InputManagerScript : MonoBehaviour {
 
         /* Aim based on the right stick */
         Vector2 rightStickOrientation = new Vector2(Input.GetAxis(myInput.RightHorizontal), Input.GetAxis(myInput.RightVertical));
-
         
-
         switch (myInput.playerSuffix)
         {
             case "_1":
-                joyNum = 1;     // Identify our player number
-
                 if (rightStickOrientation.magnitude > 0)
                 {
                     if (rightStickOrientation.magnitude > 0)
@@ -249,8 +245,6 @@ public class InputManagerScript : MonoBehaviour {
                 break;
 
             case "_2":
-                joyNum = 2;
-
                 if (rightStickOrientation.magnitude > 0)
                 {
                     if (rightStickOrientation.magnitude > 0)
