@@ -454,42 +454,42 @@ Prefab:
     - target: {fileID: 224394361960840358, guid: 5eed0066b4268c14887ebeafd95873f0,
         type: 2}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224394361960840358, guid: 5eed0066b4268c14887ebeafd95873f0,
         type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224952049170262006, guid: 5eed0066b4268c14887ebeafd95873f0,
         type: 2}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224952049170262006, guid: 5eed0066b4268c14887ebeafd95873f0,
         type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224251469163074096, guid: 5eed0066b4268c14887ebeafd95873f0,
         type: 2}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224251469163074096, guid: 5eed0066b4268c14887ebeafd95873f0,
         type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224406833228704494, guid: 5eed0066b4268c14887ebeafd95873f0,
         type: 2}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224406833228704494, guid: 5eed0066b4268c14887ebeafd95873f0,
         type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114941791273446218, guid: 5eed0066b4268c14887ebeafd95873f0,
         type: 2}
@@ -570,6 +570,74 @@ Prefab:
     - target: {fileID: 4292959204018798, guid: 43a50026743875842b5906d0e5d8116f, type: 2}
       propertyPath: m_RootOrder
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4942550013444614, guid: 43a50026743875842b5906d0e5d8116f, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -10.11
+      objectReference: {fileID: 0}
+    - target: {fileID: 4942550013444614, guid: 43a50026743875842b5906d0e5d8116f, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0.13
+      objectReference: {fileID: 0}
+    - target: {fileID: 114040415419035632, guid: 43a50026743875842b5906d0e5d8116f,
+        type: 2}
+      propertyPath: tetherResolution
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 114634243783423288, guid: 43a50026743875842b5906d0e5d8116f,
+        type: 2}
+      propertyPath: LightBulletDamage
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 114634243783423288, guid: 43a50026743875842b5906d0e5d8116f,
+        type: 2}
+      propertyPath: LightBulletSpread
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 1189084515324114, guid: 43a50026743875842b5906d0e5d8116f, type: 2}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 1441463896677894, guid: 43a50026743875842b5906d0e5d8116f, type: 2}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1161603786173650, guid: 43a50026743875842b5906d0e5d8116f, type: 2}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1642003740233448, guid: 43a50026743875842b5906d0e5d8116f, type: 2}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1331113859876140, guid: 43a50026743875842b5906d0e5d8116f, type: 2}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 114634243783423288, guid: 43a50026743875842b5906d0e5d8116f,
+        type: 2}
+      propertyPath: LightBulletCooldown
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 114849192383879338, guid: 43a50026743875842b5906d0e5d8116f,
+        type: 2}
+      propertyPath: LightBulletVel
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114634243783423288, guid: 43a50026743875842b5906d0e5d8116f,
+        type: 2}
+      propertyPath: HeavyBulletCooldown
+      value: 0.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 114634243783423288, guid: 43a50026743875842b5906d0e5d8116f,
+        type: 2}
+      propertyPath: HeavyBulletDamage
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 114634243783423288, guid: 43a50026743875842b5906d0e5d8116f,
+        type: 2}
+      propertyPath: HeavyBulletVel
+      value: 50
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 43a50026743875842b5906d0e5d8116f, type: 2}

@@ -208,8 +208,6 @@ public class InputManagerScript : MonoBehaviour {
 
     public void JoypadInput(InputNames myInput, PlayerBehavior myBehavior, PlayerCombat myCombat)
     {
-        PrintInputNames(myInput);
-        
         /* Movement based on left stick */
         float leftHorizontal = Input.GetAxis(myInput.LeftHorizontal);
         float leftVertical = Input.GetAxis(myInput.LeftVertical);
