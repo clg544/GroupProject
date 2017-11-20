@@ -60,11 +60,18 @@ public class PlayerCombat : MonoBehaviour {
      */
     public void Shoot()
     {
+
+        if (myClass == PlayerClass.FIGHTY)
+        {
+            FighterAttack();
+            return;
+        }
+
         if (curCrosshair == null)
             return;
 
         if (AttackCooldown > 0)
-            return; 
+            return;
 
         switch (curWeapon)
         {
@@ -272,25 +279,31 @@ public class PlayerCombat : MonoBehaviour {
 
         /* Arbitrarily prefers the horizontal directions */
         /* Keep last direction if not moving/aiming      */
-        if(frameDir.x > .5F)
+        if(Mathf.Abs(frameDir.x) >= Mathf.Abs(frameDir.y))
         {
-            curDirection = Direction.Right;
-            SwingVect = new Vector3(SwingDist, 0, 0);
+            if (frameDir.x > 0)
+            {
+                curDirection = Direction.Right;
+                SwingVect = new Vector3(SwingDist, 0, 0);
+            }
+            else
+            {
+                curDirection = Direction.Left;
+                SwingVect = new Vector3(-SwingDist, 0, 0);
+            }
         }
-        else if(frameDir.x < -.5F)
+        else
         {
-            curDirection = Direction.Left;
-            SwingVect = new Vector3(-SwingDist, 0, 0);
-        }
-        else if (frameDir.y > .5F)
-        {
-            curDirection = Direction.Up;
-            SwingVect = new Vector3(0, SwingDist, 0);
-        }
-        else if (frameDir.y < -.5)
-        {
-            curDirection = Direction.Down;
-            SwingVect = new Vector3(0, -SwingDist, 0);
+            if (frameDir.y > 0)
+            {
+                curDirection = Direction.Up;
+                SwingVect = new Vector3(0, SwingDist, 0);
+            }
+            else
+            {
+                curDirection = Direction.Down;
+                SwingVect = new Vector3(0, -SwingDist, 0);
+            }
         }
     }
 }
