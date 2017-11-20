@@ -108,7 +108,6 @@ NavMeshSettings:
     tileSize: 256
     accuratePlacement: 0
   m_NavMeshData: {fileID: 0}
-<<<<<<< HEAD
 --- !u!1 &27563731
 GameObject:
   m_ObjectHideFlags: 0
@@ -318,8 +317,6 @@ MonoBehaviour:
   ShootyHealthBar: {fileID: 597075811}
   ShootyCooldownBar: {fileID: 111957416}
   ShootySelectedWeapon: {fileID: 797369359}
-=======
->>>>>>> e0e515bc97af45e7e1584f9dd0eb8abeab6bffd3
 --- !u!1 &265902014
 GameObject:
   m_ObjectHideFlags: 0
@@ -445,7 +442,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
-<<<<<<< HEAD
 --- !u!1 &567607623
 GameObject:
   m_ObjectHideFlags: 0
@@ -626,8 +622,6 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Slider+SliderEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
-=======
->>>>>>> e0e515bc97af45e7e1584f9dd0eb8abeab6bffd3
 --- !u!1 &609342588
 GameObject:
   m_ObjectHideFlags: 0
@@ -783,7 +777,6 @@ GameObject:
   m_PrefabInternal: {fileID: 1197156858}
 --- !u!114 &1092774237 stripped
 MonoBehaviour:
-<<<<<<< HEAD
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
@@ -1070,8 +1063,6 @@ GameObject:
   m_PrefabInternal: {fileID: 1197156858}
 --- !u!114 &1092774237 stripped
 MonoBehaviour:
-=======
->>>>>>> e0e515bc97af45e7e1584f9dd0eb8abeab6bffd3
   m_PrefabParentObject: {fileID: 114849192383879338, guid: 43a50026743875842b5906d0e5d8116f,
     type: 2}
   m_PrefabInternal: {fileID: 1197156858}
