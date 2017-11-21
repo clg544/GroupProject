@@ -31,16 +31,19 @@ public class LevelGenerator : MonoBehaviour {
 	public GameObject navPoint;
 	public GameObject[] enemyPlayers;
 	public GameObject playerSpawn;
+	public GameObject itemPrefab;
 
 	List<GameObject> enemySpawns;
 	List<GameObject> navPoints;
 	List<GameObject> allEnemies;
+	List<GameObject> allItems;
 	int numOfNavs = 3;
 
 	void Start() {
 		enemySpawns = new List<GameObject> ();
 		navPoints = new List<GameObject> ();
 		allEnemies = new List<GameObject> ();
+		allItems = new List<GameObject> ();
 
 		int numOfNavs = 3;
 
@@ -74,6 +77,12 @@ public class LevelGenerator : MonoBehaviour {
 			}
 		}
 
+		if (allItems != null) {
+			foreach (GameObject item in allItems) {
+				Destroy (item.gameObject);
+			}
+		}
+
 		map = new int[width,height];
 		RandomFillMap();
 
@@ -83,6 +92,7 @@ public class LevelGenerator : MonoBehaviour {
 
 		placeNavs ();
 		placeSpawns ();
+		placeItems ();
 
 		MeshCreator meshGen = GetComponent<MeshCreator>();
 		meshGen.GenerateMesh(map, 1);
@@ -256,6 +266,37 @@ public class LevelGenerator : MonoBehaviour {
 			} else {
 				currentLocX = UnityEngine.Random.Range (0, width);
 				currentLocY = UnityEngine.Random.Range (0, height);	
+			}
+		}
+	}
+
+	void placeItems(){
+		int placedItems = 0;
+		int numOfItems = UnityEngine.Random.Range (3, 6);
+
+		//the current x and y location randomly selected
+		int currentLocX = UnityEngine.Random.Range (0, width);
+		int currentLocY = UnityEngine.Random.Range (0, height);
+
+		//while the number of spawns placed is less than the max, place new spawns
+		while (placedItems < numOfItems) {
+
+			//if the current x and y are a wall, Instantiate a spawnObject and set its location
+			//to the current x and y
+			//if not, randomly pick new x and y
+			if (map [currentLocX, currentLocY] == 0) {
+				placedItems += 1;
+				GameObject item = Instantiate (itemPrefab);
+				allItems.Add (item);
+
+				item.transform.SetParent (this.transform);
+				item.transform.localPosition = new Vector2 (currentLocX - width / 2, currentLocY - height / 2);
+
+				currentLocX = UnityEngine.Random.Range (0, width);
+				currentLocY = UnityEngine.Random.Range (0, height);
+			} else {
+				currentLocX = UnityEngine.Random.Range (0, width);
+				currentLocY = UnityEngine.Random.Range (0, height);
 			}
 		}
 	}

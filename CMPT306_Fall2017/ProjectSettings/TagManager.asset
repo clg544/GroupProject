@@ -14,6 +14,7 @@ TagManager:
   - DoorN
   - DoorW
   - Walls
+  - Power
   layers:
   - Default
   - TransparentFX
