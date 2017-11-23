@@ -10,7 +10,7 @@ public class EnterDoor : MonoBehaviour {
 	public Sprite needNone;
 
 	List<GameObject> obj;
-	bool hasEnteredDoor;
+	public bool hasEnteredDoor;
 
 	GameObject sDoor;
 	GameObject nDoor;
@@ -54,8 +54,12 @@ public class EnterDoor : MonoBehaviour {
 		}
 	}
 
-	void OnTriggerExit2d(Collider2D coll){
-		hasEnteredDoor = false;
+	void OnTriggerExit2d(Collider2D coll)
+    {
+        if (coll.gameObject.tag == "Player")
+        {
+            hasEnteredDoor = false;
+        }
 	}
 
 	//Determines what door to go through

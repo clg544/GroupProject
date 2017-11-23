@@ -5,23 +5,49 @@ using UnityEngine.UI;
 
 public class GUIManager : MonoBehaviour {
 
-    /* Player Combat Scripts holding values */
-    public PlayerCombat FightyCombat;
-    public PlayerCombat ShootyCombat;
+    GameObject FightyObject;
+    GameObject ShootyObject;
+    GameObject TetherManager;
 
+    /* Player Combat Scripts holding values */
+    PlayerCombat FightyCombat;
+    PlayerCombat ShootyCombat;
+    PlayerTetherScript TetherScript;
+
+    /* GUI Objects to update */
     public Slider FightyHealthBar;
     public Slider FightyCooldownBar;
+
     public Slider ShootyHealthBar;
     public Slider ShootyCooldownBar;
     public Text ShootySelectedWeapon;
 
-    /* GUI Objects to update */
+    public Slider TetherSlider;
 
 
     // Use this for initialization
-    void Start () {
-		
-	}
+    void Start ()
+    {
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+
+        foreach (GameObject p in players)
+        {
+            if (p.name == "Fighty")
+            {
+                FightyObject = p;
+            }
+            else if (p.name == "Shooty")
+            {
+                ShootyObject = p;
+            }
+        }
+
+        FightyCombat = FightyObject.GetComponent<PlayerCombat>();
+        ShootyCombat = ShootyObject.GetComponent<PlayerCombat>();
+
+        TetherManager = GameObject.FindGameObjectWithTag("TetherManager");
+        TetherScript = TetherManager.GetComponent<PlayerTetherScript>();
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -31,5 +57,7 @@ public class GUIManager : MonoBehaviour {
         ShootyHealthBar.value = ShootyCombat.getDamageRatio();
         ShootyCooldownBar.value = ShootyCombat.getCooldownRatio();
         ShootySelectedWeapon.text = ShootyCombat.getWeaponName();
+
+        TetherSlider.value = TetherScript.getDamageRatio();
     }
 }

@@ -83,7 +83,7 @@ public class BasicRangedEnemyBehaviour : MonoBehaviour {
                 shootHit = Physics2D.Raycast(shootPoint.transform.position, miss);
                 lr.SetPosition(1, shootHit.point);
                 //  Debug.Log(shootHit.transform.tag);
-                if (shootHit.transform.CompareTag("Player"))
+                if (shootHit.transform.CompareTag("Player") || shootHit.transform.CompareTag("TetherLink"))
                 {
                     shootHit.transform.gameObject.SendMessage("ApplyDamage", damage);
                 }

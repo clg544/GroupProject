@@ -19,7 +19,6 @@ public class BulletScript : MonoBehaviour {
         {
             Destroy(gameObject);
         }
-
     }
 
 	// Use this for initialization
