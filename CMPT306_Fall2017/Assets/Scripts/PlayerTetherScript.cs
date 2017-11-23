@@ -30,6 +30,10 @@ public class PlayerTetherScript : MonoBehaviour {
     public int numColls;
     public Vector3 curColl;
 
+    /* Health Management */
+    public float curHealth;
+    public float maxHealth;
+
     /* Get the centre of the players */
     public Vector3 getCentre()
     {
@@ -49,6 +53,33 @@ public class PlayerTetherScript : MonoBehaviour {
         }
     }
 
+    public void ApplyDamageFromTether(float dam, int tetherID)
+    {
+        curHealth -= dam;
+
+        if (curHealth < 0)
+        {
+            print("Tether health is zero!");
+
+            if(tetherID != 0)
+            {
+                tetherLinks[tetherID].SetActive(false);
+
+                tetherScripts[tetherID - 1].tetherVisual.enabled = false;
+
+                if(tetherID != tetherScripts.Length)
+                    tetherScripts[tetherID + 1].tetherVisual.enabled = false;
+            }
+        }
+        
+        return;
+    }
+
+    public float getDamageRatio()
+    {
+        return curHealth / maxHealth;
+    }
+
     /* Set up via Awake to prepare for child nodes */
     void Awake () {
         /* tracking variables */
@@ -65,6 +96,7 @@ public class PlayerTetherScript : MonoBehaviour {
         {
             tetherLinks[i] = Instantiate(linkNode, gameObject.transform);
             tetherScripts[i] = tetherLinks[i].GetComponent<TetherLinks>();
+            tetherScripts[i].myID = i;
         }
         distributeNodes();
 
@@ -84,6 +116,11 @@ public class PlayerTetherScript : MonoBehaviour {
         playerTwo.GetComponent<TetherLinks>().setConnection(tetherLinks[tetherLinks.Length - 1]);
         playerTwo.GetComponent<TetherLinks>().setConnection(tetherLinks[tetherLinks.Length - 1]);
         playerTwo.GetComponent<TetherLinks>().tetherManager = this;
+    }
+
+
+    void Start(){
+        curHealth = maxHealth;
     }
 	
 	// Update is called once per frame

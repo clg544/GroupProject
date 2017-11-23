@@ -5,11 +5,12 @@ using UnityEngine;
 public class TetherLinks : MonoBehaviour {
 
     public PlayerTetherScript tetherManager;    // The parent script
+    public int myID;
 
     public GameObject myConnection;             // What this node is connected to
     private Rigidbody2D myBody;                 // My RigidBody
     private Rigidbody2D connectionBody;         // Connections RigidBody
-    private LineRenderer tetherVisual;          // My lineRenderer
+    public LineRenderer tetherVisual;           // My lineRenderer
 
     private Vector3 collisionPos;
     public float pullDistance;
@@ -40,6 +41,11 @@ public class TetherLinks : MonoBehaviour {
         tetherManager = transform.parent.gameObject.GetComponent<PlayerTetherScript>();
     }
     
+    void ApplyDamage(float dam)
+    {
+        tetherManager.ApplyDamageFromTether(dam, myID);
+    }
+
     public void OnCollisionEnter2D(Collision2D coll)
     {
         tetherManager.numColls++;

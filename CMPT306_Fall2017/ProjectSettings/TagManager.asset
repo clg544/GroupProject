@@ -15,6 +15,7 @@ TagManager:
   - DoorW
   - Walls
   - Power
+  - TetherManager
   layers:
   - Default
   - TransparentFX

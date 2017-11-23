@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4925550693832430}
   - component: {fileID: 23904409133373736}
   - component: {fileID: 102069333853636704}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: NumberLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,8 @@ GameObject:
   - component: {fileID: 4482210911683502}
   - component: {fileID: 114040415419035632}
   - component: {fileID: 120709548232495482}
-  m_Layer: 8
+  - component: {fileID: 212944878854277258}
+  m_Layer: 12
   m_Name: Tether
   m_TagString: TetherLink
   m_Icon: {fileID: 0}
@@ -70,7 +71,7 @@ GameObject:
   - component: {fileID: 4187017165256088}
   - component: {fileID: 23403178820419580}
   - component: {fileID: 102861309180699418}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: NumberLabel
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -112,7 +113,7 @@ GameObject:
   - component: {fileID: 114666160176864448}
   - component: {fileID: 120720027723187362}
   - component: {fileID: 114849192383879338}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Fighty
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -135,7 +136,7 @@ GameObject:
   - component: {fileID: 232968804247740292}
   - component: {fileID: 120875268748500028}
   - component: {fileID: 114701580602432662}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Shooty
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -264,7 +265,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1441463896677894}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3, y: 0, z: 0}
+  m_LocalPosition: {x: -6.04, y: 0.01, z: 0}
   m_LocalScale: {x: 0.45533395, y: 0.45533395, z: 0.45533395}
   m_Children:
   - {fileID: 4925550693832430}
@@ -280,7 +281,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -291,7 +292,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 18.72
+  orthographic size: 10.96
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -533,7 +534,7 @@ MonoBehaviour:
   elasticity: 1
   playerOne: {fileID: 1441463896677894}
   playerTwo: {fileID: 1642003740233448}
-  tetherResolution: 10
+  tetherResolution: 30
   linkNode: {fileID: 1843378605204904, guid: 9ec2b8db4a864174f9b5bbd7e7c69d22, type: 2}
   numColls: 0
   curColl: {x: 0, y: 0, z: 0}
@@ -572,8 +573,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myPlayer: {fileID: 114883154659287566}
   myBody: {fileID: 50481284814123684}
-  myClass: 0
-  maxHealth: 0
+  myClass: 1
+  maxHealth: 100
   lastCountdownTime: 0
   Crosshair: {fileID: 1536397821931000, guid: 12d625172ca83dc438e54d9e8158bf5f, type: 2}
   Bullet: {fileID: 1253353341930176, guid: 7f6d6c9054649ed4eaa71bfc0c670086, type: 2}
@@ -586,13 +587,13 @@ MonoBehaviour:
   bulletSpawnDist: 3.5
   crosshairDist: 11
   LightBulletVel: 30
-  LightBulletCooldown: 0.05
-  LightBulletDamage: 0
-  LightBulletSpread: 0
-  HeavyBulletVel: 75
-  HeavyBulletCooldown: 0.5
+  LightBulletCooldown: 0.15
+  LightBulletDamage: 13
+  LightBulletSpread: 60
+  HeavyBulletVel: 50
+  HeavyBulletCooldown: 0.65
   HeavyBulletMassRatio: 3
-  HeavyBulletDamage: 0
+  HeavyBulletDamage: 150
   HeavyBulletSpread: 0
   recoil: 1
   curWeapon: 0
@@ -642,7 +643,7 @@ MonoBehaviour:
   myPlayer: {fileID: 114666160176864448}
   myBody: {fileID: 50781938944803170}
   myClass: 0
-  maxHealth: 0
+  maxHealth: 100
   lastCountdownTime: 0
   Crosshair: {fileID: 1536397821931000, guid: 12d625172ca83dc438e54d9e8158bf5f, type: 2}
   Bullet: {fileID: 1253353341930176, guid: 7f6d6c9054649ed4eaa71bfc0c670086, type: 2}
@@ -655,7 +656,7 @@ MonoBehaviour:
   swingDamage: 20
   bulletSpawnDist: 3.5
   crosshairDist: 11
-  LightBulletVel: 30
+  LightBulletVel: 0
   LightBulletCooldown: 6
   LightBulletDamage: 0
   LightBulletSpread: 0
@@ -1103,6 +1104,48 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+--- !u!212 &212944878854277258
+SpriteRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1189084515324114}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
 --- !u!232 &232968804247740292
 DistanceJoint2D:

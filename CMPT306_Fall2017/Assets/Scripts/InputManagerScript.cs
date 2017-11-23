@@ -50,14 +50,14 @@ public class InputManagerScript : MonoBehaviour {
     }
 
 
-    public GameObject playerOne;
-    public GameObject playerTwo;
+    public GameObject FightyObject;
+    public GameObject ShootyObject;
 
-    private PlayerBehavior playerOneBehavior;
-    private PlayerBehavior playerTwoBehavior;
+    private PlayerBehavior FightyBehavior;
+    private PlayerBehavior ShootyBehavior;
 
-    private PlayerCombat playerOneCombat;
-    private PlayerCombat playerTwoCombat;
+    private PlayerCombat FightyCombat;
+    private PlayerCombat ShootyCombat;
 
     public InputNames P1Input;
     public InputNames P2Input;
@@ -89,23 +89,23 @@ public class InputManagerScript : MonoBehaviour {
 
         if (Input.GetKey(KeyCode.W))
         {
-            playerOneBehavior.MoveUp();
+            FightyBehavior.MoveUp();
         }
         else if (Input.GetKey(KeyCode.S))
         {
-            playerOneBehavior.MoveDown();
+            FightyBehavior.MoveDown();
         }
         if (Input.GetKey(KeyCode.A))
         {
-            playerOneBehavior.MoveLeft();
+            FightyBehavior.MoveLeft();
         }
         else if (Input.GetKey(KeyCode.D))
         {
-            playerOneBehavior.MoveRight();
+            FightyBehavior.MoveRight();
         }
         if (Input.GetKey(KeyCode.E))
         {
-            playerOneBehavior.Brake();
+            FightyBehavior.Brake();
         }
 
         if (Input.GetKeyDown(KeyCode.Q))
@@ -133,21 +133,21 @@ public class InputManagerScript : MonoBehaviour {
             if (!P1isAiming)
             {
                 P1isAiming = true;
-                playerOneCombat.PlayerAimStart(P1AimAxis);
+                FightyCombat.PlayerAimStart(P1AimAxis);
             }
             else
             {
-                playerOneCombat.PlayerAimContinue(P1AimAxis);
+                FightyCombat.PlayerAimContinue(P1AimAxis);
             }
         }
         else if ((P1AimAxis.magnitude <= 0) && (P1isAiming))
         {
             P1isAiming = false;
-            playerOneCombat.PlayerAimEnd();
+            FightyCombat.PlayerAimEnd();
         }
         if (Input.GetKey(KeyCode.Space))
         {
-            playerOneCombat.FighterAttack();
+            FightyCombat.FighterAttack();
         }
 
         /**
@@ -155,27 +155,27 @@ public class InputManagerScript : MonoBehaviour {
          */
         if (Input.GetKey(KeyCode.UpArrow))
         {
-            playerTwoBehavior.MoveUp();
+            ShootyBehavior.MoveUp();
         }
         else if (Input.GetKey(KeyCode.DownArrow))
         {
-            playerTwoBehavior.MoveDown();
+            ShootyBehavior.MoveDown();
         }
         if (Input.GetKey(KeyCode.LeftArrow))
         {
-            playerTwoBehavior.MoveLeft();
+            ShootyBehavior.MoveLeft();
         }
         else if (Input.GetKey(KeyCode.RightArrow))
         {
-            playerTwoBehavior.MoveRight();
+            ShootyBehavior.MoveRight();
         }
         if (Input.GetKey(KeyCode.RightControl))
         {
-            playerTwoBehavior.Brake();
+            ShootyBehavior.Brake();
         }
         if (Input.GetKeyDown(KeyCode.Keypad9))
         {
-            playerTwoCombat.SwitchWeapon();
+            ShootyCombat.SwitchWeapon();
         }
 
         /* Aim based on the 8456 */
@@ -187,22 +187,22 @@ public class InputManagerScript : MonoBehaviour {
             if (!P2isAiming)
             {
                 P2isAiming = true;
-                playerTwoCombat.PlayerAimStart(P2AimAxis);
+                ShootyCombat.PlayerAimStart(P2AimAxis);
             }
             else
             {
-                playerTwoCombat.PlayerAimContinue(P2AimAxis);
+                ShootyCombat.PlayerAimContinue(P2AimAxis);
             }
         }
         else if ((P2AimAxis.magnitude <= 0) && (P2isAiming))
         {
             P2isAiming = false;
-            playerTwoCombat.PlayerAimEnd();
+            ShootyCombat.PlayerAimEnd();
         }
 
         if (Input.GetKey(KeyCode.Keypad0))
         {
-            playerTwoCombat.Shoot();
+            ShootyCombat.Shoot();
         }
     }
 
@@ -227,17 +227,17 @@ public class InputManagerScript : MonoBehaviour {
                         if (!P1isAiming)
                         {
                             P1isAiming = true;
-                            playerOneCombat.PlayerAimStart(rightStickOrientation);
+                            FightyCombat.PlayerAimStart(rightStickOrientation);
                         }
                         else
                         {
-                            playerOneCombat.PlayerAimContinue(rightStickOrientation);
+                            FightyCombat.PlayerAimContinue(rightStickOrientation);
                         }
                     }
                     else if ((rightStickOrientation.magnitude <= 0) && (P1isAiming))
                     {
                         P1isAiming = false;
-                        playerOneCombat.PlayerAimEnd();
+                        FightyCombat.PlayerAimEnd();
                     }
                 }
                 break;
@@ -250,17 +250,17 @@ public class InputManagerScript : MonoBehaviour {
                         if (!P2isAiming)
                         {
                             P2isAiming = true;
-                            playerTwoCombat.PlayerAimStart(rightStickOrientation);
+                            ShootyCombat.PlayerAimStart(rightStickOrientation);
                         }
                         else
                         {
-                            playerTwoCombat.PlayerAimContinue(rightStickOrientation);
+                            ShootyCombat.PlayerAimContinue(rightStickOrientation);
                         }
                     }
                     else if ((rightStickOrientation.magnitude <= 0) && (P2isAiming))
                     {
                         P2isAiming = false;
-                        playerTwoCombat.PlayerAimEnd();
+                        ShootyCombat.PlayerAimEnd();
                     }
                 }
                 break;
@@ -325,11 +325,25 @@ public class InputManagerScript : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        playerOneBehavior = playerOne.GetComponent<PlayerBehavior>();
-        playerTwoBehavior = playerTwo.GetComponent<PlayerBehavior>();
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
 
-        playerOneCombat = playerOne.GetComponent<PlayerCombat>();
-        playerTwoCombat = playerTwo.GetComponent<PlayerCombat>();
+        foreach(GameObject p in players)
+        {
+            if(p.name == "Fighty")
+            {
+                FightyObject = p;
+            }
+            else if(p.name == "Shooty")
+            {
+                ShootyObject = p;
+            }
+        }
+
+        FightyBehavior = FightyObject.GetComponent<PlayerBehavior>();
+        ShootyBehavior = ShootyObject.GetComponent<PlayerBehavior>();
+
+        FightyCombat = FightyObject.GetComponent<PlayerCombat>();
+        ShootyCombat = ShootyObject.GetComponent<PlayerCombat>();
 
         P1Input = SetUpInputNames("_1");
         P2Input = SetUpInputNames("_2");
@@ -345,7 +359,7 @@ public class InputManagerScript : MonoBehaviour {
     void Update () {
         KeyboardInput();
         
-        JoypadInput(P1Input, playerOneBehavior, playerOneCombat);
-        JoypadInput(P2Input, playerTwoBehavior, playerTwoCombat);
+        JoypadInput(P1Input, FightyBehavior, FightyCombat);
+        JoypadInput(P2Input, ShootyBehavior, ShootyCombat);
     }
 }

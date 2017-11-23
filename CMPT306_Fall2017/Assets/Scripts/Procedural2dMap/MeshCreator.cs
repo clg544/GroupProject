@@ -33,8 +33,7 @@ public class MeshCreator : MonoBehaviour {
 
 		Mesh mesh = new Mesh();
 		cave.mesh = mesh;
-
-
+        
 		mesh.vertices = vertices.ToArray();
 		mesh.triangles = triangles.ToArray();
 		mesh.RecalculateNormals();
