@@ -42,11 +42,13 @@ public class EnterDoor : MonoBehaviour {
 		if (coll.gameObject.tag == "Power") {
 			Debug.Log ("Ran into item");
 			powerSupply += 1;
+			Destroy (coll.gameObject);
 			if (powerSupply == 1) {
 				powerContainer.GetComponent<SpriteRenderer> ().sprite = needTwo;
 			} else if (powerSupply == 2) {
 				powerContainer.GetComponent<SpriteRenderer> ().sprite = needOne;
 			} else if(powerSupply >= 3){
+				this.GetComponent<Animator> ().SetInteger ("Power", 3);
 				powerContainer.GetComponent<SpriteRenderer> ().sprite = needNone;
 			}
 		}
