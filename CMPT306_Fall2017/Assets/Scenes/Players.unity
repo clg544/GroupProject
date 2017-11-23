@@ -485,20 +485,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 232968804247740292, guid: 43a50026743875842b5906d0e5d8116f,
-        type: 2}
-      propertyPath: m_Distance
-      value: 11.881339
-      objectReference: {fileID: 0}
-    - target: {fileID: 114040415419035632, guid: 43a50026743875842b5906d0e5d8116f,
-        type: 2}
-      propertyPath: maxHealth
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 1189084515324114, guid: 43a50026743875842b5906d0e5d8116f, type: 2}
-      propertyPath: m_TagString
-      value: TetherManager
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 43a50026743875842b5906d0e5d8116f, type: 2}
   m_IsPrefabParent: 0

@@ -19,8 +19,6 @@ public class BulletScript : MonoBehaviour {
         {
             Destroy(gameObject);
         }
-        
-        coll.gameObject.SendMessage("ApplyDamage", damage);
     }
 
 	// Use this for initialization
