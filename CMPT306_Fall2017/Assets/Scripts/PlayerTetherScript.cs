@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerTetherScript : MonoBehaviour {
 
+    public MenuManager curMenuManager;
+
     /* How far the players can go before the tether pulls them in */
     public float engageDistance;       // Distance where players get pulled in
     public float distanceMultiplier;   // Scaler to pull players in by
@@ -73,6 +75,11 @@ public class PlayerTetherScript : MonoBehaviour {
         }
         
         return;
+    }
+
+    public void Kill()
+    {
+        curMenuManager.ShowDeathPanel();
     }
 
     public float getDamageRatio()

@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerCombat : MonoBehaviour {
     
     public enum PlayerClass { FIGHTY, SHOOTY};
+    public PlayerTetherScript tetherManager;
 
     private float AttackCooldown;     // Current cooldown value
     
@@ -224,7 +225,16 @@ public class PlayerCombat : MonoBehaviour {
      */
     public void ApplyDamage(int dam)
     {
-        Debug.Log("Playerbehavior:ApplyDamage(int dam): Not Yet Implemented");
+        curHealth -= dam;
+
+        if (curHealth <= 0)
+            KillMe();
+
+        return;
+    }
+    public void KillMe()
+    {
+        tetherManager.Kill();
     }
 
     /* Pass values to the GUI */ 
