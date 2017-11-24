@@ -5,6 +5,8 @@ using System.Collections.Generic;
 
 public class LevelGenerator : MonoBehaviour {
 
+    public GameObject fighty;
+    public GameObject shooty;
 	public int width;
 	public int height;
 
@@ -40,7 +42,7 @@ public class LevelGenerator : MonoBehaviour {
 		enemySpawns = new List<GameObject> ();
 		navPoints = new List<GameObject> ();
 
-		int numOfNavs = 3;
+		int numOfNavs = 20;
 
 		for (int i = 0; i < numOfNavs; i++) {
 			GameObject nav = Instantiate (navPoint);
@@ -215,12 +217,18 @@ public class LevelGenerator : MonoBehaviour {
 				GameObject newEnemy = Instantiate (enemyPlayers [enemySelection]);
 				newEnemy.gameObject.tag = "Enemy";
 				newEnemy.transform.position = spawn.transform.position;
-
+               
 				if (enemySelection == 1) {
+                    newEnemy.GetComponent<BasicMeleeEnemyBehaviour>().fighty = fighty;
+                    newEnemy.GetComponent<BasicMeleeEnemyBehaviour>().shooty = shooty;
 					foreach (GameObject nav in navPoints) {
 						newEnemy.GetComponent<BasicMeleeEnemyBehaviour> ().navPoints.Add (nav);
 					}
 				}
+                else if(enemySelection == 0) {
+                    newEnemy.GetComponent<BasicRangedEnemyBehaviour>().fighty = fighty;
+                    newEnemy.GetComponent<BasicRangedEnemyBehaviour>().shooty = shooty;
+                }
 
 				currentLocX = UnityEngine.Random.Range (0, width);
 				currentLocY = UnityEngine.Random.Range (0, height);

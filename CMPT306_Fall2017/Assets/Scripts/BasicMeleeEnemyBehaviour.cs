@@ -16,8 +16,10 @@ public class BasicMeleeEnemyBehaviour : MonoBehaviour {
     private GameObject currentNavPoint;
     private Rigidbody2D rb;
     private int inCombat = 0;
-    private MeleeDamage md;
-    
+    public MeleeDamage md;
+    private GameObject tartget;
+
+    private RaycastHit2D hit;
     // Use this for initialization
     void Start () {
         navQueue = new Queue<GameObject>();
@@ -27,28 +29,29 @@ public class BasicMeleeEnemyBehaviour : MonoBehaviour {
 
         rb = GetComponent<Rigidbody2D>();
         currentNavPoint = navQueue.Dequeue();
-        md = GetComponentInChildren<MeleeDamage>();
+        //md = GetComponentInChildren<MeleeDamage>();
     }
 
 	void FixedUpdate () {
 		if (inCombat < 0){ // this should never happen
             Debug.LogError("how the hell did we get here?"); 
         }
-        if (inCombat == 0) { //when not in combat, patrol the nav points. 
+        else if (inCombat == 0) { //when not in combat, patrol the nav points. 
             Vector3 dir = currentNavPoint.transform.position - transform.position;
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90;
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-          
-
-            if (Vector2.Distance(transform.position, currentNavPoint.transform.position) < navTriggerDistance) {
+            Debug.DrawRay(transform.position, (currentNavPoint.transform.position - transform.position ).normalized);
+            hit = Physics2D.Raycast(transform.position, ( currentNavPoint.transform.position - transform.position).normalized);
+            Debug.Log(hit.transform.gameObject.name);
+            if (Vector2.Distance(transform.position, currentNavPoint.transform.position) < navTriggerDistance || hit.transform.gameObject != currentNavPoint) {
                 rb.velocity = new Vector2(0,0);
                 navQueue.Enqueue(currentNavPoint);
                 currentNavPoint = navQueue.Dequeue();
             }
         }
+        else if (inCombat > 0){ // in combat
 
-        if (inCombat > 0){ // in combat
-            GameObject tartget;
+            //Debug.Log("here");
             if (Vector2.Distance(transform.position, fighty.transform.position) < Vector2.Distance(transform.position, shooty.transform.position)){
                 tartget = fighty;
             }
@@ -57,12 +60,13 @@ public class BasicMeleeEnemyBehaviour : MonoBehaviour {
             }
             Vector3 dir = tartget.transform.position - transform.position;
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90;
+          //  Debug.Log(tartget.transform.position + ", "+ dir + ", " + angle);
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         }
 
         if (!md.winding) {
-            rb.AddRelativeForce(new Vector2(0, speed));
-            rb.velocity = Vector2.ClampMagnitude(rb.velocity, speed);
+           rb.AddRelativeForce(new Vector2(0, speed));
+           Vector2.ClampMagnitude(rb.velocity, speed);
         }
         else {
             rb.velocity = new Vector2(0,0);

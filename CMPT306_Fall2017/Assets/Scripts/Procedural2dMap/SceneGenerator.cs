@@ -5,6 +5,9 @@ namespace NG
 {
 	public class SceneGenerator : MonoBehaviour
 	{
+        public GameObject fighty;
+        public GameObject shooty;
+
 		/// <summary>
 		/// The number of iterations the generator should go through.
 		/// </summary>
@@ -196,6 +199,8 @@ namespace NG
 				section.GetComponent<LevelGenerator> ().useRandomSeed = true;
 				section.GetComponent<MeshCreator> ().cave = newMesh.GetComponent<MeshFilter>();
 				section.GetComponent<LevelGenerator> ().playerSpawn = playerSpawn;
+                section.GetComponent<LevelGenerator>().fighty = fighty;
+                section.GetComponent<LevelGenerator>().shooty = shooty;
 
 				newMesh.transform.Rotate (-90, 0, 0);
 				newMesh.transform.SetParent (section.transform, true);

@@ -56,7 +56,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1524523062439450}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.4, y: 1, z: 0}
+  m_LocalPosition: {x: 17.90159, y: 0.96954346, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4915279017076574}
@@ -102,13 +102,13 @@ CircleCollider2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1524523062439450}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -9, y: 0}
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 20
 --- !u!60 &60398492660973248
@@ -207,12 +207,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7eccd25785d415429a18ef9315edc7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fighty: {fileID: 1015685231720104, guid: f5beac725b81ce84e9335ad6d595f36f, type: 2}
-  shooty: {fileID: 1572331492096810, guid: 579cbbeb1411b874786580eb34574534, type: 2}
+  fighty: {fileID: 0}
+  shooty: {fileID: 0}
   maxHealth: 100
   speed: 10
   navPoints: []
   navTriggerDistance: 1
+  md: {fileID: 114285170059132214}
 --- !u!212 &212154049605056866
 SpriteRenderer:
   m_ObjectHideFlags: 1
