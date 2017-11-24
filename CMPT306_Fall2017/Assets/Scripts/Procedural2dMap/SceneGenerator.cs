@@ -224,22 +224,22 @@ namespace NG
 					case Direction.N:
 						transitionPostion.x += 10f;
 						scale.y = 2f;
-						section.GetComponent<LevelGenerator> ().doorPicker ("N");
+						section.GetComponent<LevelGenerator> ().directions.Add ("N");
 						break;
 					case Direction.E:
 						transitionPostion.y += 0f;
 						scale.x = 2f;
-						section.GetComponent<LevelGenerator> ().doorPicker ("E");
+						section.GetComponent<LevelGenerator> ().directions.Add ("E");
 						break;
 					case Direction.S:
 						scale.y = 2f;
 						transitionPostion.x -= 10f;
-						section.GetComponent<LevelGenerator> ().doorPicker ("S");
+						section.GetComponent<LevelGenerator> ().directions.Add ("S");
 						break;
 					case Direction.W:
 						transitionPostion.y -= 0f;
 						scale.x = 2f;
-						section.GetComponent<LevelGenerator> ().doorPicker ("W");
+						section.GetComponent<LevelGenerator> ().directions.Add ("W");
 						break;
 					default:
 						break;

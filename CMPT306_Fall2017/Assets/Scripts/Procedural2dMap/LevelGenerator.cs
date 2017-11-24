@@ -37,7 +37,13 @@ public class LevelGenerator : MonoBehaviour {
 	List<GameObject> navPoints;
 	List<GameObject> allEnemies;
 	List<GameObject> allItems;
-	int numOfNavs = 3;
+	public List<String> directions;
+	List<GameObject> doors;
+
+	void Awake(){
+		directions = new List<String> ();
+		doors = new List<GameObject> ();
+	}
 
 	void Start() {
 		enemySpawns = new List<GameObject> ();
@@ -83,12 +89,18 @@ public class LevelGenerator : MonoBehaviour {
 			}
 		}
 
+		foreach (String dir in directions) {
+			doorPicker (dir);
+		}
+
 		map = new int[width,height];
 		RandomFillMap();
 
 		for (int i = 0; i < 5; i ++) {
 			SmoothMap();
 		}
+
+		clearDoorSpace ();
 
 		placeNavs ();
 		placeSpawns ();
@@ -111,9 +123,7 @@ public class LevelGenerator : MonoBehaviour {
 		for (int x = 0; x < width; x ++) {
 			for (int y = 0; y < height; y ++) {
 				//Set an open space for doors
-				if (x < doorWidth2 && x > doorWidth1 && y < doorHeight1 && y > doorHeight2) {
-					map [x, y] = 0;
-				} else if (x == 0 || x == width - 1 || y == 0 || y == height - 1) {
+				 if (x == 0 || x == width - 1 || y == 0 || y == height - 1) {
 					map [x, y] = 1;
 				} else {
 					map [x, y] = (pseudoRandom.Next (0, 100) < randomFillPercent) ? 1 : 0;
@@ -127,23 +137,15 @@ public class LevelGenerator : MonoBehaviour {
 
 		//If direction equals a certain letter, set up the door accordingly
 		if (direction == "N") {
-			doorWidth1 = (width/2) - 10;
-			doorWidth2 = (width/2) + 10;
-			doorHeight1 = height -1;
-			doorHeight2 = height - 5;
-
 			n += 1;
 			GameObject nDoor = Instantiate(door);
 			nDoor.transform.SetParent (this.transform);
 			nDoor.transform.position = this.transform.position + new Vector3(0, height/3, 0);
 			nDoor.tag = "DoorN";
 			nDoor.name = "north door";
+			doors.Add (nDoor);
 		}
 		if (direction == "E") {
-			doorWidth1 = width - 5;
-			doorWidth2 = width - 1;
-			doorHeight1 = (height / 2) + 10;
-			doorHeight2 = (height / 2) - 10;
 
 			e += 1;
 			GameObject eDoor = Instantiate(door);
@@ -151,12 +153,9 @@ public class LevelGenerator : MonoBehaviour {
 			eDoor.transform.position = this.transform.position + new Vector3(width/3, 0, 0);
 			eDoor.tag = "DoorE";
 			eDoor.name = "east door";
+			doors.Add (eDoor);
 		}
 		if (direction == "S") {
-			doorWidth1 = (width/2) - 10;
-			doorWidth2 = (width/2) + 10;
-			doorHeight1 = 5;
-			doorHeight2 = 0;
 
 			s += 1;
 			GameObject sDoor = Instantiate(door);
@@ -164,12 +163,9 @@ public class LevelGenerator : MonoBehaviour {
 			sDoor.transform.position = this.transform.position - new Vector3 (0, height / 3, 0);
 			sDoor.tag = "DoorS";
 			sDoor.name = "south door";
+			doors.Add (sDoor);
 		}
 		if (direction == "W") {
-			doorWidth1 = 0;
-			doorWidth2 = 5;
-			doorHeight1 = (height/2) + 10;
-			doorHeight2 = (height / 2) - 10;
 
 			w += 1;
 			GameObject wDoor = Instantiate(door);
@@ -177,6 +173,7 @@ public class LevelGenerator : MonoBehaviour {
 			wDoor.transform.position = this.transform.position - new Vector3(width/3, 0, 0);
 			wDoor.tag = "DoorW";
 			wDoor.name = "west door";
+			doors.Add (wDoor);
 		}
 	}
 
@@ -194,6 +191,42 @@ public class LevelGenerator : MonoBehaviour {
 				else if (neighbourWallTiles < 4)
 					map[x,y] = 0;
 
+			}
+		}
+	}
+
+	void clearDoorSpace(){
+		foreach (GameObject door in doors) {
+			if (door.tag == "DoorN") {
+				for (int x = width / 2 - 10; x < width / 2 + 10; x++) {
+					for (int y = height - 10; y < height - 1; y++) {
+						map [x, y] = 0;
+					}
+				} 
+			}
+
+			if (door.tag == "DoorE") {
+				for (int x = width - 10; x < width - 1; x++) {
+					for (int y = height/2 - 10; y < height/2 + 10; y++) {
+						map [x, y] = 0;
+					}
+				} 
+			}
+
+			if (door.tag == "DoorS") {
+				for (int x = width / 2 - 10; x < width / 2 + 10; x++) {
+					for (int y = 1; y < 10; y++) {
+						map [x, y] = 0;
+					}
+				} 
+			}
+
+			if (door.tag == "DoorW") {
+				for (int x = 1; x < 10; x++) {
+					for (int y = height/2 - 10; y < height/2 + 10; y++) {
+						map [x, y] = 0;
+					}
+				} 
 			}
 		}
 	}
