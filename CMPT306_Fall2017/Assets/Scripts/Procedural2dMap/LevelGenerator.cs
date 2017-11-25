@@ -8,6 +8,8 @@ public class LevelGenerator : MonoBehaviour {
 	public int width;
 	public int height;
 
+    public bool refreshOnClick = false;
+
 	public string seed;
 	public bool useRandomSeed;
 
@@ -63,9 +65,13 @@ public class LevelGenerator : MonoBehaviour {
 	}
 
 	void Update() {
-		if (Input.GetMouseButtonDown(0)) {
-			GenerateMap();
-		}
+        if (refreshOnClick)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                GenerateMap();
+            }
+        }
 	}
 
 	//randomly creates the map
@@ -103,10 +109,10 @@ public class LevelGenerator : MonoBehaviour {
 		clearDoorSpace ();
 
 		placeNavs ();
-		placeSpawns ();
-		placeItems ();
+        placeSpawns();
+        placeItems();
 
-		MeshCreator meshGen = GetComponent<MeshCreator>();
+        MeshCreator meshGen = GetComponent<MeshCreator>();
 		meshGen.GenerateMesh(map, 1);
 	}
 
@@ -352,4 +358,26 @@ public class LevelGenerator : MonoBehaviour {
 
 		return wallCount;
 	}
+
+    public void DisableScene()
+    {
+        GameObject[] allEnemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+        for(int i = 0; i < allEnemies.Length; i++)
+        {
+            Destroy(allEnemies[i]);
+        }
+
+        GameObject[] allItems = GameObject.FindGameObjectsWithTag("Power");
+
+        for (int i = 0; i < allItems.Length; i++)
+        {
+            Destroy(allItems[i]);
+        }
+    }
+    public void EnableScene()
+    {
+        placeSpawns ();
+        placeItems ();
+    }
 }

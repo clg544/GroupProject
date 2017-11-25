@@ -380,8 +380,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainSceneName: MainScene
+  menuSceneName: 
+  easyScene: EasyLevel
   MainMenu: {fileID: 392411666}
   Credits: {fileID: 898861482}
+  PlayerHUD: {fileID: 0}
+  DeathPanel: {fileID: 0}
 --- !u!4 &544517439
 Transform:
   m_ObjectHideFlags: 0
@@ -546,7 +550,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 544517438}
-        m_MethodName: LoadMainScene
+        m_MethodName: LoadEasyScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
