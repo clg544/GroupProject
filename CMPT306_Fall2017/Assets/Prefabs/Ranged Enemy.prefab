@@ -69,6 +69,7 @@ GameObject:
   - component: {fileID: 60059447213727202}
   - component: {fileID: 114196105704846844}
   - component: {fileID: 114680986305846780}
+  - component: {fileID: 114068536053986906}
   m_Layer: 14
   m_Name: Ranged Enemy
   m_TagString: Enemy
@@ -237,6 +238,22 @@ PolygonCollider2D:
     - - {x: -0.43137822, y: -0.2506613}
       - {x: 0.43131524, y: -0.25213805}
       - {x: 0, y: 0.5009321}
+--- !u!114 &114068536053986906
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1496164178887884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bedb6b7e94cde8a408e9099a7b9194dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numMin: 1
+  numMax: 3
+  spawnRadius: 1
+  spawnVelocity: 1
+  treasure: {fileID: 1587112429352048, guid: 82e1480b955a303498aeca00e5516aa4, type: 2}
 --- !u!114 &114196105704846844
 MonoBehaviour:
   m_ObjectHideFlags: 1
