@@ -18,7 +18,10 @@ TagManager:
   - TetherManager
   - Treasure
   - Manager
+<<<<<<< HEAD
   - CamerTarget
+=======
+>>>>>>> 84b7a8b5163055f85d1a36e875ac09dc56669a65
   layers:
   - Default
   - TransparentFX

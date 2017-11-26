@@ -376,6 +376,7 @@ public class LevelGenerator : MonoBehaviour {
                 currentLocY = UnityEngine.Random.Range(0, height);
             }
         }
+<<<<<<< HEAD
     }
 
 	public void placeSingleItem(GameObject item){
@@ -394,6 +395,9 @@ public class LevelGenerator : MonoBehaviour {
 			currentLocY = UnityEngine.Random.Range (0, height);
 		}
 	}
+=======
+    }
+>>>>>>> 84b7a8b5163055f85d1a36e875ac09dc56669a65
 
     //Gets the number of surrounding walls
     int GetSurroundingWallCount(int gridX, int gridY) {
