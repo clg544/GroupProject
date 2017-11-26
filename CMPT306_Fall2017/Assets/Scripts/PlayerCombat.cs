@@ -7,11 +7,11 @@ public class PlayerCombat : MonoBehaviour {
     public enum PlayerClass { FIGHTY, SHOOTY};
     public PlayerTetherScript tetherManager;
 
-    private float AttackCooldown;     // Current cooldown value
+    private float AttackCooldown;               // Current cooldown value
     
     public PlayerBehavior myPlayer;
     public Rigidbody2D myBody;
-    public PlayerClass myClass;                  // True=Fighty, False=Shooty
+    public PlayerClass myClass;                 // True=Fighty, False=Shooty
     
     /* Player Health */
     private float curHealth;
@@ -23,8 +23,8 @@ public class PlayerCombat : MonoBehaviour {
     /* Prefabs for attack objects */
     public GameObject Crosshair;
     GameObject curCrosshair;
-    public GameObject Bullet;       // Shooty Bullet
-    public GameObject FightySwing;  // Fighty Swing
+    public GameObject Bullet;                   // Shooty Bullet
+    public GameObject FightySwing;              // Fighty Swing
 
     /* Position Variables */
     public enum Direction { Up, Right, Down, Left }
@@ -33,27 +33,35 @@ public class PlayerCombat : MonoBehaviour {
     /* Fighty Variables */
     public float SwingDist;
     public Vector3 SwingVect;
+
     public float swingDuration;
     public float swingCooldown;
     public float swingDamage;
 
-    /* Shooty Variables */
-    public float bulletSpawnDist;  // How far to spawn the bullet
-    public float crosshairDist;    // How away the crasshair is from the player
-    public float LightBulletVel;     // How fast light bullets travel
-    public float LightBulletCooldown;    // How many frames before we can shoot again
-    public float LightBulletDamage;     // How fast light bullets travel
-    public float LightBulletSpread;     // Spread applied to light bullets
+    private Vector3 dashDirection;
+    public float curDashTime;
+    public float dashTime;
+    public float dashCooldown;
+    public float DashForce;
+    public float dashDamage;
 
-    public float HeavyBulletVel;     // How fast light bullets travel
-    public float HeavyBulletCooldown;    // How many frames before we can shoot again
-    public float HeavyBulletMassRatio;   // Mass Multiplier of heavy bullet over light bullet
-    public float HeavyBulletDamage;     // How much damage this causes
-    public float HeavyBulletSpread;     // Spread applied to Heavy bullets
-    public float recoil;            // Universal recoil multiplier
+    /* Shooty Variables */
+    public float bulletSpawnDist;               // How far to spawn the bullet
+    public float crosshairDist;                 // How away the crasshair is from the player
+    public float LightBulletVel;                // How fast light bullets travel
+    public float LightBulletCooldown;           // How many frames before we can shoot again
+    public float LightBulletDamage;             // How fast light bullets travel
+    public float LightBulletSpread;             // Spread applied to light bullets
+
+    public float HeavyBulletVel;                // How fast light bullets travel
+    public float HeavyBulletCooldown;           // How many frames before we can shoot again
+    public float HeavyBulletMassRatio;          // Mass Multiplier of heavy bullet over light bullet
+    public float HeavyBulletDamage;             // How much damage this causes
+    public float HeavyBulletSpread;             // Spread applied to Heavy bullets
+    public float recoil;                        // Universal recoil multiplier
     
     /* Weapon variables */
-    public enum Weapon { LIGHT_GUN, HEAVY_GUN };
+    public enum Weapon { LIGHT_GUN, HEAVY_GUN, SWING, DASH };
     public Weapon curWeapon;
 
     /**
@@ -61,21 +69,23 @@ public class PlayerCombat : MonoBehaviour {
      */
     public void Shoot()
     {
-
-        if (myClass == PlayerClass.FIGHTY)
-        {
-            FighterAttack();
-            return;
-        }
-
         if (curCrosshair == null)
             return;
 
         if (AttackCooldown > 0)
             return;
-
+        
         switch (curWeapon)
         {
+            // Fighty
+            case Weapon.SWING:
+                FighterAttack();
+                break;
+            case Weapon.DASH:
+                FighterDash();
+                break;
+
+            // Shooty
             case Weapon.LIGHT_GUN:
                 LightShot();
                 break;
@@ -173,6 +183,32 @@ public class PlayerCombat : MonoBehaviour {
         lastCountdownTime = swingCooldown;
     }
 
+    public void FighterDash()
+    {
+        if (curCrosshair == null)
+            return;
+
+        if (AttackCooldown > 0)
+            return;
+
+        GameObject curAttack = Instantiate(FightySwing, gameObject.transform);
+        PlayerAttackScript curAtkScript = curAttack.GetComponent<PlayerAttackScript>();
+
+        curAttack.transform.localPosition = SwingVect;
+        curAttack.transform.Rotate(0, 0, 90 + (-90 * (int)curDirection), Space.Self);
+
+        curAtkScript.attackDamage = swingDamage;
+        curAtkScript.lifetime = dashTime;
+        curAtkScript.attackDamage = dashDamage;
+        
+        curDashTime = dashTime;
+        dashDirection = curCrosshair.transform.localPosition.normalized;
+
+        AttackCooldown += dashCooldown;
+        lastCountdownTime = dashCooldown;
+
+    }
+
     public void PlayerAimStart(Vector2 joyPos)
     {
         if (curCrosshair != null)  // Updates happen too fast! Fix to ghost crosshair bug.
@@ -199,25 +235,42 @@ public class PlayerCombat : MonoBehaviour {
 
     public void SwitchWeapon()
     {
-        if (myClass != PlayerClass.SHOOTY)
-            return;
 
         if (AttackCooldown > 0)
             return;
 
-        /* Invert weapon choice, as long as there are only 2 weapons */
-        if (curWeapon == Weapon.LIGHT_GUN)
+
+        if (myClass == PlayerClass.SHOOTY)
         {
-            curWeapon = Weapon.HEAVY_GUN;
+            /* Invert weapon choice, as long as there are only 2 weapons */
+            if (curWeapon == Weapon.LIGHT_GUN)
+            {
+                curWeapon = Weapon.HEAVY_GUN;
+                Bullet.GetComponent<TrailRenderer>().sharedMaterial.color = Color.red;
+                Bullet.GetComponent<TrailRenderer>().time = 0.5F;
+            }
+            else
+            {
+                curWeapon = Weapon.LIGHT_GUN;
+                Bullet.GetComponent<TrailRenderer>().sharedMaterial.color = Color.yellow;
+                Bullet.GetComponent<TrailRenderer>().time = 0.1F;
+            }
         }
-        else
+        else // We're Fighty!
         {
-            curWeapon = Weapon.LIGHT_GUN;
+            /* Invert weapon choice, as long as there are only 2 weapons */
+            if (curWeapon == Weapon.SWING)
+            {
+                curWeapon = Weapon.DASH;
+            }
+            else
+            {
+                curWeapon = Weapon.SWING;
+            }
+
         }
 
         AttackCooldown += 1;
-
-        Debug.Log(curWeapon);
     }
     
     /**
@@ -256,6 +309,12 @@ public class PlayerCombat : MonoBehaviour {
             case Weapon.HEAVY_GUN:
                 return "Heavy Rifle";
 
+            case Weapon.SWING:
+                return "Sabre Swing";
+
+            case Weapon.DASH:
+                return "Lance Dash";
+
             default:
                 return "<Empty>";
         }
@@ -270,6 +329,15 @@ public class PlayerCombat : MonoBehaviour {
 
         // Are we Fighty? Yes:No; 
         myClass = (gameObject.name == "Fighty") ? PlayerClass.FIGHTY:PlayerClass.SHOOTY;
+
+        if(myClass == PlayerClass.FIGHTY)
+        {
+            curWeapon = Weapon.SWING;
+        }
+        else
+        {
+            curWeapon = Weapon.LIGHT_GUN;
+        }
 
         SwingVect = new Vector3(SwingDist, 0, 0);
     }
@@ -286,6 +354,12 @@ public class PlayerCombat : MonoBehaviour {
             frameDir = myBody.velocity;
         else
             frameDir = curCrosshair.transform.localPosition;
+
+        if (curDashTime > 0)
+        {
+            curDashTime -= Time.deltaTime;
+            myBody.AddForce(dashDirection * DashForce);
+        }
 
         /* Arbitrarily prefers the horizontal directions */
         /* Keep last direction if not moving/aiming      */

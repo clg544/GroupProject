@@ -5976,6 +5976,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   width: 120
   height: 60
+  refreshOnClick: 0
   seed: 
   useRandomSeed: 1
   randomFillPercent: 45
@@ -5988,6 +5989,9 @@ MonoBehaviour:
   - {fileID: 1524523062439450, guid: a1c01bec8fb2dc541bdd3ef97cc81b7a, type: 2}
   playerSpawn: {fileID: 0}
   itemPrefab: {fileID: 1567041419273550, guid: c0094364cf21d4b62912aea67b6c8c83, type: 2}
+  treasurePrefab: {fileID: 1587112429352048, guid: 82e1480b955a303498aeca00e5516aa4,
+    type: 2}
+  directions: []
 --- !u!114 &114281602413568262
 MonoBehaviour:
   m_ObjectHideFlags: 1

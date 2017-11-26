@@ -16,6 +16,9 @@ TagManager:
   - Walls
   - Power
   - TetherManager
+  - Treasure
+  - Manager
+  - CamerTarget
   layers:
   - Default
   - TransparentFX

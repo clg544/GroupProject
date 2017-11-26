@@ -22,8 +22,6 @@ public class PlayerBehavior : MonoBehaviour {
     /* Holds our plaayer and player body */
     public GameObject player;
     private Rigidbody2D playerBody;
-
-	Animator anim;
     
     /* Getters and Setters */
     public float getMaxSpeed()
@@ -50,7 +48,6 @@ public class PlayerBehavior : MonoBehaviour {
     public void MoveDown()
     {
         frameMovement.y -= acceleration;
-		anim.SetFloat("ForwardMovement", this.GetComponent<Rigidbody2D> ().velocity.y);
     }
 
     public void MoveHorizontal(float f)
@@ -76,7 +73,6 @@ public class PlayerBehavior : MonoBehaviour {
     // Use this for initialization
     void Start () {
         playerBody = this.GetComponent<Rigidbody2D>();
-		anim = this.GetComponent<Animator> ();
 	}
 	
 	// Update is called once per frame

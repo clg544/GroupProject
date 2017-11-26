@@ -8,6 +8,8 @@ public class LevelGenerator : MonoBehaviour {
 	public int width;
 	public int height;
 
+    public bool refreshOnClick = false;
+
 	public string seed;
 	public bool useRandomSeed;
 
@@ -32,8 +34,9 @@ public class LevelGenerator : MonoBehaviour {
 	public GameObject[] enemyPlayers;
 	public GameObject playerSpawn;
 	public GameObject itemPrefab;
+    public GameObject treasurePrefab;
 
-	List<GameObject> enemySpawns;
+    List<GameObject> enemySpawns;
 	List<GameObject> navPoints;
 	List<GameObject> allEnemies;
 	List<GameObject> allItems;
@@ -63,9 +66,13 @@ public class LevelGenerator : MonoBehaviour {
 	}
 
 	void Update() {
-		if (Input.GetMouseButtonDown(0)) {
-			GenerateMap();
-		}
+        if (refreshOnClick)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                GenerateMap();
+            }
+        }
 	}
 
 	//randomly creates the map
@@ -103,10 +110,11 @@ public class LevelGenerator : MonoBehaviour {
 		clearDoorSpace ();
 
 		placeNavs ();
-		placeSpawns ();
-		placeItems ();
+        placeSpawns();
+        placeItems();
+        placeTreasure();
 
-		MeshCreator meshGen = GetComponent<MeshCreator>();
+        MeshCreator meshGen = GetComponent<MeshCreator>();
 		meshGen.GenerateMesh(map, 1);
 	}
 
@@ -305,7 +313,7 @@ public class LevelGenerator : MonoBehaviour {
 
 	void placeItems(){
 		int placedItems = 0;
-		int numOfItems = UnityEngine.Random.Range (3, 6);
+		int numOfItems = UnityEngine.Random.Range (3, 12);
 
 		//the current x and y location randomly selected
 		int currentLocX = UnityEngine.Random.Range (0, width);
@@ -332,10 +340,63 @@ public class LevelGenerator : MonoBehaviour {
 				currentLocY = UnityEngine.Random.Range (0, height);
 			}
 		}
+    }
+
+    void placeTreasure()
+    {
+        int placedItems = 0;
+        int numOfItems = UnityEngine.Random.Range(3, 12);
+
+        //the current x and y location randomly selected
+        int currentLocX = UnityEngine.Random.Range(0, width);
+        int currentLocY = UnityEngine.Random.Range(0, height);
+
+        //while the number of spawns placed is less than the max, place new spawns
+        while (placedItems < numOfItems)
+        {
+
+            //if the current x and y are a wall, Instantiate a spawnObject and set its location
+            //to the current x and y
+            //if not, randomly pick new x and y
+            if (map[currentLocX, currentLocY] == 0)
+            {
+                placedItems += 1;
+                GameObject item = Instantiate(treasurePrefab);
+                allItems.Add(item);
+
+                item.transform.SetParent(this.transform);
+                item.transform.localPosition = new Vector2(currentLocX - width / 2, currentLocY - height / 2);
+
+                currentLocX = UnityEngine.Random.Range(0, width);
+                currentLocY = UnityEngine.Random.Range(0, height);
+            }
+            else
+            {
+                currentLocX = UnityEngine.Random.Range(0, width);
+                currentLocY = UnityEngine.Random.Range(0, height);
+            }
+        }
+    }
+
+	public void placeSingleItem(GameObject item){
+
+		int currentLocX = UnityEngine.Random.Range(0, width);
+		int currentLocY = UnityEngine.Random.Range(0, height);
+		if (map [currentLocX, currentLocY] == 0) {
+			allItems.Add (item);
+
+			item.transform.localPosition = new Vector2 (currentLocX - width / 2, currentLocY - height / 2);
+
+			currentLocX = UnityEngine.Random.Range (0, width);
+			currentLocY = UnityEngine.Random.Range (0, height);
+		} else {
+			currentLocX = UnityEngine.Random.Range (0, width);
+			currentLocY = UnityEngine.Random.Range (0, height);
+		}
 	}
 
-	//Gets the number of surrounding walls
-	int GetSurroundingWallCount(int gridX, int gridY) {
+    //Gets the number of surrounding walls
+    int GetSurroundingWallCount(int gridX, int gridY) {
 		int wallCount = 0;
 		for (int neighbourX = gridX - 1; neighbourX <= gridX + 1; neighbourX ++) {
 			for (int neighbourY = gridY - 1; neighbourY <= gridY + 1; neighbourY ++) {
@@ -352,4 +413,26 @@ public class LevelGenerator : MonoBehaviour {
 
 		return wallCount;
 	}
+
+    public void DisableScene()
+    {
+        GameObject[] allEnemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+        for(int i = 0; i < allEnemies.Length; i++)
+        {
+            Destroy(allEnemies[i]);
+        }
+
+        GameObject[] allItems = GameObject.FindGameObjectsWithTag("Power");
+
+        for (int i = 0; i < allItems.Length; i++)
+        {
+            Destroy(allItems[i]);
+        }
+    }
+    public void EnableScene()
+    {
+        placeSpawns ();
+        placeItems ();
+    }
 }

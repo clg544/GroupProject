@@ -65,12 +65,7 @@ public class InputManagerScript : MonoBehaviour {
     private bool P1isAiming;
     private bool P2isAiming;
 
-    private GameObject doorEntererN;
-    private GameObject doorEntererS;
-    private GameObject doorEntererE;
-    private GameObject doorEntererW;
-
-
+	public bool openingDoor;
 
     private void KeyboardInput()
     {
@@ -108,21 +103,11 @@ public class InputManagerScript : MonoBehaviour {
             FightyBehavior.Brake();
         }
 
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            if (doorEntererN != null) {
-                doorEntererN.GetComponent<EnterDoor>().goThroughDoor();
-            }
-            if (doorEntererS != null) {
-                doorEntererS.GetComponent<EnterDoor>().goThroughDoor();
-            }
-            if (doorEntererW != null) {
-                doorEntererW.GetComponent<EnterDoor>().goThroughDoor();
-            }
-            if (doorEntererE != null) {
-                doorEntererE.GetComponent<EnterDoor>().goThroughDoor();
-            }
-        }
+		if (Input.GetKeyDown (KeyCode.Q)) {
+			openingDoor = true;
+		} else {
+			openingDoor = false;
+		}
 
         /* Aim based on the tfgh */
         tempHor = (Input.GetKey(KeyCode.H) ? 1 : 0) - (Input.GetKey(KeyCode.F) ? 1 : 0);
@@ -348,10 +333,12 @@ public class InputManagerScript : MonoBehaviour {
         P1Input = SetUpInputNames("_1");
         P2Input = SetUpInputNames("_2");
 
+		/*
         doorEntererN = GameObject.FindGameObjectWithTag("DoorN");
         doorEntererS = GameObject.FindGameObjectWithTag("DoorS");
         doorEntererE = GameObject.FindGameObjectWithTag("DoorE");
-        doorEntererW = GameObject.FindGameObjectWithTag("DoorW");   
+        doorEntererW = GameObject.FindGameObjectWithTag("DoorW");  
+        */
     }
 
 

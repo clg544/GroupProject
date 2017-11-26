@@ -8,6 +8,7 @@ public class MenuManager : MonoBehaviour
 {
     public string mainSceneName;
     public string menuSceneName;
+    public string easyScene;
 
     public Canvas MainMenu;
     public Canvas Credits;
@@ -17,6 +18,11 @@ public class MenuManager : MonoBehaviour
     public void LoadMainScene()
     {
         SceneManager.LoadScene(mainSceneName);
+    }
+    
+    public void LoadEasyScene()
+    {
+        SceneManager.LoadScene(easyScene);
     }
 
     public void LoadMainMenu()
