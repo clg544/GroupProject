@@ -21,6 +21,7 @@ public class GUIManager : MonoBehaviour {
     public Slider ShootyHealthBar;
     public Slider ShootyCooldownBar;
     public Text ShootySelectedWeapon;
+    public Text FightySelectedWeapon;
 
     public Slider TetherSlider;
 
@@ -53,6 +54,7 @@ public class GUIManager : MonoBehaviour {
 	void Update () {
         FightyHealthBar.value = FightyCombat.getDamageRatio();
         FightyCooldownBar.value = FightyCombat.getCooldownRatio();
+        FightySelectedWeapon.text = FightyCombat.getWeaponName();
 
         ShootyHealthBar.value = ShootyCombat.getDamageRatio();
         ShootyCooldownBar.value = ShootyCombat.getCooldownRatio();

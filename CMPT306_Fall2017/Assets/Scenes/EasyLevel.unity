@@ -292,6 +292,55 @@ Prefab:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 224325360170275926, guid: 5eed0066b4268c14887ebeafd95873f0,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: -58.30005
+      objectReference: {fileID: 0}
+    - target: {fileID: 224777743050917400, guid: 5eed0066b4268c14887ebeafd95873f0,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: -14.050049
+      objectReference: {fileID: 0}
+    - target: {fileID: 224256159895154136, guid: 5eed0066b4268c14887ebeafd95873f0,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: -17.650024
+      objectReference: {fileID: 0}
+    - target: {fileID: 224942711621044580, guid: 5eed0066b4268c14887ebeafd95873f0,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: -20.050049
+      objectReference: {fileID: 0}
+    - target: {fileID: 224674090361665934, guid: 5eed0066b4268c14887ebeafd95873f0,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: -20.050049
+      objectReference: {fileID: 0}
+    - target: {fileID: 224293878831316868, guid: 5eed0066b4268c14887ebeafd95873f0,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: -25.050049
+      objectReference: {fileID: 0}
+    - target: {fileID: 224914661256557090, guid: 5eed0066b4268c14887ebeafd95873f0,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: -14.050049
+      objectReference: {fileID: 0}
+    - target: {fileID: 224256959488516058, guid: 5eed0066b4268c14887ebeafd95873f0,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: -25.050049
+      objectReference: {fileID: 0}
+    - target: {fileID: 1308186397754296, guid: 5eed0066b4268c14887ebeafd95873f0, type: 2}
+      propertyPath: m_TagString
+      value: Manager
+      objectReference: {fileID: 0}
+    - target: {fileID: 114919343493872168, guid: 5eed0066b4268c14887ebeafd95873f0,
+        type: 2}
+      propertyPath: easyScene
+      value: EasyScene
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5eed0066b4268c14887ebeafd95873f0, type: 2}
   m_IsPrefabParent: 0
@@ -522,7 +571,7 @@ Prefab:
     - target: {fileID: 114160012113083624, guid: 5ffb6fd7197403047bbfd020adb72a9c,
         type: 2}
       propertyPath: iterations
-      value: 1
+      value: 50
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5ffb6fd7197403047bbfd020adb72a9c, type: 2}
@@ -601,6 +650,24 @@ MonoBehaviour:
   AllPower: []
   cullingDistance: 50
   cameraTarget: {fileID: 929957153}
+--- !u!1 &1075510058 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1308186397754296, guid: 5eed0066b4268c14887ebeafd95873f0,
+    type: 2}
+  m_PrefabInternal: {fileID: 205839843}
+--- !u!114 &1075510059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1075510058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 317a487f9a18ef64aad423bf78bdb98d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  curScore: 0
+  scoreText: {fileID: 0}
 --- !u!1001 &1359409901
 Prefab:
   m_ObjectHideFlags: 0

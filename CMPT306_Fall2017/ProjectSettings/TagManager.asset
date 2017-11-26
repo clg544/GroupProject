@@ -16,6 +16,8 @@ TagManager:
   - Walls
   - Power
   - TetherManager
+  - Treasure
+  - Manager
   layers:
   - Default
   - TransparentFX

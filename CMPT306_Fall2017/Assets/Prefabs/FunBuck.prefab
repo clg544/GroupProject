@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 114310488351948542}
   m_Layer: 0
   m_Name: FunBuck
-  m_TagString: Untagged
+  m_TagString: Treasure
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -103,7 +103,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: f752e637a3dc67840b0bc7f863cfca12, type: 3}
-  m_Color: {r: 0.9338235, g: 0.5161601, b: 0.06866351, a: 1}
+  m_Color: {r: 0.9921569, g: 0.9921569, b: 0.9921569, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
