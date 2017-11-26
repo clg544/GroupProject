@@ -194,18 +194,18 @@ public class PlayerCombat : MonoBehaviour {
         GameObject curAttack = Instantiate(FightySwing, gameObject.transform);
         PlayerAttackScript curAtkScript = curAttack.GetComponent<PlayerAttackScript>();
 
-        curAtkScript.attackDamage = swingDamage;
-        curAtkScript.lifetime = dashTime;
-        curAtkScript.attackDamage = dashDamage;
-
         curAttack.transform.localPosition = SwingVect;
         curAttack.transform.Rotate(0, 0, 90 + (-90 * (int)curDirection), Space.Self);
 
+        curAtkScript.attackDamage = swingDamage;
+        curAtkScript.lifetime = dashTime;
+        curAtkScript.attackDamage = dashDamage;
+        
         curDashTime = dashTime;
         dashDirection = curCrosshair.transform.localPosition.normalized;
 
         AttackCooldown += dashCooldown;
-        lastCountdownTime = swingCooldown;
+        lastCountdownTime = dashCooldown;
 
     }
 
@@ -271,8 +271,6 @@ public class PlayerCombat : MonoBehaviour {
         }
 
         AttackCooldown += 1;
-
-        Debug.Log(curWeapon);
     }
     
     /**

@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class CullingScript : MonoBehaviour {
 
-    public GameObject[] AllEnemies;
-    public GameObject[] AllPower;
+    GameObject[] AllEnemies;
+    GameObject[] AllPower;
 
     LinkedList<GameObject> cullingList;
     LinkedListNode<GameObject> curObj;
@@ -27,7 +27,6 @@ public class CullingScript : MonoBehaviour {
 
         for(int i = 0; i < AllEnemies.Length; i++)
         {
-            print(i + " " + AllEnemies[i] + " " + cullingList.ToString());
             cullingList.AddFirst(AllEnemies[i]);
 
             if(Vector3.Distance(AllEnemies[i].transform.position, cameraTarget.transform.position) > cullingDistance)
