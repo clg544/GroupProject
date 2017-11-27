@@ -22,7 +22,7 @@ public class PlayerBehavior : MonoBehaviour {
     /* Holds our plaayer and player body */
     public GameObject player;
     private Rigidbody2D playerBody;
-	private Animator anim;
+	public Animator anim;
     
     /* Getters and Setters */
     public float getMaxSpeed()

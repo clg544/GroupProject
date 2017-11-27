@@ -17,6 +17,8 @@ public class EnterDoor : MonoBehaviour {
 	GameObject[] wDoor;
 	GameObject[] eDoor;
 
+	public GameObject players;
+
 	public GameObject theDoor;
 
 	InputManagerScript ims;
@@ -143,17 +145,15 @@ public class EnterDoor : MonoBehaviour {
 	//Determines what door to go through
 	public void goThroughDoor(){
 		//If player has entered door zone, allow passage to another
-		if (hasEnteredDoor == true && powerSupply >= 3) {
-
-			GameObject players = GameObject.FindGameObjectWithTag ("Players");
-			players.transform.position = new Vector2 (theDoor.transform.position.x, theDoor.transform.position.y);
-
-			players.GetComponentInChildren<Transform>().position = new Vector2 (theDoor.transform.position.x, theDoor.transform.position.y);
-
-			Debug.Log (theDoor.name);
-	
+		if (hasEnteredDoor == true && powerSupply >= 1) {
 			hasEnteredDoor = false;
+			GameObject playerNow = GameObject.FindGameObjectWithTag ("Players");
+			Destroy (playerNow);
+			GameObject player = Instantiate (players);
+			player.transform.position = new Vector2 (theDoor.transform.position.x, theDoor.transform.position.y);
+			ims.Reset ();
 
+			Debug.Log (hasEnteredDoor);
 		}
 	}
 }

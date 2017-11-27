@@ -355,4 +355,29 @@ public class InputManagerScript : MonoBehaviour {
         JoypadInput(P1Input, FightyBehavior, FightyCombat);
         JoypadInput(P2Input, ShootyBehavior, ShootyCombat);
     }
+
+	public void Reset(){
+		GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+
+		foreach(GameObject p in players)
+		{
+			if(p.name == "Fighty")
+			{
+				FightyObject = p;
+			}
+			else if(p.name == "Shooty")
+			{
+				ShootyObject = p;
+			}
+		}
+
+		FightyBehavior = FightyObject.GetComponent<PlayerBehavior>();
+		ShootyBehavior = ShootyObject.GetComponent<PlayerBehavior>();
+
+		FightyCombat = FightyObject.GetComponent<PlayerCombat>();
+		ShootyCombat = ShootyObject.GetComponent<PlayerCombat>();
+
+		P1Input = SetUpInputNames("_1");
+		P2Input = SetUpInputNames("_2");
+	}
 }
