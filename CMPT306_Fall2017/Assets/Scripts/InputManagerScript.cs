@@ -1,4 +1,4 @@
-﻿/**
+/**
  *  Unity InputManager.asset file pulled from https://forum.unity.com/
  *      under "Attribution-ShareAlike 3.0 Unported (CC BY-SA 3.0)"
  *      

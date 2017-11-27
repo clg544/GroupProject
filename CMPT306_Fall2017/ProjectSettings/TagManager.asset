@@ -4,20 +4,7 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - PlayerAttack
-  - TetherLink
-  - Enemy
-  - Barrier
-  - Players
-  - DoorS
-  - DoorE
-  - DoorN
-  - DoorW
-  - Walls
   - Power
-  - TetherManager
-  - Treasure
-  - Manager
   layers:
   - Default
   - TransparentFX
@@ -27,11 +14,11 @@ TagManager:
   - UI
   - 
   - 
-  - Player Attack
-  - Player
-  - Enemy
-  - Environment
-  - Tether
+  - 
+  - 
+  - 
+  - 
+  - 
   - 
   - 
   - 

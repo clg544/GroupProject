@@ -313,7 +313,7 @@ public class LevelGenerator : MonoBehaviour {
 
 	void placeItems(){
 		int placedItems = 0;
-		int numOfItems = UnityEngine.Random.Range (3, 6);
+		int numOfItems = UnityEngine.Random.Range (3, 12);
 
 		//the current x and y location randomly selected
 		int currentLocX = UnityEngine.Random.Range (0, width);
@@ -376,7 +376,28 @@ public class LevelGenerator : MonoBehaviour {
                 currentLocY = UnityEngine.Random.Range(0, height);
             }
         }
+<<<<<<< HEAD
     }
+
+	public void placeSingleItem(GameObject item){
+
+		int currentLocX = UnityEngine.Random.Range(0, width);
+		int currentLocY = UnityEngine.Random.Range(0, height);
+		if (map [currentLocX, currentLocY] == 0) {
+			allItems.Add (item);
+
+			item.transform.localPosition = new Vector2 (currentLocX - width / 2, currentLocY - height / 2);
+
+			currentLocX = UnityEngine.Random.Range (0, width);
+			currentLocY = UnityEngine.Random.Range (0, height);
+		} else {
+			currentLocX = UnityEngine.Random.Range (0, width);
+			currentLocY = UnityEngine.Random.Range (0, height);
+		}
+	}
+=======
+    }
+>>>>>>> 84b7a8b5163055f85d1a36e875ac09dc56669a65
 
     //Gets the number of surrounding walls
     int GetSurroundingWallCount(int gridX, int gridY) {
