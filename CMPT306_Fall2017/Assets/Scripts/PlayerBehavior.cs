@@ -22,6 +22,7 @@ public class PlayerBehavior : MonoBehaviour {
     /* Holds our plaayer and player body */
     public GameObject player;
     private Rigidbody2D playerBody;
+	private Animator anim;
     
     /* Getters and Setters */
     public float getMaxSpeed()
@@ -35,18 +36,22 @@ public class PlayerBehavior : MonoBehaviour {
      */
     public void MoveLeft()
     {
+		anim.SetBool ("MoveLeft", true);
         frameMovement.x -= acceleration;
     }
     public void MoveRight()
     {
+		anim.SetBool ("MoveRight", true);
         frameMovement.x += acceleration;
     }
     public void MoveUp()
     {
+		anim.SetBool ("MoveUp", true);
         frameMovement.y += acceleration;
     }
     public void MoveDown()
     {
+		anim.SetBool ("MoveDown", true);
         frameMovement.y -= acceleration;
     }
 
@@ -60,6 +65,13 @@ public class PlayerBehavior : MonoBehaviour {
         if (Mathf.Abs(f) <= 1)
             frameMovement.y += f;
     }
+
+	public void MoveIdel(){
+		anim.SetBool ("MoveUp", false);
+		anim.SetBool ("MoveDown", false);
+		anim.SetBool ("MoveLeft", false);
+		anim.SetBool ("MoveRight", false);
+	}
     
     /**
      * Scale the player's velocity down, if brakeFraction is < zero 
@@ -73,6 +85,7 @@ public class PlayerBehavior : MonoBehaviour {
     // Use this for initialization
     void Start () {
         playerBody = this.GetComponent<Rigidbody2D>();
+		anim = this.GetComponent<Animator> ();
 	}
 	
 	// Update is called once per frame
