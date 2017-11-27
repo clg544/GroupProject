@@ -145,15 +145,14 @@ public class EnterDoor : MonoBehaviour {
 	//Determines what door to go through
 	public void goThroughDoor(){
 		//If player has entered door zone, allow passage to another
-		if (hasEnteredDoor == true && powerSupply >= 1) {
+		if (hasEnteredDoor == true && powerSupply >= 3) {
 			hasEnteredDoor = false;
 			GameObject playerNow = GameObject.FindGameObjectWithTag ("Players");
 			Destroy (playerNow);
+
 			GameObject player = Instantiate (players);
 			player.transform.position = new Vector2 (theDoor.transform.position.x, theDoor.transform.position.y);
 			ims.Reset ();
-
-			Debug.Log (hasEnteredDoor);
 		}
 	}
 }

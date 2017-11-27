@@ -19,7 +19,7 @@ public class EnterShip : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D coll){
 
-		if (sm.curScore > 20) {
+		if (sm.curScore > 100) {
 			if (coll.gameObject.tag == "Player") {
 				SceneManager.LoadScene("Win");
 				Debug.Log ("You Win");
