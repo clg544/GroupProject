@@ -13,6 +13,8 @@ using UnityEngine;
 
 public class InputManagerScript : MonoBehaviour {
 
+    public int joypadAccuracy;
+
     public string LeftHorizontal;
     public string LeftVertical;
     public string RightHorizontal;
@@ -32,6 +34,8 @@ public class InputManagerScript : MonoBehaviour {
     public struct InputNames
     {
         public string playerSuffix;
+
+        public bool isAiming;
 
         public string LeftHorizontal;
         public string LeftVertical;
@@ -65,7 +69,12 @@ public class InputManagerScript : MonoBehaviour {
     private bool P1isAiming;
     private bool P2isAiming;
 
-	public bool openingDoor;
+    private GameObject doorEntererN;
+    private GameObject doorEntererS;
+    private GameObject doorEntererE;
+    private GameObject doorEntererW;
+
+
 
     private void KeyboardInput()
     {
@@ -103,11 +112,21 @@ public class InputManagerScript : MonoBehaviour {
             FightyBehavior.Brake();
         }
 
-		if (Input.GetKeyDown (KeyCode.Q)) {
-			openingDoor = true;
-		} else {
-			openingDoor = false;
-		}
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            if (doorEntererN != null) {
+                doorEntererN.GetComponent<EnterDoor>().goThroughDoor();
+            }
+            if (doorEntererS != null) {
+                doorEntererS.GetComponent<EnterDoor>().goThroughDoor();
+            }
+            if (doorEntererW != null) {
+                doorEntererW.GetComponent<EnterDoor>().goThroughDoor();
+            }
+            if (doorEntererE != null) {
+                doorEntererE.GetComponent<EnterDoor>().goThroughDoor();
+            }
+        }
 
         /* Aim based on the tfgh */
         tempHor = (Input.GetKey(KeyCode.H) ? 1 : 0) - (Input.GetKey(KeyCode.F) ? 1 : 0);
@@ -200,57 +219,49 @@ public class InputManagerScript : MonoBehaviour {
         myBehavior.MoveVertical(leftVertical);
 
         /* Aim based on the right stick */
-        Vector2 rightStickOrientation = new Vector2(Input.GetAxis(myInput.RightHorizontal), Input.GetAxis(myInput.RightVertical));
-        
-        switch (myInput.playerSuffix)
-        {
-            case "_1":
-                if (rightStickOrientation.magnitude > 0)
-                {
-                    if (rightStickOrientation.magnitude > 0)
-                    {
-                        if (!P1isAiming)
-                        {
-                            P1isAiming = true;
-                            FightyCombat.PlayerAimStart(rightStickOrientation);
-                        }
-                        else
-                        {
-                            FightyCombat.PlayerAimContinue(rightStickOrientation);
-                        }
-                    }
-                    else if ((rightStickOrientation.magnitude <= 0) && (P1isAiming))
-                    {
-                        P1isAiming = false;
-                        FightyCombat.PlayerAimEnd();
-                    }
-                }
-                break;
+        Vector3 rightStickOrientation = new Vector3(Input.GetAxis(myInput.RightHorizontal), Input.GetAxis(myInput.RightVertical), 0);
 
-            case "_2":
-                if (rightStickOrientation.magnitude > 0)
+        if (myInput.playerSuffix.Equals("_1"))
+        {
+            if (rightStickOrientation.magnitude > 0.3f)
+            {
+                if (!P1Input.isAiming)
                 {
-                    if (rightStickOrientation.magnitude > 0)
-                    {
-                        if (!P2isAiming)
-                        {
-                            P2isAiming = true;
-                            ShootyCombat.PlayerAimStart(rightStickOrientation);
-                        }
-                        else
-                        {
-                            ShootyCombat.PlayerAimContinue(rightStickOrientation);
-                        }
-                    }
-                    else if ((rightStickOrientation.magnitude <= 0) && (P2isAiming))
-                    {
-                        P2isAiming = false;
-                        ShootyCombat.PlayerAimEnd();
-                    }
+                    P1Input.isAiming = true;
+                    FightyCombat.PlayerAimStart(rightStickOrientation);
                 }
-                break;
+                else
+                {
+                    FightyCombat.PlayerAimContinue(rightStickOrientation);
+                }
+            }
+            else if ((rightStickOrientation.magnitude <= 0.5f) && (P1Input.isAiming))
+            {
+                P1Input.isAiming = false;
+                FightyCombat.PlayerAimEnd();
+            }
         }
-        
+        else
+        {
+            if (rightStickOrientation.magnitude > 0.3f)
+            {
+                if (!P2Input.isAiming)
+                {
+                    P2Input.isAiming = true;
+                    FightyCombat.PlayerAimStart(rightStickOrientation);
+                }
+                else
+                {
+                    FightyCombat.PlayerAimContinue(rightStickOrientation);
+                }
+            }
+            else if ((rightStickOrientation.magnitude <= 0.5f) && (P2Input.isAiming))
+            {
+                P2Input.isAiming = false;
+                FightyCombat.PlayerAimEnd();
+            }
+        }
+
         if (Input.GetButton(myInput.LeftBumper))
         {
             myBehavior.Brake();
@@ -263,6 +274,8 @@ public class InputManagerScript : MonoBehaviour {
         {
             myCombat.Shoot();
         }
+
+        print("End JoypadInput " + P1Input.isAiming);
     }
 
     private void PrintInputNames(InputNames i)
@@ -288,8 +301,10 @@ public class InputManagerScript : MonoBehaviour {
     public InputNames SetUpInputNames(string suffix)
     {
         InputNames input = new InputNames();
-
+        
         input.playerSuffix = suffix;
+
+        input.isAiming = false;
 
         input.LeftHorizontal = "" + this.LeftHorizontal + suffix;
         input.LeftVertical = "" + this.LeftVertical + suffix;
@@ -333,19 +348,16 @@ public class InputManagerScript : MonoBehaviour {
         P1Input = SetUpInputNames("_1");
         P2Input = SetUpInputNames("_2");
 
-		/*
         doorEntererN = GameObject.FindGameObjectWithTag("DoorN");
         doorEntererS = GameObject.FindGameObjectWithTag("DoorS");
         doorEntererE = GameObject.FindGameObjectWithTag("DoorE");
-        doorEntererW = GameObject.FindGameObjectWithTag("DoorW");  
-        */
+        doorEntererW = GameObject.FindGameObjectWithTag("DoorW");   
     }
 
 
     // Update is called once per frame
     void Update () {
         KeyboardInput();
-        
         JoypadInput(P1Input, FightyBehavior, FightyCombat);
         JoypadInput(P2Input, ShootyBehavior, ShootyCombat);
     }
