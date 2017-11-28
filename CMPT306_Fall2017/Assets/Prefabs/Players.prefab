@@ -54,7 +54,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4292959204018798}
-  m_Layer: 8
+  - component: {fileID: 114709023460217444}
+  m_Layer: 9
   m_Name: Players
   m_TagString: Players
   m_Icon: {fileID: 0}
@@ -110,7 +111,7 @@ GameObject:
   - component: {fileID: 124531846863175002}
   - component: {fileID: 81619200610853564}
   - component: {fileID: 114860004238916526}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: PlayerCamera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -178,7 +179,7 @@ GameObject:
   - component: {fileID: 114445429429291430}
   - component: {fileID: 50620234936771470}
   - component: {fileID: 114468086975614158}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: CameraTarget
   m_TagString: CamerTarget
   m_Icon: {fileID: 0}
@@ -1394,5 +1395,5 @@ DistanceJoint2D:
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 1
-  m_Distance: 3
+  m_Distance: 9.658899
   m_MaxDistanceOnly: 1

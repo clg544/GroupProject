@@ -135,6 +135,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10a34cba4651e944f8dca3c077f92db2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fighty: {fileID: 1153773844}
+  shooty: {fileID: 1564462223}
   iterations: 100
   areaDatas:
   - representation: {fileID: 0}
@@ -152,6 +154,7 @@ MonoBehaviour:
   section1: {fileID: 1105893505996914, guid: a6c4cbe0c4d2d499b8f842e86cd90a08, type: 2}
   material: {fileID: 2100000, guid: f0f35e17332ad43ae8236030a1820a14, type: 2}
   levelMesh: {fileID: 1017459256821596, guid: b323062f6c4524926a4f04cf6e9fdd68, type: 2}
+  playerSpawn: {fileID: 0}
 --- !u!4 &142522253
 Transform:
   m_ObjectHideFlags: 0
@@ -600,6 +603,11 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!1 &1153773844 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1441463896677894, guid: 43a50026743875842b5906d0e5d8116f,
+    type: 2}
+  m_PrefabInternal: {fileID: 165016481}
 --- !u!1 &1178489432
 GameObject:
   m_ObjectHideFlags: 0
@@ -774,6 +782,11 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!1 &1564462223 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1642003740233448, guid: 43a50026743875842b5906d0e5d8116f,
+    type: 2}
+  m_PrefabInternal: {fileID: 165016481}
 --- !u!1 &1646164000
 GameObject:
   m_ObjectHideFlags: 0
@@ -802,11 +815,6 @@ Transform:
   m_Father: {fileID: 1384135889}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1751835988 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1763017534516472, guid: 43a50026743875842b5906d0e5d8116f,
-    type: 2}
-  m_PrefabInternal: {fileID: 165016481}
 --- !u!1 &1850996074
 GameObject:
   m_ObjectHideFlags: 0
@@ -878,11 +886,6 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
---- !u!1 &1946355695 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1436182535237730, guid: 43a50026743875842b5906d0e5d8116f,
-    type: 2}
-  m_PrefabInternal: {fileID: 165016481}
 --- !u!1 &2043338351
 GameObject:
   m_ObjectHideFlags: 0
@@ -1139,12 +1142,12 @@ Prefab:
         type: 2}
       propertyPath: playerOne
       value: 
-      objectReference: {fileID: 1946355695}
+      objectReference: {fileID: 0}
     - target: {fileID: 114941791273446218, guid: 5eed0066b4268c14887ebeafd95873f0,
         type: 2}
       propertyPath: playerTwo
       value: 
-      objectReference: {fileID: 1751835988}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5eed0066b4268c14887ebeafd95873f0, type: 2}
   m_IsPrefabParent: 0
