@@ -54,29 +54,9 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4292959204018798}
-  - component: {fileID: 114709023460217444}
   m_Layer: 9
   m_Name: Players
   m_TagString: Players
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &1258096201984424
-GameObject:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 4552956078337368}
-  - component: {fileID: 212020086327262084}
-  - component: {fileID: 114945310108553142}
-  - component: {fileID: 50003597435114352}
-  - component: {fileID: 114275804680599072}
-  m_Layer: 8
-  m_Name: CameraTarget (1)
-  m_TagString: CamerTarget
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -206,7 +186,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1248456438693984}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.061033, y: 3.3454456, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4579606988426786}
@@ -241,21 +221,7 @@ Transform:
   m_Children:
   - {fileID: 4942550013444614}
   - {fileID: 4307276037810758}
-  - {fileID: 4552956078337368}
   m_Father: {fileID: 4292959204018798}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4552956078337368
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1258096201984424}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.4852749, y: -0.058288574, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4482210911683502}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4579606988426786
@@ -411,26 +377,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!50 &50003597435114352
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1258096201984424}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!50 &50481284814123684
 Rigidbody2D:
   serializedVersion: 4
@@ -662,19 +608,6 @@ MonoBehaviour:
   curColl: {x: 0, y: 0, z: 0}
   curHealth: 0
   maxHealth: 100
---- !u!114 &114275804680599072
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1258096201984424}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 49d6af75af8828a43a412fa8709117fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cullingDistance: 50
-  cameraTarget: {fileID: 1258096201984424}
 --- !u!114 &114445429429291430
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -721,27 +654,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 725479f7b5881874d92cb73b6c876748, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tetherManager: {fileID: 0}
+  tetherManager: {fileID: 114040415419035632}
   myPlayer: {fileID: 114883154659287566}
   myBody: {fileID: 50481284814123684}
   myClass: 1
   maxHealth: 100
-  lastCountdownTime: 0
+  lastCountdownTime: 0.15
   Crosshair: {fileID: 1536397821931000, guid: 12d625172ca83dc438e54d9e8158bf5f, type: 2}
   Bullet: {fileID: 1253353341930176, guid: 7f6d6c9054649ed4eaa71bfc0c670086, type: 2}
-  FightySwing: {fileID: 0}
+  FightySwing: {fileID: 1924731845635454, guid: d90971027387ed341b06044029bb0fbb,
+    type: 2}
   SwingDist: 0
-  SwingVect: {x: 0, y: 0, z: 0}
-  swingDuration: 0
-  swingCooldown: 0
-  swingDamage: 0
+  SwingVect: {x: -0, y: 0, z: 0}
+  swingDuration: 0.5
+  swingCooldown: 1
+  swingDamage: 40
   curDashTime: 0
-  dashTime: 0
-  dashCooldown: 0
-  DashForce: 0
-  dashDamage: 0
-  bulletSpawnDist: 3.5
-  crosshairDist: 1
+  dashTime: 3
+  dashCooldown: 2
+  DashForce: 30
+  dashDamage: 50
+  bulletSpawnDist: 0.75
+  crosshairDist: 2
   LightBulletVel: 30
   LightBulletCooldown: 0.15
   LightBulletDamage: 13
@@ -799,38 +733,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 725479f7b5881874d92cb73b6c876748, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tetherManager: {fileID: 0}
+  tetherManager: {fileID: 114040415419035632}
   myPlayer: {fileID: 114666160176864448}
   myBody: {fileID: 50781938944803170}
   myClass: 0
   maxHealth: 100
-  lastCountdownTime: 0
+  lastCountdownTime: 0.15
   Crosshair: {fileID: 1536397821931000, guid: 12d625172ca83dc438e54d9e8158bf5f, type: 2}
   Bullet: {fileID: 1253353341930176, guid: 7f6d6c9054649ed4eaa71bfc0c670086, type: 2}
   FightySwing: {fileID: 1924731845635454, guid: d90971027387ed341b06044029bb0fbb,
     type: 2}
-  SwingDist: 4.45
-  SwingVect: {x: 0, y: 0, z: 0}
-  swingDuration: 0
+  SwingDist: 1.25
+  SwingVect: {x: -0, y: 0, z: 0}
+  swingDuration: 0.5
   swingCooldown: 1
-  swingDamage: 20
+  swingDamage: 40
   curDashTime: 0
-  dashTime: 1
-  dashCooldown: 30
+  dashTime: 3
+  dashCooldown: 2
   DashForce: 30
-  dashDamage: 30
-  bulletSpawnDist: 3.5
-  crosshairDist: 1
-  LightBulletVel: 0
-  LightBulletCooldown: 6
-  LightBulletDamage: 0
-  LightBulletSpread: 0
-  HeavyBulletVel: 0
-  HeavyBulletCooldown: 0
-  HeavyBulletMassRatio: 0
-  HeavyBulletDamage: 0
+  dashDamage: 50
+  bulletSpawnDist: 0.75
+  crosshairDist: 2
+  LightBulletVel: 30
+  LightBulletCooldown: 0.15
+  LightBulletDamage: 13
+  LightBulletSpread: 60
+  HeavyBulletVel: 50
+  HeavyBulletCooldown: 0.65
+  HeavyBulletMassRatio: 3
+  HeavyBulletDamage: 150
   HeavyBulletSpread: 0
-  recoil: 0
+  recoil: 1
   curWeapon: 0
 --- !u!114 &114860004238916526
 MonoBehaviour:
@@ -882,28 +816,6 @@ MonoBehaviour:
   maxSpeed: 10
   player: {fileID: 1642003740233448}
   anim: {fileID: 95913222436979190}
---- !u!114 &114945310108553142
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1258096201984424}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c825d4bed5b4ef14dbdd77b3ceceb25e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PlayerOne: {fileID: 1441463896677894}
-  PlayerTwo: {fileID: 1642003740233448}
-  PlayerCamera: {fileID: 1364349108589580}
-  AccelerationSpeed: 1
-  MaxSpeed: 1
-  cameraSpeed: 1
-  AccelRatio: 0.7
-  minCameraSize: 0
-  maxCameraSize: 0
-  maxX: 30
-  maxY: 30
 --- !u!120 &120709548232495482
 LineRenderer:
   m_ObjectHideFlags: 1
@@ -1169,48 +1081,6 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1364349108589580}
   m_Enabled: 1
---- !u!212 &212020086327262084
-SpriteRenderer:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1258096201984424}
-  m_Enabled: 0
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_SelectedEditorRenderState: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 0.8931034, g: 0.41603476, b: 0.039401606, a: 1}
-  m_FlipX: 0
-  m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 0.2, y: 0.2}
-  m_AdaptiveModeThreshold: 0.5
-  m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
 --- !u!212 &212141915175425422
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -1395,5 +1265,5 @@ DistanceJoint2D:
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 1
-  m_Distance: 9.658899
+  m_Distance: 3
   m_MaxDistanceOnly: 1
