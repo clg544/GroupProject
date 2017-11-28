@@ -52,7 +52,10 @@ public class CullingScript : MonoBehaviour {
         while(curObj != null)
         {
             if (curObj.Value == null)
+            {
                 cullingList.Remove(curObj);
+                break;
+            }
 
             if (Vector3.Distance(curObj.Value.transform.position, cameraTarget.transform.position) < cullingDistance)
             {

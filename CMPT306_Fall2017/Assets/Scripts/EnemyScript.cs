@@ -15,7 +15,13 @@ public class EnemyScript : MonoBehaviour {
         currentHealth -= dam;
 
         if (currentHealth <= 0)
+        {
             Kill();
+        }
+        else
+        {
+            SendMessage("StartBlink");
+        }
     }
 
     /** 
