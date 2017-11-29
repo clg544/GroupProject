@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnterDoor : MonoBehaviour {
 
+    public float enterDistance;
+
 	public GameObject powerContainer;
 	public Sprite needTwo;
 	public Sprite needOne;
@@ -121,7 +123,6 @@ public class EnterDoor : MonoBehaviour {
 		}
 
 		if (coll.gameObject.tag == "Power") {
-			Debug.Log ("Ran into item");
 			powerSupply += 1;
 			this.GetComponentInParent<LevelGenerator> ().placeSingleItem (coll.gameObject);
 			if (powerSupply == 1) {
@@ -144,14 +145,16 @@ public class EnterDoor : MonoBehaviour {
 
 	//Determines what door to go through
 	public void goThroughDoor(){
+        Vector3 overshoot = (theDoor.transform.position - gameObject.transform.position).normalized * enterDistance;
+
 		//If player has entered door zone, allow passage to another
 		if (hasEnteredDoor == true && powerSupply >= 3) {
 			hasEnteredDoor = false;
 			GameObject playerNow = GameObject.FindGameObjectWithTag ("Players");
-			Destroy (playerNow);
+			//Destroy (playerNow);
 
-			GameObject player = Instantiate (players);
-			player.transform.position = new Vector2 (theDoor.transform.position.x, theDoor.transform.position.y);
+			//GameObject player = Instantiate (players);
+            playerNow.transform.position = new Vector2 (theDoor.transform.position.x + overshoot.x, theDoor.transform.position.y + overshoot.y);
 			ims.Reset ();
 		}
 	}

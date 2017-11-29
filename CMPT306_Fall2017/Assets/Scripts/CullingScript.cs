@@ -59,7 +59,6 @@ public class CullingScript : MonoBehaviour {
 
             if (Vector3.Distance(curObj.Value.transform.position, cameraTarget.transform.position) < cullingDistance)
             {
-				Debug.Log (curObj);
                 curObj.Value.SetActive(true);
             }
             else

@@ -129,6 +129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe1a3520b48c2419fa5f2c52c8deae66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enterDistance: 10
   powerContainer: {fileID: 1508838864717874}
   needTwo: {fileID: 21300818, guid: 4f3d817ad821bc345b488255f0de8318, type: 3}
   needOne: {fileID: 21300816, guid: 4f3d817ad821bc345b488255f0de8318, type: 3}

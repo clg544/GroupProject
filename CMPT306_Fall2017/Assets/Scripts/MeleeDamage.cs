@@ -33,11 +33,9 @@ public class MeleeDamage : MonoBehaviour {
             }
             else {
                 winding = true;
-                Debug.Log("Winding up");
                 //send windup animation
                 yield return new WaitForSeconds(windUpTime);
                 foreach (GameObject g in inCombatWith) {
-                    Debug.Log("applying "+ damage +" damage");
                     g.SendMessage("ApplyDamage", damage);
                 }
                 winding = false;

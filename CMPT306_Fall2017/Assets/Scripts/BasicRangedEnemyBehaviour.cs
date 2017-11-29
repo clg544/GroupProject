@@ -43,11 +43,20 @@ public class BasicRangedEnemyBehaviour : MonoBehaviour {
     // Update is called once per frame
     void FixedUpdate() {
         //look at closer of fighty or shooty
-        if (Vector2.Distance(transform.position, fighty.transform.position) < Vector2.Distance(transform.position, shooty.transform.position)) {
-            target = fighty;
+        if(fighty != null && shooty != null)
+        {
+            if (Vector2.Distance(transform.position, fighty.transform.position) < Vector2.Distance(transform.position, shooty.transform.position))
+            {
+                target = fighty;
+            }
+            else
+            {
+                target = shooty;
+            }
         }
-        else {
-            target = shooty;
+        else
+        {
+            return;
         }
         //look at closest player
 

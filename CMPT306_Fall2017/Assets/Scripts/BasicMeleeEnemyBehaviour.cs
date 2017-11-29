@@ -33,6 +33,28 @@ public class BasicMeleeEnemyBehaviour : MonoBehaviour {
     }
 
 	void FixedUpdate () {
+        if(fighty == null || shooty == null)
+        {
+            GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+            if (players.Length != 2)    // Players are despawned, we can't continue
+            {
+                return;
+            }
+            else    // Prepare the new players
+            {
+                if (players[0].name.Equals("Fighty"))
+                {
+                    fighty = players[0];
+                    shooty = players[1];
+                }
+                else
+                {
+                    shooty = players[0];
+                    fighty = players[1];
+                }
+            }
+        }
+
 		if (inCombat < 0){ // this should never happen
             Debug.LogError("how the hell did we get here?"); 
         }
@@ -42,7 +64,6 @@ public class BasicMeleeEnemyBehaviour : MonoBehaviour {
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
             Debug.DrawRay(transform.position, (currentNavPoint.transform.position - transform.position ).normalized);
             hit = Physics2D.Raycast(transform.position, ( currentNavPoint.transform.position - transform.position).normalized);
-            Debug.Log(hit.transform.gameObject.name);
             if (Vector2.Distance(transform.position, currentNavPoint.transform.position) < navTriggerDistance || hit.transform.gameObject != currentNavPoint) {
                 rb.velocity = new Vector2(0,0);
                 navQueue.Enqueue(currentNavPoint);
@@ -50,18 +71,25 @@ public class BasicMeleeEnemyBehaviour : MonoBehaviour {
             }
         }
         else if (inCombat > 0){ // in combat
-
-            //Debug.Log("here");
-            if (Vector2.Distance(transform.position, fighty.transform.position) < Vector2.Distance(transform.position, shooty.transform.position)){
-                tartget = fighty;
+            
+            
+            if(fighty != null || shooty != null)
+            {
+                if (Vector2.Distance(transform.position, fighty.transform.position) < Vector2.Distance(transform.position, shooty.transform.position)){
+                    tartget = fighty;
+                }
+                else {
+                    tartget = shooty;
+                }
+                Vector3 dir = tartget.transform.position - transform.position;
+                float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90;
+                //  Debug.Log(tartget.transform.position + ", "+ dir + ", " + angle);
+                transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
             }
-            else {
-                tartget = shooty;
+            else
+            {
+                return;
             }
-            Vector3 dir = tartget.transform.position - transform.position;
-            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90;
-          //  Debug.Log(tartget.transform.position + ", "+ dir + ", " + angle);
-            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         }
 
         if (!md.winding) {

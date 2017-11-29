@@ -26,6 +26,7 @@ GameObject:
   - component: {fileID: 114891106873606092}
   - component: {fileID: 114784285469784666}
   - component: {fileID: 114189362436373596}
+  - component: {fileID: 114619948755197074}
   m_Layer: 14
   m_Name: Melee Enemy
   m_TagString: Enemy
@@ -197,6 +198,22 @@ MonoBehaviour:
   windUpTime: 1
   damage: 5
   winding: 0
+--- !u!114 &114619948755197074
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1524523062439450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e85b9fa5f926dcc408447c36e9b2c616, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  min: 3
+  max: 9
+  maxForce: 20
+  treasurePrefab: {fileID: 1587112429352048, guid: 82e1480b955a303498aeca00e5516aa4,
+    type: 2}
 --- !u!114 &114784285469784666
 MonoBehaviour:
   m_ObjectHideFlags: 1
