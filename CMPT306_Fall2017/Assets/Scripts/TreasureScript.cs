@@ -23,7 +23,15 @@ public class TreasureScript : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        myScoreManager = GameObject.FindGameObjectWithTag("Manager").GetComponent<ScoreManager>();
+        GameObject[] managers = GameObject.FindGameObjectsWithTag("Manager");
+
+        for (int i = 0; i < managers.Length; i++)
+        {
+            if (managers[i].name == "Managers")
+            {
+                myScoreManager = managers[i].GetComponent<ScoreManager>();
+            }
+        }
 
         mySprite = gameObject.GetComponent<SpriteRenderer>();
 
