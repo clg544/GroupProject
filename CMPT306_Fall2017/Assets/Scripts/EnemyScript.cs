@@ -32,6 +32,8 @@ public class EnemyScript : MonoBehaviour {
      */
     public void Kill()
     {
+
+
         Destroy(gameObject);
     }
 
