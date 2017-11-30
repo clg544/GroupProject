@@ -191,7 +191,7 @@ namespace NG
 		{
 			for (int i = 0; i < generatedAreas.Count; i++)
 			{
-				GameObject section = Instantiate (section1);
+				GameObject section = Instantiate (section1, gameObject.transform);
 				GameObject newMesh = Instantiate (levelMesh);
 
 				section.GetComponent<MeshRenderer> ().material = material;

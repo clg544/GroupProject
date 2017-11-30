@@ -278,7 +278,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   min: 3
   max: 9
-  maxForce: 20
+  maxForce: 87.05
   treasurePrefab: {fileID: 1587112429352048, guid: 82e1480b955a303498aeca00e5516aa4,
     type: 2}
 --- !u!114 &114680986305846780
