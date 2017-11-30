@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BasicRangedEnemyBehaviour : MonoBehaviour {
+    public AudioManager soundOut;
     public GameObject fighty;
     public GameObject shooty;
 
@@ -92,6 +93,10 @@ public class BasicRangedEnemyBehaviour : MonoBehaviour {
                 shootHit = Physics2D.Raycast(shootPoint.transform.position, miss);
                 lr.SetPosition(1, shootHit.point);
                 //  Debug.Log(shootHit.transform.tag);
+
+                // Play Shot sound
+                soundOut.PlaySound(soundOut.SoundIndex.Ouch);
+
                 if (shootHit.transform.CompareTag("Player") || shootHit.transform.CompareTag("TetherLink"))
                 {
                     shootHit.transform.gameObject.SendMessage("ApplyDamage", damage);

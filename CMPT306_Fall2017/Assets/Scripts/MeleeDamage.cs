@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class MeleeDamage : MonoBehaviour {
+    public AudioManager soundOut;
+
     public float coolDownTime;
     public float windUpTime;
     public int damage;
@@ -36,6 +38,7 @@ public class MeleeDamage : MonoBehaviour {
                 //send windup animation
                 yield return new WaitForSeconds(windUpTime);
                 foreach (GameObject g in inCombatWith) {
+                    soundOut.PlaySound(soundOut.SoundIndex.Brrrr);
                     g.SendMessage("ApplyDamage", damage);
                 }
                 winding = false;

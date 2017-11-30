@@ -72,7 +72,6 @@ public class BasicMeleeEnemyBehaviour : MonoBehaviour {
         }
         else if (inCombat > 0){ // in combat
             
-            
             if(fighty != null || shooty != null)
             {
                 if (Vector2.Distance(transform.position, fighty.transform.position) < Vector2.Distance(transform.position, shooty.transform.position)){

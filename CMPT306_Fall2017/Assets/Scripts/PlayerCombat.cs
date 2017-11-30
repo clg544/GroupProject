@@ -6,6 +6,7 @@ public class PlayerCombat : MonoBehaviour {
     
     public enum PlayerClass { FIGHTY, SHOOTY};
     public PlayerTetherScript tetherManager;
+    public AudioManager soundOut;
 
     private float AttackCooldown;               // Current cooldown value
     
@@ -127,6 +128,9 @@ public class PlayerCombat : MonoBehaviour {
 
             /* Apply Bullet Spread */
             bulletVel.AddForce(perpendicular * Random.Range(-1.0F, 1.0F) * LightBulletSpread);
+
+            /* Play a Sound */
+            soundOut.PlaySound(soundOut.SoundIndex.Thwam);
         }
     }
     /**
@@ -162,6 +166,9 @@ public class PlayerCombat : MonoBehaviour {
 
             /* Apply Bullet Spread */
             bulletVel.AddForce(perpendicular * Random.Range(-1.0F, 1.0F) * HeavyBulletSpread);
+
+            /* Play a Sound */
+            soundOut.PlaySound(soundOut.SoundIndex.Thwam);
         }
     }
     
@@ -181,6 +188,13 @@ public class PlayerCombat : MonoBehaviour {
 
         AttackCooldown += swingCooldown;
         lastCountdownTime = swingCooldown;
+
+        int rand = Random.Range(0, 1);
+
+        if(rand == 0)
+            soundOut.PlaySound(soundOut.SoundIndex.Swing);
+        else
+            soundOut.PlaySound(soundOut.SoundIndex.Woosh_2);
     }
 
     public void FighterDash()
@@ -207,6 +221,7 @@ public class PlayerCombat : MonoBehaviour {
         AttackCooldown += dashCooldown;
         lastCountdownTime = dashCooldown;
 
+        soundOut.PlaySound(soundOut.SoundIndex.Charge);
     }
 
     public void PlayerAimStart(Vector2 joyPos)
@@ -287,6 +302,7 @@ public class PlayerCombat : MonoBehaviour {
     }
     public void KillMe()
     {
+        soundOut.PlaySound(soundOut.SoundIndex.Death);
         tetherManager.Kill();
     }
 
@@ -322,6 +338,7 @@ public class PlayerCombat : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+
         myBody = gameObject.GetComponent<Rigidbody2D>();
 
         curHealth = maxHealth;
