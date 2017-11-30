@@ -6,7 +6,7 @@ public class PlayerCombat : MonoBehaviour {
     
     public enum PlayerClass { FIGHTY, SHOOTY};
     public PlayerTetherScript tetherManager;
-    public AudioManager soundOut;
+    AudioManager soundOut;
 
     private float AttackCooldown;               // Current cooldown value
     
@@ -338,6 +338,15 @@ public class PlayerCombat : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        GameObject[] managers = GameObject.FindGameObjectsWithTag("Manager");
+
+        for (int i = 0; i < managers.Length; i++)
+        {
+            if (managers[i].name == "SoundManager")
+            {
+                soundOut = managers[i].GetComponent<AudioManager>();
+            }
+        }
 
         myBody = gameObject.GetComponent<Rigidbody2D>();
 

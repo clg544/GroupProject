@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class MeleeDamage : MonoBehaviour {
-    public AudioManager soundOut;
+    AudioManager soundOut;
 
     public float coolDownTime;
     public float windUpTime;
@@ -11,6 +11,22 @@ public class MeleeDamage : MonoBehaviour {
     public bool winding = false;
 
     private LinkedList<GameObject> inCombatWith;
+
+    void Awake()
+    {
+        GameObject[] managers = GameObject.FindGameObjectsWithTag("Manager");
+
+        for (int i = 0; i < managers.Length; i++)
+        {
+            if (managers[i].name == "SoundManager")
+            {
+                soundOut = managers[i].GetComponent<AudioManager>();
+            }
+        }
+    }
+
+
+
     // Use this for initialization
     void Start() {
         inCombatWith = new LinkedList<GameObject>();

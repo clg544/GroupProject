@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BasicRangedEnemyBehaviour : MonoBehaviour {
-    public AudioManager soundOut;
+    AudioManager soundOut;
     public GameObject fighty;
     public GameObject shooty;
 
@@ -27,7 +27,18 @@ public class BasicRangedEnemyBehaviour : MonoBehaviour {
     private GameObject target;
 
     // Use this for initialization
-    void Start() {
+    void Start()
+    {
+        GameObject[] managers = GameObject.FindGameObjectsWithTag("Manager");
+
+        for (int i = 0; i < managers.Length; i++)
+        {
+            if (managers[i].name == "SoundManager")
+            {
+                soundOut = managers[i].GetComponent<AudioManager>();
+            }
+        }
+        
         navQueue = new Queue<GameObject>();
         foreach (GameObject g in navPoints) {
             navQueue.Enqueue(g);

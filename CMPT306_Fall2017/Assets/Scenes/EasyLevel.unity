@@ -235,7 +235,7 @@ Prefab:
     - target: {fileID: 224908555833327422, guid: 5eed0066b4268c14887ebeafd95873f0,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -64.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224970077092168548, guid: 5eed0066b4268c14887ebeafd95873f0,
         type: 2}
@@ -255,7 +255,7 @@ Prefab:
     - target: {fileID: 224970077092168548, guid: 5eed0066b4268c14887ebeafd95873f0,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -129
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224820584492373780, guid: 5eed0066b4268c14887ebeafd95873f0,
         type: 2}
@@ -275,7 +275,7 @@ Prefab:
     - target: {fileID: 224820584492373780, guid: 5eed0066b4268c14887ebeafd95873f0,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -193.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224327183068424920, guid: 5eed0066b4268c14887ebeafd95873f0,
         type: 2}
@@ -295,7 +295,7 @@ Prefab:
     - target: {fileID: 224327183068424920, guid: 5eed0066b4268c14887ebeafd95873f0,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -258
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5eed0066b4268c14887ebeafd95873f0, type: 2}
@@ -570,6 +570,12 @@ GameObject:
   m_PrefabParentObject: {fileID: 1372703821333668, guid: 43a50026743875842b5906d0e5d8116f,
     type: 2}
   m_PrefabInternal: {fileID: 749900522}
+--- !u!114 &507815924 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114033342330421188, guid: 5eed0066b4268c14887ebeafd95873f0,
+    type: 2}
+  m_PrefabInternal: {fileID: 205839843}
+  m_Script: {fileID: 11500000, guid: 17b8cdadf78e4f648b63033adbded6cd, type: 3}
 --- !u!1001 &749900522
 Prefab:
   m_ObjectHideFlags: 0
@@ -619,6 +625,16 @@ Prefab:
       propertyPath: curMenuManager
       value: 
       objectReference: {fileID: 205839844}
+    - target: {fileID: 114239325501581466, guid: 43a50026743875842b5906d0e5d8116f,
+        type: 2}
+      propertyPath: soundOut
+      value: 
+      objectReference: {fileID: 507815924}
+    - target: {fileID: 114707459711416342, guid: 43a50026743875842b5906d0e5d8116f,
+        type: 2}
+      propertyPath: soundOut
+      value: 
+      objectReference: {fileID: 507815924}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 43a50026743875842b5906d0e5d8116f, type: 2}
   m_IsPrefabParent: 0
