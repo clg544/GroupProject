@@ -254,10 +254,10 @@ MonoBehaviour:
   shooty: {fileID: 1572331492096810, guid: 579cbbeb1411b874786580eb34574534, type: 2}
   speed: 0
   spread: 15
-  burst: 5
+  burst: 13
   reloadTime: 5
   rof: 0.5
-  damage: 0
+  damage: 2
   shootPoint: {fileID: 1906919092974420}
   navPoints:
   - {fileID: 1050554123168580}

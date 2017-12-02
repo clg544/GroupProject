@@ -19,9 +19,7 @@ public class TreasureScript : MonoBehaviour {
         }
     }
 
-
-    // Use this for initialization
-    void Start()
+    void Awake()
     {
         GameObject[] managers = GameObject.FindGameObjectsWithTag("Manager");
 
@@ -68,7 +66,7 @@ public class TreasureScript : MonoBehaviour {
 
         worth = randCol;
     }
-	
+    
 	// Update is called once per frame
 	void Update () {
 		

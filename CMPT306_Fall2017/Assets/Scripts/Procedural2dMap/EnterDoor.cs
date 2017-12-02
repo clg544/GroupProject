@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnterDoor : MonoBehaviour {
     
@@ -29,6 +30,7 @@ public class EnterDoor : MonoBehaviour {
 	InputManagerScript ims;
     PlayerTetherScript tetherManager;
     Behaviour myHalo;
+    public Text HudInteract;
 
 	public int powerSupply;
 
@@ -37,6 +39,15 @@ public class EnterDoor : MonoBehaviour {
 
 		ims = GameObject.FindObjectOfType<InputManagerScript>();
         tetherManager = GameObject.FindObjectOfType<PlayerTetherScript>();
+        
+        GameObject[] hud = GameObject.FindGameObjectsWithTag("HUD");
+        for (int i = 0; i < hud.Length; i++)
+        {
+            if (hud[i].name == "InteractPrompt")
+            {
+                HudInteract = hud[i].GetComponent<Text>();
+            }
+        }
 
         myHalo = (Behaviour)GetComponent("Halo");
         myHalo.enabled = false;
@@ -148,6 +159,12 @@ public class EnterDoor : MonoBehaviour {
             shootyHasEnteredDoor = true;
         }
 
+        if(fightyHasEnteredDoor && shootyHasEnteredDoor)
+        {
+            HudInteract.GetComponent<Text>().text = "A: Enter Door";
+            HudInteract.enabled = true;
+        }
+
 		if (coll.gameObject.tag == "Power") {
 			powerSupply += 1;
 			this.GetComponentInParent<LevelGenerator> ().placeSingleItem (coll.gameObject);
@@ -166,11 +183,15 @@ public class EnterDoor : MonoBehaviour {
     {
         if (coll.gameObject.name == "Fighty")
         {
+            HudInteract.enabled = false;
             fightyHasEnteredDoor = false;
+            HudInteract.enabled = false;
         }
         else if (coll.gameObject.name == "Shooty")
         {
+            HudInteract.enabled = false;
             shootyHasEnteredDoor = false;
+            HudInteract.enabled = false;
         }
     }
 
@@ -182,6 +203,7 @@ public class EnterDoor : MonoBehaviour {
 		if (fightyHasEnteredDoor && shootyHasEnteredDoor && powerSupply >= 3) {
             fightyHasEnteredDoor = false;
             shootyHasEnteredDoor = false;
+            HudInteract.enabled = false;
 
             switch (theDoor.name)
             {

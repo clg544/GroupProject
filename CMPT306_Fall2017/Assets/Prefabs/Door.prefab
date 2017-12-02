@@ -139,6 +139,7 @@ MonoBehaviour:
   shootyHasEnteredDoor: 0
   players: {fileID: 1248456438693984, guid: 43a50026743875842b5906d0e5d8116f, type: 2}
   theDoor: {fileID: 0}
+  HudInteract: {fileID: 0}
   powerSupply: 0
 --- !u!122 &122933633382418006
 Halo:

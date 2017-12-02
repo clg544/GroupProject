@@ -293,11 +293,8 @@ public class PlayerCombat : MonoBehaviour {
      */
     public void ApplyDamage(int dam)
     {
-        curHealth -= dam;
-
-        if (curHealth <= 0)
-            KillMe();
-
+        tetherManager.ApplyDamageFromTether(dam, 0);
+        
         return;
     }
     public void KillMe()

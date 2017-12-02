@@ -19,6 +19,7 @@ TagManager:
   - Treasure
   - Manager
   - CamerTarget
+  - HUD
   layers:
   - Default
   - TransparentFX

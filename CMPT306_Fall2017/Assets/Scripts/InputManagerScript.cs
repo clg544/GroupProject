@@ -66,6 +66,7 @@ public class InputManagerScript : MonoBehaviour {
     private bool P2isAiming;
 
 	public bool openingDoor;
+    public bool enteringShip;
 
     private void KeyboardInput()
     {
@@ -106,9 +107,11 @@ public class InputManagerScript : MonoBehaviour {
 
 		if (Input.GetKeyDown (KeyCode.Q)) {
 			openingDoor = true;
+            enteringShip = true;
 		} else {
 			openingDoor = false;
-		}
+            enteringShip = false;
+        }
 
         /* Aim based on the tfgh */
         tempHor = (Input.GetKey(KeyCode.H) ? 1 : 0) - (Input.GetKey(KeyCode.F) ? 1 : 0);
