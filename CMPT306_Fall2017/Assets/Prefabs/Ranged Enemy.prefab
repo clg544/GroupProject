@@ -69,6 +69,8 @@ GameObject:
   - component: {fileID: 60059447213727202}
   - component: {fileID: 114196105704846844}
   - component: {fileID: 114680986305846780}
+  - component: {fileID: 114816804517288876}
+  - component: {fileID: 114254242808398944}
   m_Layer: 14
   m_Name: Ranged Enemy
   m_TagString: Enemy
@@ -252,10 +254,10 @@ MonoBehaviour:
   shooty: {fileID: 1572331492096810, guid: 579cbbeb1411b874786580eb34574534, type: 2}
   speed: 0
   spread: 15
-  burst: 5
+  burst: 13
   reloadTime: 5
   rof: 0.5
-  damage: 0
+  damage: 2
   shootPoint: {fileID: 1906919092974420}
   navPoints:
   - {fileID: 1050554123168580}
@@ -263,6 +265,22 @@ MonoBehaviour:
   - {fileID: 1020717404057448}
   - {fileID: 1200202102100790}
   navTriggerDistance: 3
+--- !u!114 &114254242808398944
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1496164178887884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e85b9fa5f926dcc408447c36e9b2c616, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  min: 3
+  max: 9
+  maxForce: 87.05
+  treasurePrefab: {fileID: 1587112429352048, guid: 82e1480b955a303498aeca00e5516aa4,
+    type: 2}
 --- !u!114 &114680986305846780
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -276,6 +294,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHealth: 0
   maxHealth: 100
+--- !u!114 &114816804517288876
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1496164178887884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9050bf7d17c344c479edc434768f4998, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toggleTime: 0.1
+  blinkTime: 0.5
 --- !u!120 &120026016331682604
 LineRenderer:
   m_ObjectHideFlags: 1

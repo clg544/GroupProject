@@ -317,7 +317,7 @@ public class LevelGenerator : MonoBehaviour {
 				currentLocY = UnityEngine.Random.Range (0, height);	
 			}
 		}
-	}
+    }
 
 	void placeItems(){
 		int placedItems = 0;

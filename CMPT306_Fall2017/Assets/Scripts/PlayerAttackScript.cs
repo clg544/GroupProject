@@ -10,10 +10,12 @@ public class PlayerAttackScript : MonoBehaviour {
 
     public void OnTriggerEnter2D(Collider2D coll)
     {
+        if (coll.isTrigger)
+            return;
+
         if (coll.gameObject.tag == "Enemy")
         {
             coll.gameObject.SendMessage("ApplyDamage", attackDamage);
-            Debug.Log("I Dealt Damage" + attackDamage);
         }
     }
 

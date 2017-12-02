@@ -28,7 +28,7 @@ GameObject:
   - component: {fileID: 114634505077372030}
   - component: {fileID: 111971435582380434}
   - component: {fileID: 95321734937210498}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Fighty
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 4351952202177716}
   - component: {fileID: 23846092980601120}
   - component: {fileID: 102669193244911136}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: NumberLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -60,7 +60,7 @@ Transform:
   m_GameObject: {fileID: 1212742193469634}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 1}
   m_Children: []
   m_Father: {fileID: 4922380153090630}
   m_RootOrder: 0
@@ -72,8 +72,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1015685231720104}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3, y: 0, z: 0}
-  m_LocalScale: {x: 0.45533395, y: 0.45533395, z: 0.45533395}
+  m_LocalPosition: {x: -6.04, y: 0.01, z: 0}
+  m_LocalScale: {x: 2.5, y: 2.5, z: 0.45533395}
   m_Children:
   - {fileID: 4351952202177716}
   m_Father: {fileID: 0}
@@ -145,7 +145,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 2.56
+  m_Radius: 0.48
 --- !u!95 &95321734937210498
 Animator:
   serializedVersion: 3
@@ -155,7 +155,7 @@ Animator:
   m_GameObject: {fileID: 1015685231720104}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6826ecab8c949f542accb58ea7836476, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -230,34 +230,34 @@ MonoBehaviour:
   myPlayer: {fileID: 114929608259001202}
   myBody: {fileID: 50856147029049122}
   myClass: 0
-  maxHealth: 0
-  lastCountdownTime: 0
+  maxHealth: 100
+  lastCountdownTime: 0.15
   Crosshair: {fileID: 1536397821931000, guid: 12d625172ca83dc438e54d9e8158bf5f, type: 2}
   Bullet: {fileID: 1253353341930176, guid: 7f6d6c9054649ed4eaa71bfc0c670086, type: 2}
   FightySwing: {fileID: 1924731845635454, guid: d90971027387ed341b06044029bb0fbb,
     type: 2}
-  SwingDist: 6.1
-  SwingVect: {x: 0, y: 0, z: 0}
-  swingDuration: 0
+  SwingDist: 1.25
+  SwingVect: {x: -0, y: 0, z: 0}
+  swingDuration: 0.5
   swingCooldown: 1
-  swingDamage: 0
+  swingDamage: 40
   curDashTime: 0
-  dashTime: 0
-  dashCooldown: 0
-  DashForce: 0
-  dashDamage: 0
-  bulletSpawnDist: 3.5
-  crosshairDist: 11
+  dashTime: 3
+  dashCooldown: 2
+  DashForce: 30
+  dashDamage: 50
+  bulletSpawnDist: 0.75
+  crosshairDist: 2
   LightBulletVel: 30
-  LightBulletCooldown: 6
-  LightBulletDamage: 0
-  LightBulletSpread: 0
-  HeavyBulletVel: 0
-  HeavyBulletCooldown: 0
-  HeavyBulletMassRatio: 0
-  HeavyBulletDamage: 0
+  LightBulletCooldown: 0.15
+  LightBulletDamage: 13
+  LightBulletSpread: 60
+  HeavyBulletVel: 50
+  HeavyBulletCooldown: 0.65
+  HeavyBulletMassRatio: 3
+  HeavyBulletDamage: 150
   HeavyBulletSpread: 0
-  recoil: 0
+  recoil: 1
   curWeapon: 0
 --- !u!114 &114929608259001202
 MonoBehaviour:
@@ -395,7 +395,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 1eca21286dbfc404c97105f0a6305c75, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0b7d550d00afd374b8d8b0131df0971a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

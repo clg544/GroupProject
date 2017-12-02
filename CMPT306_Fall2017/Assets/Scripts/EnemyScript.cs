@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemyScript : MonoBehaviour {
 
+    AudioManager soundOut;
+
     public int currentHealth;
     public int maxHealth;
 
@@ -15,7 +17,14 @@ public class EnemyScript : MonoBehaviour {
         currentHealth -= dam;
 
         if (currentHealth <= 0)
+        {
+            soundOut.PlaySound(soundOut.SoundIndex.Pop_2);
             Kill();
+        }
+        else
+        {
+            SendMessage("StartBlink");
+        }
     }
 
     /** 
@@ -23,11 +32,24 @@ public class EnemyScript : MonoBehaviour {
      */
     public void Kill()
     {
+
+
         Destroy(gameObject);
     }
 
     // Use this for initialization
     void Start () {
+
+        GameObject[] managers = GameObject.FindGameObjectsWithTag("Manager");
+
+        for (int i = 0; i < managers.Length; i++)
+        {
+            if (managers[i].name == "SoundManager")
+            {
+                soundOut = managers[i].GetComponent<AudioManager>();
+            }
+        }
+
         currentHealth = maxHealth;
     }
 	

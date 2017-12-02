@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4085064796702680}
   - component: {fileID: 58462221069278984}
-  m_Layer: 8
+  m_Layer: 13
   m_Name: NavPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}

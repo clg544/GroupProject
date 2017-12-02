@@ -3,12 +3,30 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class MeleeDamage : MonoBehaviour {
+    AudioManager soundOut;
+
     public float coolDownTime;
     public float windUpTime;
     public int damage;
     public bool winding = false;
 
     private LinkedList<GameObject> inCombatWith;
+
+    void Awake()
+    {
+        GameObject[] managers = GameObject.FindGameObjectsWithTag("Manager");
+
+        for (int i = 0; i < managers.Length; i++)
+        {
+            if (managers[i].name == "SoundManager")
+            {
+                soundOut = managers[i].GetComponent<AudioManager>();
+            }
+        }
+    }
+
+
+
     // Use this for initialization
     void Start() {
         inCombatWith = new LinkedList<GameObject>();
@@ -33,11 +51,10 @@ public class MeleeDamage : MonoBehaviour {
             }
             else {
                 winding = true;
-                Debug.Log("Winding up");
                 //send windup animation
                 yield return new WaitForSeconds(windUpTime);
                 foreach (GameObject g in inCombatWith) {
-                    Debug.Log("applying "+ damage +" damage");
+                    soundOut.PlaySound(soundOut.SoundIndex.Brrrr);
                     g.SendMessage("ApplyDamage", damage);
                 }
                 winding = false;

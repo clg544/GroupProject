@@ -39,6 +39,7 @@ GameObject:
   - component: {fileID: 114750194198579642}
   - component: {fileID: 50650955104094156}
   - component: {fileID: 212318345640510230}
+  - component: {fileID: 122933633382418006}
   m_Layer: 0
   m_Name: Door
   m_TagString: Untagged
@@ -129,13 +130,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe1a3520b48c2419fa5f2c52c8deae66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enterDistance: 10
   powerContainer: {fileID: 1508838864717874}
   needTwo: {fileID: 21300818, guid: 4f3d817ad821bc345b488255f0de8318, type: 3}
   needOne: {fileID: 21300816, guid: 4f3d817ad821bc345b488255f0de8318, type: 3}
   needNone: {fileID: 21300814, guid: 4f3d817ad821bc345b488255f0de8318, type: 3}
-  hasEnteredDoor: 0
+  fightyHasEnteredDoor: 0
+  shootyHasEnteredDoor: 0
   players: {fileID: 1248456438693984, guid: 43a50026743875842b5906d0e5d8116f, type: 2}
   theDoor: {fileID: 0}
+  HudInteract: {fileID: 0}
+  powerSupply: 0
+--- !u!122 &122933633382418006
+Halo:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1627067515847650}
+  m_Enabled: 1
+  m_Color:
+    serializedVersion: 2
+    rgba: 4294931800
+  m_Size: 2.5
 --- !u!212 &212318345640510230
 SpriteRenderer:
   m_ObjectHideFlags: 1

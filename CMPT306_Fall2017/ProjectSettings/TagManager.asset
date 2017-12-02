@@ -19,6 +19,7 @@ TagManager:
   - Treasure
   - Manager
   - CamerTarget
+  - HUD
   layers:
   - Default
   - TransparentFX
@@ -35,12 +36,7 @@ TagManager:
   - Tether
   - nav
   - player
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Background
   - 
   - 
   - 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BasicRangedEnemyBehaviour : MonoBehaviour {
+    AudioManager soundOut;
     public GameObject fighty;
     public GameObject shooty;
 
@@ -26,7 +27,18 @@ public class BasicRangedEnemyBehaviour : MonoBehaviour {
     private GameObject target;
 
     // Use this for initialization
-    void Start() {
+    void Start()
+    {
+        GameObject[] managers = GameObject.FindGameObjectsWithTag("Manager");
+
+        for (int i = 0; i < managers.Length; i++)
+        {
+            if (managers[i].name == "SoundManager")
+            {
+                soundOut = managers[i].GetComponent<AudioManager>();
+            }
+        }
+        
         navQueue = new Queue<GameObject>();
         foreach (GameObject g in navPoints) {
             navQueue.Enqueue(g);
@@ -43,11 +55,20 @@ public class BasicRangedEnemyBehaviour : MonoBehaviour {
     // Update is called once per frame
     void FixedUpdate() {
         //look at closer of fighty or shooty
-        if (Vector2.Distance(transform.position, fighty.transform.position) < Vector2.Distance(transform.position, shooty.transform.position)) {
-            target = fighty;
+        if(fighty != null && shooty != null)
+        {
+            if (Vector2.Distance(transform.position, fighty.transform.position) < Vector2.Distance(transform.position, shooty.transform.position))
+            {
+                target = fighty;
+            }
+            else
+            {
+                target = shooty;
+            }
         }
-        else {
-            target = shooty;
+        else
+        {
+            return;
         }
         //look at closest player
 
@@ -83,6 +104,10 @@ public class BasicRangedEnemyBehaviour : MonoBehaviour {
                 shootHit = Physics2D.Raycast(shootPoint.transform.position, miss);
                 lr.SetPosition(1, shootHit.point);
                 //  Debug.Log(shootHit.transform.tag);
+
+                // Play Shot sound
+                soundOut.PlaySound(soundOut.SoundIndex.Ouch);
+
                 if (shootHit.transform.CompareTag("Player") || shootHit.transform.CompareTag("TetherLink"))
                 {
                     shootHit.transform.gameObject.SendMessage("ApplyDamage", damage);

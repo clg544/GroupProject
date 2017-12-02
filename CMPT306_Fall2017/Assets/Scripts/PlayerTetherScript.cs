@@ -14,7 +14,9 @@ public class PlayerTetherScript : MonoBehaviour {
     public float elasticity;           // Constant tether force, scaled
 
     /* The current distance between the two players */
+    public float initialDistance;
     private float curDistance;
+
 
     /* Our Players */
     public GameObject playerOne;
@@ -128,6 +130,8 @@ public class PlayerTetherScript : MonoBehaviour {
 
     void Start(){
         curHealth = maxHealth;
+
+        initialDistance = Vector3.Distance(playerOne.transform.position, playerTwo.transform.position);
     }
 	
 	// Update is called once per frame
