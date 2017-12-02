@@ -37,8 +37,8 @@ TagManager:
   - nav
   - player
   - Background
-  - 
-  - 
+  - Minimap
+  - MinimapCamera
   - 
   - 
   - 

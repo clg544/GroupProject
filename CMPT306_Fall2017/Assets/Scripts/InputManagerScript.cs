@@ -68,6 +68,10 @@ public class InputManagerScript : MonoBehaviour {
 	public bool openingDoor;
     public bool enteringShip;
 
+	public Camera overWorldMap;
+	public Camera playerCamera;
+	public GameObject miniMap;
+
     private void KeyboardInput()
     {
         float tempHor;
@@ -171,6 +175,20 @@ public class InputManagerScript : MonoBehaviour {
         {
             ShootyCombat.SwitchWeapon();
         }
+
+		if (Input.GetKeyDown (KeyCode.M)) {
+			if (overWorldMap.enabled == false) {
+				overWorldMap.enabled = true;
+				playerCamera.enabled = false;
+				miniMap.SetActive (false);
+				Time.timeScale = 0;
+			} else {
+				overWorldMap.enabled = false;
+				playerCamera.enabled = true;
+				miniMap.SetActive (true);
+				Time.timeScale = 1;
+			}
+		}
 
         /* Aim based on the 8456 */
         tempHor = (Input.GetKey(KeyCode.Keypad6) ? 1 : 0) - (Input.GetKey(KeyCode.Keypad4) ? 1 : 0);
