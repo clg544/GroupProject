@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnterDoor : MonoBehaviour {
-
+    
     public float enterDistance;
 
 	public GameObject powerContainer;
@@ -12,7 +12,8 @@ public class EnterDoor : MonoBehaviour {
 	public Sprite needNone;
 
 	List<GameObject> obj;
-	public bool hasEnteredDoor;
+    public bool fightyHasEnteredDoor;
+    public bool shootyHasEnteredDoor;
 
 	GameObject[] sDoor;
 	GameObject[] nDoor;
@@ -20,22 +21,44 @@ public class EnterDoor : MonoBehaviour {
 	GameObject[] eDoor;
 
 	public GameObject players;
+    GameObject fighty;
+    GameObject shooty;
 
 	public GameObject theDoor;
 
 	InputManagerScript ims;
+    PlayerTetherScript tetherManager;
+    Behaviour myHalo;
 
-	int powerSupply;
+	public int powerSupply;
 
 	// Use this for initialization
 	void Start () {
 
 		ims = GameObject.FindObjectOfType<InputManagerScript>();
+        tetherManager = GameObject.FindObjectOfType<PlayerTetherScript>();
 
-		powerSupply = 0;
-		hasEnteredDoor = false;
+        myHalo = (Behaviour)GetComponent("Halo");
+        myHalo.enabled = false;
 
-		if (this.gameObject.name == "north door") {
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        for (int i = 0; i < players.Length; i++)
+        {
+            if (players[i].name == "Fighty")
+            {
+                fighty = players[i];
+            }
+            if (players[i].name == "Shooty")
+            {
+                shooty = players[i];
+            }
+        }
+
+        powerSupply = 0;
+		fightyHasEnteredDoor = false;
+        shootyHasEnteredDoor = false;
+
+        if (this.gameObject.name == "north door") {
 			sDoor = GameObject.FindGameObjectsWithTag ("DoorS");
 			GameObject closestDoor = null;
 			foreach (GameObject obj in sDoor)
@@ -118,9 +141,12 @@ public class EnterDoor : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D coll){
 		
-		if (coll.gameObject.tag == "Player") {
-			hasEnteredDoor = true;
+		if (coll.gameObject.name == "Fighty") {
+			fightyHasEnteredDoor = true;
 		}
+        else if(coll.gameObject.name == "Shooty") {
+            shootyHasEnteredDoor = true;
+        }
 
 		if (coll.gameObject.tag == "Power") {
 			powerSupply += 1;
@@ -131,31 +157,59 @@ public class EnterDoor : MonoBehaviour {
 				powerContainer.GetComponent<SpriteRenderer> ().sprite = needOne;
 			} else if(powerSupply >= 3){
 				powerContainer.GetComponent<SpriteRenderer> ().sprite = needNone;
+                myHalo.enabled = true;
 			}
 		}
 	}
 
 	void OnTriggerExit2d(Collider2D coll)
     {
-        if (coll.gameObject.tag == "Player")
+        if (coll.gameObject.name == "Fighty")
         {
-            hasEnteredDoor = false;
+            fightyHasEnteredDoor = false;
         }
-	}
+        else if (coll.gameObject.name == "Shooty")
+        {
+            shootyHasEnteredDoor = false;
+        }
+    }
 
 	//Determines what door to go through
 	public void goThroughDoor(){
-        Vector3 overshoot = (theDoor.transform.position - gameObject.transform.position).normalized * enterDistance;
+        powerSupply = 3;
 
-		//If player has entered door zone, allow passage to another
-		if (hasEnteredDoor == true && powerSupply >= 3) {
-			hasEnteredDoor = false;
-			GameObject playerNow = GameObject.FindGameObjectWithTag ("Players");
-			//Destroy (playerNow);
+        //If player has entered door zone, allow passage to another
+		if (fightyHasEnteredDoor && shootyHasEnteredDoor && powerSupply >= 3) {
+            fightyHasEnteredDoor = false;
+            shootyHasEnteredDoor = false;
 
-			//GameObject player = Instantiate (players);
-            playerNow.transform.position = new Vector2 (theDoor.transform.position.x + overshoot.x, theDoor.transform.position.y + overshoot.y);
-			ims.Reset ();
+            switch (theDoor.name)
+            {
+                case ("north door"):
+                    fighty.transform.position = theDoor.transform.position + new Vector3(-tetherManager.initialDistance / 2, 0, 0);
+                    shooty.transform.position = theDoor.transform.position + new Vector3(tetherManager.initialDistance / 2, 0, 0);
+                    tetherManager.distributeNodes();
+                    break;
+
+                case ("south door"):
+                    fighty.transform.position = theDoor.transform.position + new Vector3(-tetherManager.initialDistance / 2, 0, 0);
+                    shooty.transform.position = theDoor.transform.position + new Vector3(tetherManager.initialDistance / 2, 0, 0);
+                    tetherManager.distributeNodes();
+                    break;
+                    
+                case ("east door"):
+                    fighty.transform.position = theDoor.transform.position + new Vector3(0, -tetherManager.initialDistance / 2, 0);
+                    shooty.transform.position = theDoor.transform.position + new Vector3(0, tetherManager.initialDistance / 2, 0);
+                    tetherManager.distributeNodes();
+                    break;
+
+                case ("west door"):
+                    fighty.transform.position = theDoor.transform.position + new Vector3(0, -tetherManager.initialDistance / 2, 0);
+                    shooty.transform.position = theDoor.transform.position + new Vector3(0, tetherManager.initialDistance / 2, 0);
+                    tetherManager.distributeNodes();
+                    break;
+
+            }
 		}
 	}
 }
