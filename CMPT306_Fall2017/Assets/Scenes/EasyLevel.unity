@@ -748,6 +748,16 @@ Prefab:
       propertyPath: iterations
       value: 50
       objectReference: {fileID: 0}
+    - target: {fileID: 114160012113083624, guid: 5ffb6fd7197403047bbfd020adb72a9c,
+        type: 2}
+      propertyPath: fighty
+      value: 
+      objectReference: {fileID: 1359409903}
+    - target: {fileID: 114160012113083624, guid: 5ffb6fd7197403047bbfd020adb72a9c,
+        type: 2}
+      propertyPath: shooty
+      value: 
+      objectReference: {fileID: 1359409902}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5ffb6fd7197403047bbfd020adb72a9c, type: 2}
   m_IsPrefabParent: 0
@@ -1056,9 +1066,24 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 232968804247740292, guid: 43a50026743875842b5906d0e5d8116f,
+        type: 2}
+      propertyPath: m_Distance
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 43a50026743875842b5906d0e5d8116f, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1359409902 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1642003740233448, guid: 43a50026743875842b5906d0e5d8116f,
+    type: 2}
+  m_PrefabInternal: {fileID: 1359409901}
+--- !u!1 &1359409903 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1441463896677894, guid: 43a50026743875842b5906d0e5d8116f,
+    type: 2}
+  m_PrefabInternal: {fileID: 1359409901}
 --- !u!1 &1385605099
 GameObject:
   m_ObjectHideFlags: 0
