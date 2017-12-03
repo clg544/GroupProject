@@ -278,18 +278,56 @@ public class InputManagerScript : MonoBehaviour {
                 break;
         }
         
+        /* Left Bumper to brake */
         if (Input.GetButton(myInput.LeftBumper))
         {
             myBehavior.Brake();
         }
+
+        /* Y to change Weapons */
         if (Input.GetButton(myInput.ButtonY))
         {
             myCombat.SwitchWeapon();
         }
+
+        /* Right Bmper to attack */
         if (Input.GetButton(myInput.RightBumper))
         {
             myCombat.Shoot();
         }
+
+        /* A to interact with doors and ship*/
+        if (Input.GetButtonDown(myInput.ButtonA))
+        {
+            print("A");
+            openingDoor = true;
+            enteringShip = true;
+        }
+        if(Input.GetButtonUp(myInput.ButtonA))
+        {
+            openingDoor = false;
+            enteringShip = false;
+        }
+
+        /* X to view overworld */
+        if (Input.GetButtonDown(myInput.ButtonX))
+        {
+            if (overWorldMap.enabled == false)
+            {
+                overWorldMap.enabled = true;
+                playerCamera.enabled = false;
+                miniMap.SetActive(false);
+                Time.timeScale = 0;
+            }
+            else
+            {
+                overWorldMap.enabled = false;
+                playerCamera.enabled = true;
+                miniMap.SetActive(true);
+                Time.timeScale = 1;
+            }
+        }
+
     }
 
     private void PrintInputNames(InputNames i)

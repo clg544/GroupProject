@@ -146,6 +146,7 @@ public class EnterDoor : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (ims.openingDoor == true) {
+            print("Hit!");
 			goThroughDoor ();
 		}
 	}
@@ -159,7 +160,7 @@ public class EnterDoor : MonoBehaviour {
             shootyHasEnteredDoor = true;
         }
 
-        if(fightyHasEnteredDoor && shootyHasEnteredDoor)
+        if(fightyHasEnteredDoor && shootyHasEnteredDoor && powerSupply >= 3)
         {
             HudInteract.GetComponent<Text>().text = "A: Enter Door";
             HudInteract.enabled = true;
@@ -179,28 +180,27 @@ public class EnterDoor : MonoBehaviour {
 		}
 	}
 
-	void OnTriggerExit2d(Collider2D coll)
+	void OnTriggerExit2D(Collider2D coll)
     {
         if (coll.gameObject.name == "Fighty")
         {
             HudInteract.enabled = false;
             fightyHasEnteredDoor = false;
-            HudInteract.enabled = false;
         }
-        else if (coll.gameObject.name == "Shooty")
+        if (coll.gameObject.name == "Shooty")
         {
             HudInteract.enabled = false;
             shootyHasEnteredDoor = false;
-            HudInteract.enabled = false;
         }
     }
 
 	//Determines what door to go through
 	public void goThroughDoor(){
-        powerSupply = 3;
+        powerSupply = 4;
 
         //If player has entered door zone, allow passage to another
 		if (fightyHasEnteredDoor && shootyHasEnteredDoor && powerSupply >= 3) {
+            
             fightyHasEnteredDoor = false;
             shootyHasEnteredDoor = false;
             HudInteract.enabled = false;

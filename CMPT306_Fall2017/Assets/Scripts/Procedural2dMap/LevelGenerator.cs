@@ -112,7 +112,7 @@ public class LevelGenerator : MonoBehaviour {
 		clearDoorSpace ();
 
 		placeNavs ();
-        placeSpawns();
+        //placeSpawns();
         placeItems();
         placeTreasure();
 
