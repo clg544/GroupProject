@@ -196,7 +196,6 @@ public class EnterDoor : MonoBehaviour {
 
 	//Determines what door to go through
 	public void goThroughDoor(){
-        powerSupply = 4;
 
         //If player has entered door zone, allow passage to another
 		if (fightyHasEnteredDoor && shootyHasEnteredDoor && powerSupply >= 3) {

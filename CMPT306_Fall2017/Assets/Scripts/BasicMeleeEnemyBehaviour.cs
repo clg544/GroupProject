@@ -30,6 +30,20 @@ public class BasicMeleeEnemyBehaviour : MonoBehaviour {
         rb = GetComponent<Rigidbody2D>();
         currentNavPoint = navQueue.Dequeue();
         //md = GetComponentInChildren<MeleeDamage>();
+
+
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        for(int i = 0; i < players.Length; i++)
+        { 
+            if (players[i].name.Equals("Fighty"))
+            {
+                fighty = players[i];
+            }
+            if(players[i].name.Equals("Shooty"))
+            {
+                shooty = players[i];
+            }
+        }
     }
 
 	void FixedUpdate () {
