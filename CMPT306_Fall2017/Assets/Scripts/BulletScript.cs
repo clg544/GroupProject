@@ -18,10 +18,12 @@ public class BulletScript : MonoBehaviour {
             coll.gameObject.GetComponent<Rigidbody2D>().AddForce(myBody.velocity * myBody.mass);
         }
 
-        if(coll.gameObject.tag != "Untagged")
+        if(coll.gameObject.tag == "Treasure" || coll.gameObject.tag == "Power")
         {
-            Destroy(gameObject);
+            coll.gameObject.GetComponent<Rigidbody2D>().AddForce(myBody.velocity * myBody.mass);
         }
+        
+        Destroy(gameObject);
     }
 
 	// Use this for initialization
