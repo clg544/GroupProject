@@ -114,7 +114,7 @@ public class LevelGenerator : MonoBehaviour {
                 
         //Instantiate the different enemies randomly
         int enemySelection = UnityEngine.Random.Range(0, 2);
-        GameObject newEnemy = Instantiate(enemyPlayers[enemySelection], gameObject.transform);
+                GameObject newEnemy = Instantiate(enemyPlayers[enemySelection], gameObject.transform);
         allEnemies.Add(newEnemy);
         newEnemy.gameObject.tag = "Enemy";
         newEnemy.transform.position = spawn.transform.position;

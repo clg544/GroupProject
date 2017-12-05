@@ -182,12 +182,12 @@ public class InputManagerScript : MonoBehaviour {
 			if (overWorldMap.enabled == false) {
 				overWorldMap.enabled = true;
 				playerCamera.enabled = false;
-				miniMap.SetActive (false);
+				//miniMap.SetActive (false);
 				Time.timeScale = 0;
 			} else {
 				overWorldMap.enabled = false;
 				playerCamera.enabled = true;
-				miniMap.SetActive (true);
+				//miniMap.SetActive (true);
 				Time.timeScale = 1;
 			}
 		}
@@ -318,14 +318,14 @@ public class InputManagerScript : MonoBehaviour {
             {
                 overWorldMap.enabled = true;
                 playerCamera.enabled = false;
-                miniMap.SetActive(false);
+                //miniMap.SetActive(false);
                 Time.timeScale = 0;
             }
             else
             {
                 overWorldMap.enabled = false;
                 playerCamera.enabled = true;
-                miniMap.SetActive(true);
+                //miniMap.SetActive(true);
                 Time.timeScale = 1;
             }
         }

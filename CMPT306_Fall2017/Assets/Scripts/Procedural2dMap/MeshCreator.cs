@@ -15,7 +15,6 @@ public class MeshCreator : MonoBehaviour {
 	HashSet<int> checkedVertices = new HashSet<int>();
 
 	public void GenerateMesh(int[,] map, float squareSize) {
-
 		triangleDictionary.Clear ();
 		outlines.Clear ();
 		checkedVertices.Clear ();
@@ -55,7 +54,7 @@ public class MeshCreator : MonoBehaviour {
 
 	void Generate2DColliders() {
 
-		PolygonCollider2D[] currentColliders = gameObject.GetComponents<PolygonCollider2D> ();
+        PolygonCollider2D[] currentColliders = gameObject.GetComponents<PolygonCollider2D> ();
 		for (int i = 0; i < currentColliders.Length; i++) {
 			Destroy(currentColliders[i]);
 		}
@@ -69,17 +68,37 @@ public class MeshCreator : MonoBehaviour {
 
 
 		foreach (List<int> outline in outlines) {
-			if (outlines.IndexOf (outline) == 1 || outlines.IndexOf(outline) == 0) {
-				EdgeCollider2D edgeCollider = gameObject.AddComponent<EdgeCollider2D> ();
-				Vector2[] edgePoints = new Vector2[outline.Count];
+			if (outlines.IndexOf (outline) == 1) {
+                PolygonCollider2D edgeCollider = gameObject.AddComponent<PolygonCollider2D> ();
+				Vector2[] edgePoints = new Vector2[outline.Count + 6];
 
 				for (int i = 0; i < outline.Count; i++) {
 					edgePoints [i] = new Vector2 (vertices [outline [i]].x, vertices [outline [i]].z);
-				}
+                }
 
+                /* Do a loop outside of the map to add thickness */
+                edgePoints[edgePoints.Length - 6] = new Vector2(-64, 0);
+                edgePoints[edgePoints.Length - 5] = new Vector2(-64, 33);
+                edgePoints[edgePoints.Length - 4] = new Vector2(64, 33);
+                edgePoints[edgePoints.Length - 3] = new Vector2(64, -33);
+                edgePoints[edgePoints.Length - 2] = new Vector2(-64, -33);
+                edgePoints[edgePoints.Length - 1] = new Vector2(-64, 0);
+                
+                edgeCollider.points = edgePoints;
+			}
+            else if (outlines.IndexOf(outline) == 0)
+            {
+                PolygonCollider2D edgeCollider = gameObject.AddComponent<PolygonCollider2D>();
+                Vector2[] edgePoints = new Vector2[outline.Count + 6];
 
-				edgeCollider.points = edgePoints;
-			} else {
+                for (int i = 0; i < outline.Count; i++)
+                {
+                    edgePoints[i] = new Vector2(vertices[outline[i]].x, vertices[outline[i]].z);
+                }
+                
+                edgeCollider.points = edgePoints;
+            }
+            else {
 				PolygonCollider2D polyCollider = gameObject.AddComponent<PolygonCollider2D> ();
 				Vector2[] edgePoints = new Vector2[outline.Count];
 

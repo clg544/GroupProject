@@ -29,17 +29,17 @@ TagManager:
   - UI
   - 
   - 
-  - Player Attack
+  - Minimap
   - Player
   - Enemy
   - Environment
   - Tether
   - nav
   - player
-  - Background
-  - Minimap
-  - MinimapCamera
   - 
+  - Player Attack
+  - MinimapCamera
+  - Background
   - 
   - 
   - 

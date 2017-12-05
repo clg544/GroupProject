@@ -203,6 +203,8 @@ public class EnterDoor : MonoBehaviour {
             fightyHasEnteredDoor = false;
             shootyHasEnteredDoor = false;
             HudInteract.enabled = false;
+            theDoor.GetComponent<EnterDoor>().powerSupply = 3;
+            theDoor.GetComponent<EnterDoor>().myHalo.enabled = true;
 
             switch (theDoor.name)
             {
