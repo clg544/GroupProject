@@ -59,6 +59,14 @@ public class PlayerBehavior : MonoBehaviour {
     {
         if(Mathf.Abs(f) <= 1)
             frameMovement.x += f;
+
+		if (frameMovement.x < 0) {
+			anim.SetBool ("MoveLeft", true);
+			anim.SetBool ("MoveRight", false);
+		} else if(frameMovement.x > 0){
+			anim.SetBool ("MoveRight", true);
+			anim.SetBool ("MoveLeft", false);
+		}
     }
     public void MoveVertical(float f)
     {
