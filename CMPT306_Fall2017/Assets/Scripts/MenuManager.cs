@@ -6,6 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
+
+    public InputManagerScript curInputManager;
+
     public string mainSceneName;
     public string menuSceneName;
     public string easyScene;
@@ -51,6 +54,8 @@ public class MenuManager : MonoBehaviour
     {
         PlayerHUD.enabled = false;
         DeathPanel.enabled = true;
+
+        //curInputManager.inputEnabled = false;
     }
 
     // Use this for initialization

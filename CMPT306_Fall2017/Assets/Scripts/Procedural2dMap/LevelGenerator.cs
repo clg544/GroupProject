@@ -5,11 +5,17 @@ using System.Collections.Generic;
 
 public class LevelGenerator : MonoBehaviour {
 
+    public CullingScript toCull;
+
     public GameObject fighty;
     public GameObject shooty;
 	public int width;
 	public int height;
 
+    public int sugEnemyCount;
+    float spawnTime;
+    public float spawnInterval;
+    
     public bool refreshOnClick = false;
 
 	public string seed;
@@ -37,10 +43,11 @@ public class LevelGenerator : MonoBehaviour {
 	public GameObject playerSpawn;
 	public GameObject itemPrefab;
     public GameObject treasurePrefab;
+    ScoreManager scoreMan;
 
-    List<GameObject> enemySpawns;
+    IList<GameObject> enemySpawns;
 	List<GameObject> navPoints;
-	List<GameObject> allEnemies;
+	public List<GameObject> allEnemies;
 	List<GameObject> allItems;
 	public List<String> directions;
 	List<GameObject> doors;
@@ -57,6 +64,7 @@ public class LevelGenerator : MonoBehaviour {
 		allItems = new List<GameObject> ();
 
 		int numOfNavs = 20;
+        spawnTime = Time.time + spawnInterval;
 
 		for (int i = 0; i < numOfNavs; i++) {
 			GameObject nav = Instantiate (navPoint);
@@ -64,10 +72,13 @@ public class LevelGenerator : MonoBehaviour {
 			nav.transform.SetParent (this.transform);
 		}
 
+        toCull = FindObjectOfType<CullingScript>();
+        scoreMan = FindObjectOfType<ScoreManager>();
+
 		GenerateMap();
 	}
 
-	void Update() {
+    void Update() {
         if (refreshOnClick)
         {
             if (Input.GetMouseButtonDown(0))
@@ -75,7 +86,55 @@ public class LevelGenerator : MonoBehaviour {
                 GenerateMap();
             }
         }
-	}
+
+        if (Time.time > spawnTime)
+        {
+            if (allEnemies.Count < sugEnemyCount)
+            {
+                SpawnEnemy();
+            }
+
+            spawnTime = Time.time + spawnInterval;
+        }
+    }
+
+
+    void AdjustDifficulty()
+    {
+        spawnInterval = spawnInterval;
+        sugEnemyCount = sugEnemyCount;
+    }
+    
+    // Create new enemies if we're in deficit
+    void SpawnEnemy()
+    {
+        int rand = UnityEngine.Random.Range(0, enemySpawns.Count);
+
+        GameObject spawn = enemySpawns[rand];
+                
+        //Instantiate the different enemies randomly
+        int enemySelection = UnityEngine.Random.Range(0, 2);
+        GameObject newEnemy = Instantiate(enemyPlayers[enemySelection], gameObject.transform);
+        allEnemies.Add(newEnemy);
+        newEnemy.gameObject.tag = "Enemy";
+        newEnemy.transform.position = spawn.transform.position;
+        toCull.AddEnemyToList(newEnemy);
+
+        if (enemySelection == 1)
+        {
+            newEnemy.GetComponent<BasicMeleeEnemyBehaviour>().fighty = fighty;
+            newEnemy.GetComponent<BasicMeleeEnemyBehaviour>().shooty = shooty;
+            foreach (GameObject nav in navPoints)
+            {
+                newEnemy.GetComponent<BasicMeleeEnemyBehaviour>().navPoints.Add(nav);
+            }
+        }
+        else if (enemySelection == 0)
+        {
+            newEnemy.GetComponent<BasicRangedEnemyBehaviour>().fighty = fighty;
+            newEnemy.GetComponent<BasicRangedEnemyBehaviour>().shooty = shooty;
+        }
+    }
 
 	//randomly creates the map
 	void GenerateMap() {
@@ -267,8 +326,8 @@ public class LevelGenerator : MonoBehaviour {
 
 				//Instantiate the different enemies randomly
 				int enemySelection = UnityEngine.Random.Range (0, 2);
-				GameObject newEnemy = Instantiate (enemyPlayers [enemySelection]);
-				allEnemies.Add (newEnemy);
+                GameObject newEnemy = Instantiate(enemyPlayers[enemySelection], gameObject.transform);
+                allEnemies.Add (newEnemy);
 				newEnemy.gameObject.tag = "Enemy";
 				newEnemy.transform.position = spawn.transform.position;
                

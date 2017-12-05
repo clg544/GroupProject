@@ -282,7 +282,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fighty: {fileID: 1015685231720104, guid: f5beac725b81ce84e9335ad6d595f36f, type: 2}
   shooty: {fileID: 1572331492096810, guid: 579cbbeb1411b874786580eb34574534, type: 2}
-  speed: 0
+  speed: 3
   spread: 15
   burst: 13
   reloadTime: 5

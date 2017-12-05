@@ -5978,6 +5978,8 @@ MonoBehaviour:
   shooty: {fileID: 0}
   width: 120
   height: 60
+  sugEnemyCount: 4
+  spawnInterval: 60
   refreshOnClick: 0
   seed: 
   useRandomSeed: 1
@@ -5993,6 +5995,7 @@ MonoBehaviour:
   itemPrefab: {fileID: 1567041419273550, guid: c0094364cf21d4b62912aea67b6c8c83, type: 2}
   treasurePrefab: {fileID: 1587112429352048, guid: 82e1480b955a303498aeca00e5516aa4,
     type: 2}
+  allEnemies: []
   directions: []
 --- !u!114 &114281602413568262
 MonoBehaviour:

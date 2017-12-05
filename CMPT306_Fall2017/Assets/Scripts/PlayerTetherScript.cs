@@ -63,8 +63,7 @@ public class PlayerTetherScript : MonoBehaviour {
 
         if (curHealth < 0)
         {
-            print("Tether health is zero!");
-
+            // Snap the tether
             if(tetherID != 0)
             {
                 tetherLinks[tetherID].SetActive(false);
@@ -74,6 +73,9 @@ public class PlayerTetherScript : MonoBehaviour {
                 if(tetherID != tetherScripts.Length)
                     tetherScripts[tetherID + 1].tetherVisual.enabled = false;
             }
+
+            // kill the players
+            Kill();
         }
         
         return;

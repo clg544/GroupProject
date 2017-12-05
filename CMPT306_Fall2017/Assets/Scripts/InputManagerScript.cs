@@ -13,6 +13,8 @@ using UnityEngine;
 
 public class InputManagerScript : MonoBehaviour {
 
+    public bool inputEnabled;
+
     public string LeftHorizontal;
     public string LeftVertical;
     public string RightHorizontal;
@@ -389,6 +391,8 @@ public class InputManagerScript : MonoBehaviour {
             }
         }
 
+        inputEnabled = true;
+
         FightyBehavior = FightyObject.GetComponent<PlayerBehavior>();
         ShootyBehavior = ShootyObject.GetComponent<PlayerBehavior>();
 
@@ -409,10 +413,13 @@ public class InputManagerScript : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        KeyboardInput();
-        
-        JoypadInput(P1Input, FightyBehavior, FightyCombat);
-        JoypadInput(P2Input, ShootyBehavior, ShootyCombat);
+        if (inputEnabled)
+        {
+            KeyboardInput();
+
+            JoypadInput(P1Input, FightyBehavior, FightyCombat);
+            JoypadInput(P2Input, ShootyBehavior, ShootyCombat);
+        }
     }
 
 	public void Reset(){
@@ -429,6 +436,8 @@ public class InputManagerScript : MonoBehaviour {
 				ShootyObject = p;
 			}
 		}
+
+        inputEnabled = true;
 
 		FightyBehavior = FightyObject.GetComponent<PlayerBehavior>();
 		ShootyBehavior = ShootyObject.GetComponent<PlayerBehavior>();

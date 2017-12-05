@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyScript : MonoBehaviour {
 
     AudioManager soundOut;
+    SpawnTreasureOnDeath stod;
 
     public int currentHealth;
     public int maxHealth;
@@ -32,13 +33,14 @@ public class EnemyScript : MonoBehaviour {
      */
     public void Kill()
     {
-
+        stod.SpawnTreasure();
 
         Destroy(gameObject);
     }
 
     // Use this for initialization
     void Start () {
+        stod = gameObject.GetComponent<SpawnTreasureOnDeath>();
 
         GameObject[] managers = GameObject.FindGameObjectsWithTag("Manager");
 

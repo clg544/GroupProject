@@ -11,12 +11,12 @@ public class SpawnTreasureOnDeath : MonoBehaviour {
     public float maxForce;
 
     public GameObject treasurePrefab;
-
-    void OnDestroy()
+    
+    public void SpawnTreasure()
     {
         GameObject curObj;
 
-        for(int i = 0; i < count; i++)
+        for (int i = 0; i < count; i++)
         {
             curObj = Instantiate(treasurePrefab, this.transform.position, Quaternion.identity, this.transform.parent);
             curObj.GetComponent<Rigidbody2D>().AddForce(Random.insideUnitCircle * Random.Range(0, maxForce));

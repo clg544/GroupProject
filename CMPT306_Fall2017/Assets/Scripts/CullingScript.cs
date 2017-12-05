@@ -15,6 +15,10 @@ public class CullingScript : MonoBehaviour {
     public float cullingDistance;
     public GameObject cameraTarget;
 
+    public void AddEnemyToList(GameObject newEnemy)
+    {
+        cullingList.AddFirst(newEnemy);
+    }
     
 	// Use this for initialization
     // Set to run last of all start scripts
