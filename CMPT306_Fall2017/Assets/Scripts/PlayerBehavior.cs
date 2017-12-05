@@ -86,8 +86,9 @@ public class PlayerBehavior : MonoBehaviour {
     void Start () {
         playerBody = this.GetComponent<Rigidbody2D>();
 		anim = this.GetComponent<Animator> ();
-	}
-	
+    }
+
+
 	// Update is called once per frame
 	void FixedUpdate () {
         /* Accelerate the player with a movement vector based on this frames input */

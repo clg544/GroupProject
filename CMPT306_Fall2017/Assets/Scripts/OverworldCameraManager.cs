@@ -10,6 +10,8 @@ public class OverworldCameraManager : MonoBehaviour {
     public Camera myCamera;
     public GameObject players;
     public GameObject ship;
+    public GameObject shootyOverSprite;
+    public GameObject shipOverSprite;
 
     Vector3 playerPos;
     Vector3 shipPos;
@@ -22,9 +24,12 @@ public class OverworldCameraManager : MonoBehaviour {
 	void Update () {
         playerPos = players.transform.position;
         shipPos = ship.transform.position;
+        float playerShipDist = Vector3.Distance(playerPos, shipPos);
 
         gameObject.transform.position = (playerPos - shipPos) / 2;
         gameObject.transform.position += new Vector3(0, 0, -150);
-        myCamera.fieldOfView = 60 + ((Vector3.Distance(playerPos, shipPos) / maxAllowableDistance) * maxFov);
-	}
+        myCamera.fieldOfView = 60 + ((playerShipDist / maxAllowableDistance) * maxFov);
+
+        shootyOverSprite.transform.localScale = (Vector3.one * (15 + ((playerShipDist / 450.0F) * 75)));
+    }
 }
