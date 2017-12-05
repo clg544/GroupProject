@@ -273,7 +273,7 @@ MonoBehaviour:
   maxHealth: 100
   speed: 10
   navPoints: []
-  navTriggerDistance: 1
+  navTriggerDistance: 3
   md: {fileID: 114285170059132214}
 --- !u!212 &212154049605056866
 SpriteRenderer:

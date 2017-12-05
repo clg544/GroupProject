@@ -73,6 +73,7 @@ public class InputManagerScript : MonoBehaviour {
 	public Camera overWorldMap;
 	public Camera playerCamera;
 	public GameObject miniMap;
+	public float doorTimer;
 
     private void KeyboardInput()
     {
@@ -301,9 +302,11 @@ public class InputManagerScript : MonoBehaviour {
         /* A to interact with doors and ship*/
         if (Input.GetButtonDown(myInput.ButtonA))
         {
-            print("A");
-            openingDoor = true;
-            enteringShip = true;
+			if (doorTimer >= 0) {
+				openingDoor = true;
+				enteringShip = true;
+				doorTimer = 1;
+			} 
         }
         if(Input.GetButtonUp(myInput.ButtonA))
         {
@@ -413,6 +416,8 @@ public class InputManagerScript : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
+		doorTimer -= Time.deltaTime;
+
         if (inputEnabled)
         {
             KeyboardInput();

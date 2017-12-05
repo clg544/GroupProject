@@ -78,6 +78,8 @@ public class BasicMeleeEnemyBehaviour : MonoBehaviour {
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
             Debug.DrawRay(transform.position, (currentNavPoint.transform.position - transform.position ).normalized);
             hit = Physics2D.Raycast(transform.position, ( currentNavPoint.transform.position - transform.position).normalized);
+
+        
             if (Vector2.Distance(transform.position, currentNavPoint.transform.position) < navTriggerDistance || hit.transform.gameObject != currentNavPoint) {
                 rb.velocity = new Vector2(0,0);
                 navQueue.Enqueue(currentNavPoint);
