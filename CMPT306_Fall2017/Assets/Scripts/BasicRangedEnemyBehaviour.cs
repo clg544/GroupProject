@@ -115,7 +115,7 @@ public class BasicRangedEnemyBehaviour : MonoBehaviour {
                 {
                     shootHit.transform.gameObject.SendMessage("ApplyDamage", damage);
                 }
-                yield return 10;
+                yield return new WaitForSeconds(0.2f);
                 lr.enabled = false;
 
                yield return new WaitForSeconds(rof);
