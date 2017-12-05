@@ -979,7 +979,7 @@ Prefab:
     - target: {fileID: 114160012113083624, guid: 5ffb6fd7197403047bbfd020adb72a9c,
         type: 2}
       propertyPath: iterations
-      value: 50
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 114160012113083624, guid: 5ffb6fd7197403047bbfd020adb72a9c,
         type: 2}
@@ -1125,6 +1125,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 111703763403816096, guid: 43a50026743875842b5906d0e5d8116f,
+        type: 2}
+      propertyPath: m_Animations.Array.size
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4292959204018798, guid: 43a50026743875842b5906d0e5d8116f, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1272,6 +1277,61 @@ Prefab:
       propertyPath: acceleration
       value: 12
       objectReference: {fileID: 0}
+    - target: {fileID: 95138711968233790, guid: 43a50026743875842b5906d0e5d8116f,
+        type: 2}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 76ee213e9ea14f041b673f9458cd0e82, type: 2}
+    - target: {fileID: 111703763403816096, guid: 43a50026743875842b5906d0e5d8116f,
+        type: 2}
+      propertyPath: m_Animations.Array.data[0]
+      value: 
+      objectReference: {fileID: 7400000, guid: cf7501c67a6264f4d86909230ab03b89, type: 2}
+    - target: {fileID: 111703763403816096, guid: 43a50026743875842b5906d0e5d8116f,
+        type: 2}
+      propertyPath: m_Animations.Array.data[1]
+      value: 
+      objectReference: {fileID: 7400000, guid: a82b24b20c43f364b9d70e73805f9384, type: 2}
+    - target: {fileID: 111703763403816096, guid: 43a50026743875842b5906d0e5d8116f,
+        type: 2}
+      propertyPath: m_Animations.Array.data[2]
+      value: 
+      objectReference: {fileID: 7400000, guid: 4cf25d654fb0f0f478468ecee4dacc8f, type: 2}
+    - target: {fileID: 111703763403816096, guid: 43a50026743875842b5906d0e5d8116f,
+        type: 2}
+      propertyPath: m_Animations.Array.data[3]
+      value: 
+      objectReference: {fileID: 7400000, guid: 6296b04299b1b954db4b01a8de11251a, type: 2}
+    - target: {fileID: 111703763403816096, guid: 43a50026743875842b5906d0e5d8116f,
+        type: 2}
+      propertyPath: m_Animations.Array.data[4]
+      value: 
+      objectReference: {fileID: 7400000, guid: 5ed23db4168dc5841a61cb964e57ee61, type: 2}
+    - target: {fileID: 111703763403816096, guid: 43a50026743875842b5906d0e5d8116f,
+        type: 2}
+      propertyPath: m_Animations.Array.data[5]
+      value: 
+      objectReference: {fileID: 7400000, guid: 4b67d8075808a9d42b30e02c46e80818, type: 2}
+    - target: {fileID: 111703763403816096, guid: 43a50026743875842b5906d0e5d8116f,
+        type: 2}
+      propertyPath: m_Animations.Array.data[6]
+      value: 
+      objectReference: {fileID: 7400000, guid: ec0b2e7b994b33540841b50b81eb87ed, type: 2}
+    - target: {fileID: 111703763403816096, guid: 43a50026743875842b5906d0e5d8116f,
+        type: 2}
+      propertyPath: m_Animations.Array.data[7]
+      value: 
+      objectReference: {fileID: 7400000, guid: 865708834d3c95a4286e3fc162187b6f, type: 2}
+    - target: {fileID: 111703763403816096, guid: 43a50026743875842b5906d0e5d8116f,
+        type: 2}
+      propertyPath: m_Animations.Array.data[8]
+      value: 
+      objectReference: {fileID: 7400000, guid: 8936e7d39d696374dbe5ea4e36dbaf1f, type: 2}
+    - target: {fileID: 111703763403816096, guid: 43a50026743875842b5906d0e5d8116f,
+        type: 2}
+      propertyPath: m_Animations.Array.data[9]
+      value: 
+      objectReference: {fileID: 7400000, guid: 6b617a139bbb0a243b7903957df84a6e, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 43a50026743875842b5906d0e5d8116f, type: 2}
   m_IsPrefabParent: 0
