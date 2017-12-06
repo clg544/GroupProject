@@ -27,28 +27,29 @@ public class BasicRangedEnemyBehaviour : MonoBehaviour {
     private GameObject target;
 
     // Use this for initialization
-    void Start()
-    {
+    void Start() {
         GameObject[] managers = GameObject.FindGameObjectsWithTag("Manager");
 
-        for (int i = 0; i < managers.Length; i++)
-        {
-            if (managers[i].name == "SoundManager")
-            {
+        for(int i = 0; i < managers.Length; i++) {
+            if(managers[i].name == "SoundManager") {
                 soundOut = managers[i].GetComponent<AudioManager>();
             }
         }
-        
+
         navQueue = new Queue<GameObject>();
-        foreach (GameObject g in navPoints) {
+        foreach(GameObject g in navPoints) {
             navQueue.Enqueue(g);
         }
 
-        currentNavPoint = navQueue.Dequeue();
-      
+        if(navQueue.Count != 0) {
+            currentNavPoint = navQueue.Dequeue();
+        }
         rb = GetComponent<Rigidbody2D>();
         lr = GetComponentInChildren<LineRenderer>();
 
+        StartCoroutine(shoot());
+    }
+    private void OnEnable() {
         StartCoroutine(shoot());
     }
 
@@ -75,20 +76,22 @@ public class BasicRangedEnemyBehaviour : MonoBehaviour {
         Vector3 dir = target.transform.position - transform.position;
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90;
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-        
-        rb.velocity = (currentNavPoint.transform.position - transform.position).normalized * speed;
-        
-        //
-        if (Vector2.Distance(transform.position, currentNavPoint.transform.position) < navTriggerDistance) {
-            navQueue.Enqueue(currentNavPoint);
-            currentNavPoint = navQueue.Dequeue();
+
+        if(currentNavPoint != null) {
+            rb.velocity = (currentNavPoint.transform.position - transform.position).normalized * speed;
+
+
+            if(Vector2.Distance(transform.position, currentNavPoint.transform.position) < navTriggerDistance) {
+                navQueue.Enqueue(currentNavPoint);
+                currentNavPoint = navQueue.Dequeue();
+            }
         }
 
     }
 
     IEnumerator shoot() {
         yield return new WaitForSeconds(Random.Range(0, reloadTime));
-       // Debug.Log("beginning shooting");
+        Debug.Log("beginning shooting");
         while (true) {
             //  Debug.Log("shooting");
             for (int i = 0; i < burst; i++)
@@ -112,7 +115,7 @@ public class BasicRangedEnemyBehaviour : MonoBehaviour {
                 {
                     shootHit.transform.gameObject.SendMessage("ApplyDamage", damage);
                 }
-                yield return 10;
+                yield return new WaitForSeconds(0.2f);
                 lr.enabled = false;
 
                yield return new WaitForSeconds(rof);

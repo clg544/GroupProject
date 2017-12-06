@@ -379,9 +379,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93b83bad8f98b284dbfa4fb72eac84cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  curInputManager: {fileID: 0}
   mainSceneName: MainScene
   menuSceneName: 
   easyScene: EasyLevel
+  splashScreenName: SplashScreen
   MainMenu: {fileID: 392411666}
   Credits: {fileID: 898861482}
   PlayerHUD: {fileID: 0}
@@ -550,7 +552,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 544517438}
-        m_MethodName: LoadEasyScene
+        m_MethodName: LoadSplashScreen
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

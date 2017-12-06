@@ -33,6 +33,11 @@ public class MeleeDamage : MonoBehaviour {
         StartCoroutine(swing());
     }
 
+    private void OnEnable() {
+        inCombatWith = new LinkedList<GameObject>();
+        StartCoroutine(swing());
+    }
+
     void OnTriggerEnter2D(Collider2D collision) {
         if (collision.tag == "Player" && !inCombatWith.Contains(collision.gameObject)) {
             inCombatWith.AddFirst(collision.gameObject);

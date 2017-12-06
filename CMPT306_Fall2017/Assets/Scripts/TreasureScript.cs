@@ -33,38 +33,29 @@ public class TreasureScript : MonoBehaviour {
 
         mySprite = gameObject.GetComponent<SpriteRenderer>();
 
-        int randCol = Random.Range(0, 13);
+        int randCol = Random.Range(1, 6);
 
         /* Choose a color via rand + copypasta */
         switch (randCol)
         {
-            case 0:
+            case 1:
                 mySprite.color = Color.red;
                 break;
-            case 1:
+            case 2:
                 mySprite.color = Color.black;
                 break;
-            case 2:
-                mySprite.color = Color.blue;
-                break;
             case 3:
-                mySprite.color = Color.cyan;
-                break;
-            case 4:
-                mySprite.color = Color.green;
-                break;
-            case 5:
                 mySprite.color = Color.magenta;
                 break;
-            case 6:
+            case 4:
                 mySprite.color = Color.yellow;
                 break;
-            case 7:
+            case 5:
                 mySprite.color = Color.white;
                 break;
         }
 
-        worth = randCol;
+        worth = randCol * 3;
     }
     
 	// Update is called once per frame

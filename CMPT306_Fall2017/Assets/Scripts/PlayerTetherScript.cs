@@ -70,7 +70,7 @@ public class PlayerTetherScript : MonoBehaviour {
 
                 tetherScripts[tetherID - 1].tetherVisual.enabled = false;
 
-                if(tetherID != tetherScripts.Length)
+                if(tetherID <= tetherScripts.Length)
                     tetherScripts[tetherID + 1].tetherVisual.enabled = false;
             }
 

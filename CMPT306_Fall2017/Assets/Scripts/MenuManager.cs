@@ -12,6 +12,7 @@ public class MenuManager : MonoBehaviour
     public string mainSceneName;
     public string menuSceneName;
     public string easyScene;
+	public string splashScreenName;
 
     public Canvas MainMenu;
     public Canvas Credits;
@@ -32,6 +33,10 @@ public class MenuManager : MonoBehaviour
     {
         SceneManager.LoadScene(menuSceneName);
     }
+
+	public void LoadSplashScreen(){
+		SceneManager.LoadScene(splashScreenName);
+	}
 
     public void ExitGame()
     {
