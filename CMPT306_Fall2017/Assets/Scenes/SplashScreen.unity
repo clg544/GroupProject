@@ -386,6 +386,48 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 132037646}
+--- !u!1 &260985746
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 260985748}
+  - component: {fileID: 260985747}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &260985747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 260985746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94698fb497311446789441fdc456b653, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  easyScene: EasyLevel
+  AButton: A
+--- !u!4 &260985748
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 260985746}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 315.5, y: 254.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &383400120
 GameObject:
   m_ObjectHideFlags: 0
@@ -920,7 +962,6 @@ GameObject:
   - component: {fileID: 1000516266}
   - component: {fileID: 1000516265}
   - component: {fileID: 1000516264}
-  - component: {fileID: 1000516268}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1006,24 +1047,13 @@ RectTransform:
   - {fileID: 2097081648}
   - {fileID: 1519670224}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &1000516268
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1000516263}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94698fb497311446789441fdc456b653, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1183438144
 GameObject:
   m_ObjectHideFlags: 0
@@ -1466,55 +1496,13 @@ MonoBehaviour:
     You must work together using you unique skills to defeat enemies and collect loot!
     Get as much loot as you can but be careful, the tether may not last forever!
 
-    Press A to Start'
+    Press Start Button'
 --- !u!222 &1716052575
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1716052572}
---- !u!1001 &1794498619
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4283290277112284, guid: 82e1480b955a303498aeca00e5516aa4, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 69.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4283290277112284, guid: 82e1480b955a303498aeca00e5516aa4, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 177.70528
-      objectReference: {fileID: 0}
-    - target: {fileID: 4283290277112284, guid: 82e1480b955a303498aeca00e5516aa4, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4283290277112284, guid: 82e1480b955a303498aeca00e5516aa4, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4283290277112284, guid: 82e1480b955a303498aeca00e5516aa4, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4283290277112284, guid: 82e1480b955a303498aeca00e5516aa4, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4283290277112284, guid: 82e1480b955a303498aeca00e5516aa4, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4283290277112284, guid: 82e1480b955a303498aeca00e5516aa4, type: 2}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 82e1480b955a303498aeca00e5516aa4, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1 &1960121381
 GameObject:
   m_ObjectHideFlags: 0
