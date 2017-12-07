@@ -25,10 +25,12 @@ public class PlayerCombat : MonoBehaviour {
     public GameObject Crosshair;
     GameObject curCrosshair;
     public GameObject Bullet;                   // Shooty Bullet
-    public GameObject FightySwing;              // Fighty Swing
+    public GameObject FightySwing; 
+	public GameObject armAnim;			// Fighty Swing
+	public GameObject shootyRotate;
 
     /* Position Variables */
-    public enum Direction { Up, Right, Down, Left }
+    public enum Direction { Up, Right, Down, Left}
     Direction curDirection;
 
     /* Fighty Variables */
@@ -59,7 +61,9 @@ public class PlayerCombat : MonoBehaviour {
     public float HeavyBulletMassRatio;          // Mass Multiplier of heavy bullet over light bullet
     public float HeavyBulletDamage;             // How much damage this causes
     public float HeavyBulletSpread;             // Spread applied to Heavy bullets
-    public float recoil;                        // Universal recoil multiplier
+    public float recoil; 						// Universal recoil multiplier
+
+	int directionAnim;							//Sword swing direction
     
     /* Weapon variables */
     public enum Weapon { LIGHT_GUN, HEAVY_GUN, SWING, DASH };
@@ -129,6 +133,11 @@ public class PlayerCombat : MonoBehaviour {
             /* Apply Bullet Spread */
             bulletVel.AddForce(perpendicular * Random.Range(-1.0F, 1.0F) * LightBulletSpread);
 
+			Vector3 dir = curCrosshair.transform.position - transform.position;
+			float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90;
+			//  Debug.Log(tartget.transform.position + ", "+ dir + ", " + angle);
+			shootyRotate.transform.localRotation = Quaternion.AngleAxis(angle+180, Vector3.forward);
+
             /* Play a Sound */
             soundOut.PlaySound(soundOut.SoundIndex.Thwam);
         }
@@ -167,6 +176,11 @@ public class PlayerCombat : MonoBehaviour {
             /* Apply Bullet Spread */
             bulletVel.AddForce(perpendicular * Random.Range(-1.0F, 1.0F) * HeavyBulletSpread);
 
+			Vector3 dir = curCrosshair.transform.position - transform.position;
+			float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90;
+			//  Debug.Log(tartget.transform.position + ", "+ dir + ", " + angle);
+			shootyRotate.transform.localRotation = Quaternion.AngleAxis(angle+180, Vector3.forward);
+
             /* Play a Sound */
             soundOut.PlaySound(soundOut.SoundIndex.Thwam);
         }
@@ -174,11 +188,13 @@ public class PlayerCombat : MonoBehaviour {
     
     public void FighterAttack()
     {
-        if (curCrosshair == null)
-            return;
+		if (curCrosshair == null) {
+			return;
+		}
 
-        if (AttackCooldown > 0)
-            return;
+		if (AttackCooldown > 0) {
+			return;
+		}
         
         GameObject curAttack = Instantiate(FightySwing, gameObject.transform);
         curAttack.GetComponent<PlayerAttackScript>().attackDamage = swingDamage;
@@ -188,6 +204,22 @@ public class PlayerCombat : MonoBehaviour {
 
         AttackCooldown += swingCooldown;
         lastCountdownTime = swingCooldown;
+
+		if (curCrosshair.transform.localPosition.normalized.x == 1) {
+			directionAnim = 4;
+
+		} else if (curCrosshair.transform.localPosition.normalized.x == -1) {
+			directionAnim = 2;
+
+		} else if (curCrosshair.transform.localPosition.normalized.y == 1) {
+			directionAnim = 1;
+
+		} else if (curCrosshair.transform.localPosition.normalized.y == -1) {
+			directionAnim = 3;
+		}
+
+		armAnim.GetComponent<Animator>().SetInteger ("swing", directionAnim);
+		armAnim.transform.localPosition = curCrosshair.transform.localPosition;
 
         int rand = Random.Range(0, 1);
 
@@ -217,9 +249,26 @@ public class PlayerCombat : MonoBehaviour {
         
         curDashTime = dashTime;
         dashDirection = curCrosshair.transform.localPosition.normalized;
+		Debug.Log (curCrosshair.transform.localPosition.normalized);
 
         AttackCooldown += dashCooldown;
         lastCountdownTime = dashCooldown;
+
+		if (curCrosshair.transform.localPosition.normalized.x == 1) {
+			directionAnim = 4;
+
+		} else if (curCrosshair.transform.localPosition.normalized.x == -1) {
+			directionAnim = 2;
+
+		} else if (curCrosshair.transform.localPosition.normalized.y == 1) {
+			directionAnim = 1;
+
+		} else if (curCrosshair.transform.localPosition.normalized.y == -1) {
+			directionAnim = 3;
+		}
+
+		armAnim.GetComponent<Animator>().SetInteger ("slash", directionAnim);
+		armAnim.transform.localPosition = curCrosshair.transform.localPosition;
 
         soundOut.PlaySound(soundOut.SoundIndex.Charge);
     }
@@ -368,8 +417,15 @@ public class PlayerCombat : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        if (AttackCooldown > 0)
-            AttackCooldown -= Time.deltaTime;
+		if (AttackCooldown > 0) {
+			AttackCooldown -= Time.deltaTime;
+		}
+
+		if (armAnim.GetComponent<Animator>().GetNextAnimatorStateInfo (0).normalizedTime > 0.2) {
+			directionAnim = 0;
+			armAnim.GetComponent<Animator>().SetInteger ("swing", directionAnim);
+			armAnim.GetComponent<Animator>().SetInteger ("slash", directionAnim);
+		}
 
         Vector3 frameDir;
         /* Set Direction */
@@ -386,6 +442,7 @@ public class PlayerCombat : MonoBehaviour {
 
         /* Arbitrarily prefers the horizontal directions */
         /* Keep last direction if not moving/aiming      */
+
         if(Mathf.Abs(frameDir.x) >= Mathf.Abs(frameDir.y))
         {
             if (frameDir.x > 0)
