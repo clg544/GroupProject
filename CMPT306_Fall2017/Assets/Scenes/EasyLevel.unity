@@ -337,7 +337,7 @@ Prefab:
     - target: {fileID: 224908555833327422, guid: 5eed0066b4268c14887ebeafd95873f0,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -64.5
       objectReference: {fileID: 0}
     - target: {fileID: 224970077092168548, guid: 5eed0066b4268c14887ebeafd95873f0,
         type: 2}
@@ -357,7 +357,7 @@ Prefab:
     - target: {fileID: 224970077092168548, guid: 5eed0066b4268c14887ebeafd95873f0,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -129
       objectReference: {fileID: 0}
     - target: {fileID: 224820584492373780, guid: 5eed0066b4268c14887ebeafd95873f0,
         type: 2}
@@ -377,7 +377,7 @@ Prefab:
     - target: {fileID: 224820584492373780, guid: 5eed0066b4268c14887ebeafd95873f0,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -193.5
       objectReference: {fileID: 0}
     - target: {fileID: 224327183068424920, guid: 5eed0066b4268c14887ebeafd95873f0,
         type: 2}
@@ -397,7 +397,7 @@ Prefab:
     - target: {fileID: 224327183068424920, guid: 5eed0066b4268c14887ebeafd95873f0,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -258
       objectReference: {fileID: 0}
     - target: {fileID: 1191405102404602, guid: 5eed0066b4268c14887ebeafd95873f0, type: 2}
       propertyPath: m_IsActive
@@ -682,6 +682,11 @@ Prefab:
         type: 2}
       propertyPath: menuSceneName
       value: StartScreen
+      objectReference: {fileID: 0}
+    - target: {fileID: 114673474101548594, guid: 5eed0066b4268c14887ebeafd95873f0,
+        type: 2}
+      propertyPath: m_UiScaleMode
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5eed0066b4268c14887ebeafd95873f0, type: 2}

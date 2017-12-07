@@ -855,7 +855,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: This power! Drag this with tether to open doors
+  m_Text: This is power, drag to open doors
 --- !u!222 &741193579
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -996,7 +996,7 @@ MonoBehaviour:
   m_Script: {fileID: 1980459831, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -1266,7 +1266,7 @@ MonoBehaviour:
 
     Right Bumper to attack
 
-    Left Bumber to break
+    Left Bumber to brake
 
     Y to switch weapon
 
@@ -1417,7 +1417,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Welcome To Fighty Shooty
+  m_Text: Welcome To Fighty Shooty!
 --- !u!222 &1706919525
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1491,12 +1491,12 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'You are space fairing adventurers who are tethered together!
+  m_Text: 'You are space faring adventurers who are tethered together!
 
     You must work together using you unique skills to defeat enemies and collect loot!
-    Get as much loot as you can but be careful, the tether may not last forever!
+    Get as much loot as you can, but be careful! The tether won''t last forever!
 
-    Press Start Button'
+    Press ''T'' or Start Button '
 --- !u!222 &1716052575
 CanvasRenderer:
   m_ObjectHideFlags: 0
