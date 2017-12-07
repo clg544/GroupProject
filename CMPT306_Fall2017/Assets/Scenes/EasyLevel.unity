@@ -337,7 +337,7 @@ Prefab:
     - target: {fileID: 224908555833327422, guid: 5eed0066b4268c14887ebeafd95873f0,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -64.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224970077092168548, guid: 5eed0066b4268c14887ebeafd95873f0,
         type: 2}
@@ -357,7 +357,7 @@ Prefab:
     - target: {fileID: 224970077092168548, guid: 5eed0066b4268c14887ebeafd95873f0,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -129
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224820584492373780, guid: 5eed0066b4268c14887ebeafd95873f0,
         type: 2}
@@ -377,7 +377,7 @@ Prefab:
     - target: {fileID: 224820584492373780, guid: 5eed0066b4268c14887ebeafd95873f0,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -193.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224327183068424920, guid: 5eed0066b4268c14887ebeafd95873f0,
         type: 2}
@@ -397,7 +397,7 @@ Prefab:
     - target: {fileID: 224327183068424920, guid: 5eed0066b4268c14887ebeafd95873f0,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -258
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1191405102404602, guid: 5eed0066b4268c14887ebeafd95873f0, type: 2}
       propertyPath: m_IsActive
@@ -1118,7 +1118,7 @@ MonoBehaviour:
   numColls: 0
   curColl: {x: 0, y: 0, z: 0}
   curHealth: 0
-  maxHealth: 10000
+  maxHealth: 100
 --- !u!212 &317883394
 SpriteRenderer:
   m_ObjectHideFlags: 0
