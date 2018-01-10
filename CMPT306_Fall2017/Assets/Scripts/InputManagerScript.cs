@@ -193,6 +193,11 @@ public class InputManagerScript : MonoBehaviour {
 				Time.timeScale = 1;
 			}
 		}
+		
+		/* Kill Switch */
+		if(Input.GetKey(KeyCode.K)){
+			FightyObject.SendMessage("ApplyDamage", 9001);
+		}
 
         /* Aim based on the 8456 */
         tempHor = (Input.GetKey(KeyCode.Keypad6) ? 1 : 0) - (Input.GetKey(KeyCode.Keypad4) ? 1 : 0);
@@ -303,7 +308,7 @@ public class InputManagerScript : MonoBehaviour {
         /* A to interact with doors and ship*/
         if (Input.GetButtonDown(myInput.ButtonA))
         {
-			if (doorTimer >= 0) {
+			if (doorTimer <= 0) {
 				openingDoor = true;
 				enteringShip = true;
 				doorTimer = 1;

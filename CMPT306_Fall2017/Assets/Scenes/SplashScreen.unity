@@ -1496,7 +1496,7 @@ MonoBehaviour:
     You must work together using you unique skills to defeat enemies and collect loot!
     Get as much loot as you can, but be careful! The tether won''t last forever!
 
-    Press ''T'' or Start Button '
+    Press ''T'' or ''A'' Button '
 --- !u!222 &1716052575
 CanvasRenderer:
   m_ObjectHideFlags: 0

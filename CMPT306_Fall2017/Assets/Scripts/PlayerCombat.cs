@@ -13,8 +13,9 @@ public class PlayerCombat : MonoBehaviour {
     public PlayerBehavior myPlayer;
     public Rigidbody2D myBody;
     public PlayerClass myClass;                 // True=Fighty, False=Shooty
-    
+
     /* Player Health */
+    public float healthTimer = 2.0F;
     private float curHealth;
     public float maxHealth;
 

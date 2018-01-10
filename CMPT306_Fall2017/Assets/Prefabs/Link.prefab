@@ -91,7 +91,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tetherManager: {fileID: 0}
+  myID: 0
   myConnection: {fileID: 0}
+  tetherVisual: {fileID: 0}
   pullDistance: 0.85
   tension: 80
 --- !u!120 &120366032863917642
@@ -101,13 +103,13 @@ LineRenderer:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1843378605204904}
   m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
   m_MotionVectors: 0
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: aa5c8a000e4b10d4eb4deafbb07b067f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -128,10 +130,10 @@ LineRenderer:
   m_SortingOrder: 0
   m_Positions:
   - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 1}
+  - {x: 0, y: 0, z: 0}
   m_Parameters:
     serializedVersion: 2
-    widthMultiplier: 0.15
+    widthMultiplier: 0.2
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -176,7 +178,7 @@ LineRenderer:
     numCornerVertices: 0
     numCapVertices: 0
     alignment: 0
-    textureMode: 0
+    textureMode: 2
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0

@@ -35,6 +35,8 @@ public class PlayerTetherScript : MonoBehaviour {
     public Vector3 curColl;
 
     /* Health Management */
+    public float healthTimer = 2.0F;
+    public float regenSpeed = 0.8F;
     public float curHealth;
     public float maxHealth;
 
@@ -92,7 +94,16 @@ public class PlayerTetherScript : MonoBehaviour {
     }
 
     /* Set up via Awake to prepare for child nodes */
-    void Awake () {
+    void Awake ()
+    {
+        /* Health Regen */
+        healthTimer -= Time.deltaTime;
+        if (healthTimer < 0 && curHealth < maxHealth)
+        {
+            curHealth++;
+            healthTimer = 2.0F;
+        }
+
         /* tracking variables */
         numColls = 0;
 
@@ -138,6 +149,15 @@ public class PlayerTetherScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+        /* Health Regen */
+        healthTimer -= Time.deltaTime;
+        if (healthTimer < 0 && curHealth < maxHealth)
+        {
+            curHealth++;
+            healthTimer = regenSpeed;
+        }
+
         // Get current distance between players
         Vector3 posOne = playerOne.transform.position;
         Vector3 posTwo = playerTwo.transform.position;

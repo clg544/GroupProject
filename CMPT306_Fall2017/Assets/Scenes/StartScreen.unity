@@ -1316,8 +1316,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000011444, y: 136}
-  m_SizeDelta: {x: 85.54, y: 105.39}
+  m_AnchoredPosition: {x: 0.000011444, y: 83}
+  m_SizeDelta: {x: 670.82, y: 275.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1951825160
 MonoBehaviour:
@@ -1365,17 +1365,12 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Red Team
-
-    Clinton
-
-    Garrett
-
-    Dan
-
-    Rowan
-
-    Brandon'
+  m_Text: "Red Team: Clinton Galbraith, Garrett Gizen, Dan McCoshen, Rowan Yates,
+    Brandon Pillar\n\nMusic, Free w/ Attribution:\nCreo - Dimension\r\nhttps://www.newgrounds.com/audio/listen/709578\n\nJjoon
+    - Energetic\r\nhttps://www.newgrounds.com/audio/listen/767823\n\nJjoon - Ultra
+    Sky\nhttps://www.newgrounds.com/audio/listen/746790\n\nPartial Art: Unity Store,
+    hiro (hamstone): \"Basic Pixel Art for Retro 2D Shooter\"\nhttps://www.assetstore.unity3d.com/en/#!content/38653\n\nSFX:
+    Unity Store, Dustyroom: \"FREE Casual Game SFX Pack\"\nhttps://www.assetstore.unity3d.com/en/#!/content/54116\n"
 --- !u!222 &1951825162
 CanvasRenderer:
   m_ObjectHideFlags: 0
