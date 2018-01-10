@@ -9,7 +9,6 @@ public class PlayerCameraTargetScript : MonoBehaviour
     /* Serialized Game Objects */
     public GameObject PlayerOne;
     public GameObject PlayerTwo;
-    public GameObject PlayerCamera;
         
     /* Used Components */
     Rigidbody2D PlayerOneBody;
@@ -38,7 +37,7 @@ public class PlayerCameraTargetScript : MonoBehaviour
         PlayerOneBody = PlayerOne.GetComponent<Rigidbody2D>();
         PlayerTwoBody = PlayerTwo.GetComponent<Rigidbody2D>();
 
-        myCamera = PlayerCamera.GetComponent<Camera>();
+        myCamera = gameObject.GetComponent<Camera>();
     }
     
     // Update is called once per frame
